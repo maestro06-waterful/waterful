@@ -10,8 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var plant: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        plant.setBackgroundImage(UIImage(named: "2_sprout.png"), forState: UIControlState.Normal)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
