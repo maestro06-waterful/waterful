@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
+		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
+		C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495261BDCB9B3004FAF45 /* Plant.swift */; };
+		C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */; };
+		C7E495301BDCB9B3004FAF45 /* WaterLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495281BDCB9B3004FAF45 /* WaterLog.swift */; };
+		C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */; };
+		C7E495321BDCB9B3004FAF45 /* StepDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4952A1BDCB9B3004FAF45 /* StepDate.swift */; };
+		C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4952B1BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift */; };
+		C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4952C1BDCB9B3004FAF45 /* Setting.swift */; };
 		F4B2E89C1BC6C9EC00A93E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */; };
 		F4B2E89E1BC6C9EC00A93E58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */; };
 		F4B2E8A11BC6C9EC00A93E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B2E89F1BC6C9EC00A93E58 /* Main.storyboard */; };
@@ -22,22 +31,7 @@
 		F4B2E8E31BC6CA1700A93E58 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */; };
 		F4B2E8E51BC6CA1700A93E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */; };
 		F4B2E8E91BC6CA1700A93E58 /* waterful_watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F4B2E8CB1BC6CA1700A93E58 /* waterful_watch.app */; };
-		F4F610F31BC6D60100A61D20 /* 1_seed.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F610EC1BC6D60100A61D20 /* 1_seed.png */; settings = {ASSET_TAGS = (); }; };
-		F4F610F41BC6D60100A61D20 /* 2_sprout.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F610ED1BC6D60100A61D20 /* 2_sprout.png */; settings = {ASSET_TAGS = (); }; };
-		F4F610F51BC6D60100A61D20 /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4F610EE1BC6D60100A61D20 /* 2.gif */; settings = {ASSET_TAGS = (); }; };
-		F4F610F61BC6D60100A61D20 /* 3_bud.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F610EF1BC6D60100A61D20 /* 3_bud.png */; settings = {ASSET_TAGS = (); }; };
-		F4F610F71BC6D60100A61D20 /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4F610F01BC6D60100A61D20 /* 3.gif */; settings = {ASSET_TAGS = (); }; };
-		F4F610F81BC6D60100A61D20 /* 4_flower.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F610F11BC6D60100A61D20 /* 4_flower.png */; settings = {ASSET_TAGS = (); }; };
-		F4F610F91BC6D60100A61D20 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4F610F21BC6D60100A61D20 /* 4.gif */; settings = {ASSET_TAGS = (); }; };
-		F4F611161BC6E08300A61D20 /* 1_seed.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F6110F1BC6E08300A61D20 /* 1_seed.png */; settings = {ASSET_TAGS = (); }; };
-		F4F611171BC6E08300A61D20 /* 2_sprout.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F611101BC6E08300A61D20 /* 2_sprout.png */; settings = {ASSET_TAGS = (); }; };
-		F4F611181BC6E08300A61D20 /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4F611111BC6E08300A61D20 /* 2.gif */; settings = {ASSET_TAGS = (); }; };
-		F4F611191BC6E08300A61D20 /* 3_bud.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F611121BC6E08300A61D20 /* 3_bud.png */; settings = {ASSET_TAGS = (); }; };
-		F4F6111A1BC6E08300A61D20 /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4F611131BC6E08300A61D20 /* 3.gif */; settings = {ASSET_TAGS = (); }; };
-		F4F6111B1BC6E08300A61D20 /* 4_flower.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F611141BC6E08300A61D20 /* 4_flower.png */; settings = {ASSET_TAGS = (); }; };
-		F4F6111C1BC6E08300A61D20 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4F611151BC6E08300A61D20 /* 4.gif */; settings = {ASSET_TAGS = (); }; };
-		F4F6111E1BC6E08E00A61D20 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F6111D1BC6E08E00A61D20 /* setting.png */; settings = {ASSET_TAGS = (); }; };
-		F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +91,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
+		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C7E495261BDCB9B3004FAF45 /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plant.swift; path = waterful/core_data/Plant.swift; sourceTree = "<group>"; };
+		C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WaterLog+CoreDataProperties.swift"; path = "waterful/core_data/WaterLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C7E495281BDCB9B3004FAF45 /* WaterLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaterLog.swift; path = waterful/core_data/WaterLog.swift; sourceTree = "<group>"; };
+		C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StepDate+CoreDataProperties.swift"; path = "waterful/core_data/StepDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C7E4952A1BDCB9B3004FAF45 /* StepDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepDate.swift; path = waterful/core_data/StepDate.swift; sourceTree = "<group>"; };
+		C7E4952B1BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Setting+CoreDataProperties.swift"; path = "waterful/core_data/Setting+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C7E4952C1BDCB9B3004FAF45 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = waterful/core_data/Setting.swift; sourceTree = "<group>"; };
 		F4B2E8981BC6C9EC00A93E58 /* waterful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = waterful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,21 +124,6 @@
 		F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4B2E8E61BC6CA1700A93E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4F610EC1BC6D60100A61D20 /* 1_seed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_seed.png; sourceTree = "<group>"; };
-		F4F610ED1BC6D60100A61D20 /* 2_sprout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_sprout.png; sourceTree = "<group>"; };
-		F4F610EE1BC6D60100A61D20 /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
-		F4F610EF1BC6D60100A61D20 /* 3_bud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3_bud.png; sourceTree = "<group>"; };
-		F4F610F01BC6D60100A61D20 /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
-		F4F610F11BC6D60100A61D20 /* 4_flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4_flower.png; sourceTree = "<group>"; };
-		F4F610F21BC6D60100A61D20 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
-		F4F6110F1BC6E08300A61D20 /* 1_seed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_seed.png; sourceTree = "<group>"; };
-		F4F611101BC6E08300A61D20 /* 2_sprout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_sprout.png; sourceTree = "<group>"; };
-		F4F611111BC6E08300A61D20 /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
-		F4F611121BC6E08300A61D20 /* 3_bud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3_bud.png; sourceTree = "<group>"; };
-		F4F611131BC6E08300A61D20 /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
-		F4F611141BC6E08300A61D20 /* 4_flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4_flower.png; sourceTree = "<group>"; };
-		F4F611151BC6E08300A61D20 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
-		F4F6111D1BC6E08E00A61D20 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkWaterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +159,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7E495351BDCB9B8004FAF45 /* core_data */ = {
+			isa = PBXGroup;
+			children = (
+				C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */,
+				C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */,
+				C7E495261BDCB9B3004FAF45 /* Plant.swift */,
+				C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */,
+				C7E495281BDCB9B3004FAF45 /* WaterLog.swift */,
+				C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */,
+				C7E4952A1BDCB9B3004FAF45 /* StepDate.swift */,
+				C7E4952B1BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift */,
+				C7E4952C1BDCB9B3004FAF45 /* Setting.swift */,
+			);
+			name = core_data;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C7E495361BDCBB89004FAF45 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */,
+				F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C7E495371BDCBBF4004FAF45 /* InterfaceControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4B2E8DE1BC6CA1700A93E58 /* InterfaceController.swift */,
+			);
+			name = InterfaceControllers;
+			sourceTree = "<group>";
+		};
 		F4B2E88F1BC6C9EC00A93E58 = {
 			isa = PBXGroup;
 			children = (
@@ -198,14 +220,13 @@
 		F4B2E89A1BC6C9EC00A93E58 /* waterful */ = {
 			isa = PBXGroup;
 			children = (
-				F4F6110E1BC6E07500A61D20 /* images */,
 				F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */,
-				F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */,
+				C7E495361BDCBB89004FAF45 /* ViewControllers */,
+				C7E495351BDCB9B8004FAF45 /* core_data */,
 				F4B2E89F1BC6C9EC00A93E58 /* Main.storyboard */,
 				F4B2E8A21BC6C9EC00A93E58 /* Assets.xcassets */,
 				F4B2E8A41BC6C9EC00A93E58 /* LaunchScreen.storyboard */,
 				F4B2E8A71BC6C9EC00A93E58 /* Info.plist */,
-				F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */,
 			);
 			path = waterful;
 			sourceTree = "<group>";
@@ -231,7 +252,6 @@
 		F4B2E8CC1BC6CA1700A93E58 /* waterful_watch */ = {
 			isa = PBXGroup;
 			children = (
-				F4F610EB1BC6D5F200A61D20 /* images */,
 				F4B2E8CD1BC6CA1700A93E58 /* Interface.storyboard */,
 				F4B2E8D01BC6CA1700A93E58 /* Assets.xcassets */,
 				F4B2E8D21BC6CA1700A93E58 /* Info.plist */,
@@ -242,9 +262,9 @@
 		F4B2E8DB1BC6CA1700A93E58 /* waterful_watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				F4B2E8DC1BC6CA1700A93E58 /* Supporting Files */,
-				F4B2E8DE1BC6CA1700A93E58 /* InterfaceController.swift */,
 				F4B2E8E01BC6CA1700A93E58 /* ExtensionDelegate.swift */,
+				F4B2E8DC1BC6CA1700A93E58 /* Supporting Files */,
+				C7E495371BDCBBF4004FAF45 /* InterfaceControllers */,
 				F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */,
 				F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */,
 				F4B2E8E61BC6CA1700A93E58 /* Info.plist */,
@@ -260,35 +280,6 @@
 			name = "Supporting Files";
 			path = "waterful_watch Extension";
 			sourceTree = SOURCE_ROOT;
-		};
-		F4F610EB1BC6D5F200A61D20 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				F4F610EC1BC6D60100A61D20 /* 1_seed.png */,
-				F4F610ED1BC6D60100A61D20 /* 2_sprout.png */,
-				F4F610EE1BC6D60100A61D20 /* 2.gif */,
-				F4F610EF1BC6D60100A61D20 /* 3_bud.png */,
-				F4F610F01BC6D60100A61D20 /* 3.gif */,
-				F4F610F11BC6D60100A61D20 /* 4_flower.png */,
-				F4F610F21BC6D60100A61D20 /* 4.gif */,
-			);
-			name = images;
-			sourceTree = "<group>";
-		};
-		F4F6110E1BC6E07500A61D20 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				F4F6111D1BC6E08E00A61D20 /* setting.png */,
-				F4F6110F1BC6E08300A61D20 /* 1_seed.png */,
-				F4F611101BC6E08300A61D20 /* 2_sprout.png */,
-				F4F611111BC6E08300A61D20 /* 2.gif */,
-				F4F611121BC6E08300A61D20 /* 3_bud.png */,
-				F4F611131BC6E08300A61D20 /* 3.gif */,
-				F4F611141BC6E08300A61D20 /* 4_flower.png */,
-				F4F611151BC6E08300A61D20 /* 4.gif */,
-			);
-			name = images;
-			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -407,7 +398,7 @@
 					};
 					F4B2E8D61BC6CA1700A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = XRUF4YU89Q;
+						DevelopmentTeam = 9TL9TH34MP;
 					};
 				};
 			};
@@ -438,17 +429,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F6111E1BC6E08E00A61D20 /* setting.png in Resources */,
-				F4F611191BC6E08300A61D20 /* 3_bud.png in Resources */,
 				F4B2E8A61BC6C9EC00A93E58 /* LaunchScreen.storyboard in Resources */,
 				F4B2E8A31BC6C9EC00A93E58 /* Assets.xcassets in Resources */,
-				F4F611161BC6E08300A61D20 /* 1_seed.png in Resources */,
-				F4F6111A1BC6E08300A61D20 /* 3.gif in Resources */,
-				F4F611181BC6E08300A61D20 /* 2.gif in Resources */,
 				F4B2E8A11BC6C9EC00A93E58 /* Main.storyboard in Resources */,
-				F4F6111C1BC6E08300A61D20 /* 4.gif in Resources */,
-				F4F6111B1BC6E08300A61D20 /* 4_flower.png in Resources */,
-				F4F611171BC6E08300A61D20 /* 2_sprout.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,13 +454,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4B2E8D11BC6CA1700A93E58 /* Assets.xcassets in Resources */,
-				F4F610F81BC6D60100A61D20 /* 4_flower.png in Resources */,
-				F4F610F61BC6D60100A61D20 /* 3_bud.png in Resources */,
-				F4F610F51BC6D60100A61D20 /* 2.gif in Resources */,
-				F4F610F71BC6D60100A61D20 /* 3.gif in Resources */,
-				F4F610F41BC6D60100A61D20 /* 2_sprout.png in Resources */,
-				F4F610F91BC6D60100A61D20 /* 4.gif in Resources */,
-				F4F610F31BC6D60100A61D20 /* 1_seed.png in Resources */,
 				F4B2E8CF1BC6CA1700A93E58 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,9 +473,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
+				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
+				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
+				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
 				F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */,
+				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
+				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,
 				F4B2E89E1BC6C9EC00A93E58 /* ViewController.swift in Sources */,
 				F4B2E89C1BC6C9EC00A93E58 /* AppDelegate.swift in Sources */,
+				C7E495301BDCB9B3004FAF45 /* WaterLog.swift in Sources */,
+				C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */,
+				C7E495321BDCB9B3004FAF45 /* StepDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,9 +654,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = waterful/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful;
+				PRODUCT_BUNDLE_IDENTIFIER = com.waterful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -680,9 +666,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = waterful/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful;
+				PRODUCT_BUNDLE_IDENTIFIER = com.waterful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -742,7 +729,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "waterful_watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -759,7 +746,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "waterful_watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -773,10 +760,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = waterful_watch_Extension;
 				INFOPLIST_FILE = waterful_watch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -789,10 +777,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = waterful_watch_Extension;
 				INFOPLIST_FILE = waterful_watch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -859,6 +848,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */,
+			);
+			currentVersion = C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */;
+			name = waterfulDataModel.xcdatamodeld;
+			path = waterful/waterfulDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F4B2E8901BC6C9EC00A93E58 /* Project object */;
 }
