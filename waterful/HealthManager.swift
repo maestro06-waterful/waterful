@@ -54,6 +54,7 @@ class HealthManager {
                 if success == true && error == nil {
                     print("Request Authorization succeeded.")
                     self.executeStepObserverQuery()
+                    self.executeWorkoutObserverQuery()
                 } else {
                     print("Request Authorization failed.")
                 }
@@ -63,6 +64,41 @@ class HealthManager {
                 }
             }
         )
+    }
+    
+    func executeWorkoutObserverQuery() {
+        
+        // Set the observer query for observing workout
+        let workoutObserverQuery: HKObserverQuery = HKObserverQuery(sampleType: HKWorkoutType.workoutType(), predicate: nil) {
+            (query, completionHandler, error) -> Void in    // updateHandler
+            print("updateHandler called. (workout)")
+            
+            // When updateHandler is called in the background mode
+            if self.appDelegate.isBackground == true {
+                print("background updateHandler is called. (workout)")
+                self.appDelegate.registerNotification(NSDate().dateByAddingTimeInterval(60),
+                    alertBody: "운동을 열심히 하셨군요! 운동을 하는 동안 물을 얼마나 마셨나요??")
+            }
+            completionHandler()
+        }
+        
+        // Exectue the observer query which is observing workout sample
+        self.healthKitStore.executeQuery(workoutObserverQuery)
+        
+        // Enable the background delivery for workout samples
+        self.healthKitStore.enableBackgroundDeliveryForType(HKWorkoutType.workoutType(),
+            frequency: .Hourly) {
+                (success, error) -> Void in // completionHandler
+                
+                if success {
+                    print("Enabling background delivery for workout succeeded.")
+                } else {
+                    print("Enabling background delivery for workout failed.")
+                    if error != nil {
+                        print("error: \(error?.localizedDescription)")
+                    }
+                }
+        }
     }
     
     func executeStepObserverQuery () {
