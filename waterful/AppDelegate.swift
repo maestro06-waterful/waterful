@@ -30,6 +30,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        // healthkit setting
+        HealthManager.sharedInstance.authorizeHealthKit {
+            (success, error) -> Void in
+            if success {
+                print("authorizeHealthKit() succeeded.")
+            } else {
+                print("authorizeHealthKit() failed.")
+                if error != nil {
+                    print("Error: \(error?.localizedDescription)")
+                }
+            }
+        }
+        
         // notification setting
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound]
             , categories: nil)
