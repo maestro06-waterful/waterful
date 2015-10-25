@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+    <entity name="Plant" representedClassName=".Plant" syncable="YES">
+        <attribute name="bornDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="growthRate" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plantId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Setting" representedClassName=".Setting" syncable="YES">
+        <attribute name="alarmEndTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="alarmInterval" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="alarmStartTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="goal" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="todayAmount" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="StepDate" representedClassName=".StepDate" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="WaterLog" representedClassName=".WaterLog" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="loggedTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="logId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Plant" positionX="-18" positionY="54" width="128" height="105"/>
+        <element name="Setting" positionX="-54" positionY="0" width="128" height="135"/>
+        <element name="StepDate" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="WaterLog" positionX="-36" positionY="45" width="128" height="105"/>
+    </elements>
+</model>
