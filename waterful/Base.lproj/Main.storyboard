@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mgT-L2-hci">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mgT-L2-hci">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
@@ -114,7 +114,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="wYx-6n-6YJ"/>
                     <connections>
+                        <outlet property="consumed" destination="rUZ-MH-4ZW" id="wE0-Pp-pUQ"/>
+                        <outlet property="goal" destination="hwX-p2-0xd" id="e4Q-Kc-pXx"/>
                         <outlet property="plant" destination="DjJ-bu-6Y4" id="t0K-10-o6D"/>
+                        <outlet property="plant_dob" destination="hKd-lc-ecQ" id="doZ-7K-LdN"/>
+                        <outlet property="plant_name" destination="CiL-Nl-Ihd" id="lxe-7T-QRg"/>
+                        <outlet property="plant_type" destination="zjn-Uq-SWH" id="mma-7c-EvS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
