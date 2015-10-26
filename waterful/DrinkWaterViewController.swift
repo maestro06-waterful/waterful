@@ -10,6 +10,27 @@
 import UIKit
 import CoreData
 
+func logWater(amount : Int){
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    
+    let water_info = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
+        inManagedObjectContext: managedContext) as! WaterLog
+
+    water_info.amount = amount
+    water_info.loggedTime = NSDate()
+    
+    do {
+        try managedContext.save()
+        
+    } catch {
+        print("Unresolved error")
+        abort()
+    }
+    
+}
+
 class DrinkWaterViewController: UIViewController {
     
     @IBOutlet weak var waterInput: UITextField!
