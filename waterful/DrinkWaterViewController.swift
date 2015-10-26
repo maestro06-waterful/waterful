@@ -6,11 +6,15 @@
 //  Copyright © 2015 suz. All rights reserved.
 //
 
+
 import UIKit
+import CoreData
 
 class DrinkWaterViewController: UIViewController {
     
     @IBOutlet weak var waterInput: UITextField!
+    
+    var amount : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,16 +28,20 @@ class DrinkWaterViewController: UIViewController {
     }
     
     @IBAction func button1Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 40)
+        amount = amount + 40
+        waterInput.text = String(amount)
     }
     @IBAction func button2Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 120)
+        amount = amount + 120
+        waterInput.text = String(amount)
     }
     @IBAction func button3Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 400)
+        amount = amount + 400
+        waterInput.text = String(amount)
     }
     @IBAction func button4Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 500)
+        amount = amount + 500
+        waterInput.text = String(amount)
     }
     
 }
