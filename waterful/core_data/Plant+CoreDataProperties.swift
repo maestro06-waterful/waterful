@@ -18,5 +18,5 @@ extension Plant {
     @NSManaged var growthRate: NSNumber?
     @NSManaged var name: String?
     @NSManaged var plantId: NSNumber?
-
+    @NSManaged var type: String?
 }

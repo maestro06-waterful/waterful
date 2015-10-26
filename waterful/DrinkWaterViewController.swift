@@ -6,16 +6,46 @@
 //  Copyright © 2015 suz. All rights reserved.
 //
 
+
 import UIKit
+import CoreData
+
+func logWater(amount : Int){
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    
+    let water_info = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
+        inManagedObjectContext: managedContext) as! WaterLog
+
+    water_info.amount = amount
+    water_info.loggedTime = NSDate()
+    
+    do {
+        try managedContext.save()
+        
+    } catch {
+        print("Unresolved error")
+        abort()
+    }
+    
+}
 
 class DrinkWaterViewController: UIViewController {
     
     @IBOutlet weak var waterInput: UITextField!
     
+    var amount : Int = 0
+    
+    func log()
+    {
+        logWater(amount)
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view, typically from a nib.
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ADD", style: UIBarButtonItemStyle.Plain, target: self, action: "log")
     }
     
     override func didReceiveMemoryWarning() {
@@ -24,17 +54,24 @@ class DrinkWaterViewController: UIViewController {
     }
     
     @IBAction func button1Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 40)
+        amount = amount + 40
+        waterInput.text = String(amount)
     }
     @IBAction func button2Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 120)
+        amount = amount + 120
+        waterInput.text = String(amount)
     }
     @IBAction func button3Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 400)
+        amount = amount + 400
+        waterInput.text = String(amount)
     }
     @IBAction func button4Pressed(sender: AnyObject) {
-        waterInput.text = String(Int(waterInput.text!)! as Int + 500)
+        amount = amount + 500
+        waterInput.text = String(amount)
     }
+    
+
+    
     
 }
 
