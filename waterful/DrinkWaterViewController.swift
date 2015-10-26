@@ -19,7 +19,7 @@ func logWater(amount : Int){
         inManagedObjectContext: managedContext) as! WaterLog
 
     water_info.amount = amount
-    water_info.loggedTime = NSDate()
+    water_info.loggedTime = NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT))
     
     do {
         try managedContext.save()

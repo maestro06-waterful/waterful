@@ -56,6 +56,7 @@ func getDate(date : NSDate) -> String{
 }
 
 func fetchWater() -> String {
+    print(String(NSDate))
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     let managedContext = appDelegate.managedObjectContext
@@ -66,9 +67,14 @@ func fetchWater() -> String {
 
     var consumed : Int = 0
     
-    let today = getDate(NSDate())
+    let today = getDate(NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT)))
+    
     for result in fetchResults! {
         if (getDate(result.loggedTime!) == today){
+            print(String(NSDate))
+            print("today: " + String(today))
+            print(String(result.loggedTime))
+            print(getDate(result.loggedTime!))
             consumed = consumed + Int(result.amount!)
         }
     }
