@@ -37,10 +37,15 @@ class DrinkWaterViewController: UIViewController {
     
     var amount : Int = 0
     
+    func log()
+    {
+        logWater(amount)
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view, typically from a nib.
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ADD", style: UIBarButtonItemStyle.Plain, target: self, action: "log")
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,6 +69,9 @@ class DrinkWaterViewController: UIViewController {
         amount = amount + 500
         waterInput.text = String(amount)
     }
+    
+
+    
     
 }
 

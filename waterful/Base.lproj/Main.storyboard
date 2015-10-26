@@ -258,11 +258,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                                 <animations/>
                                 <items>
-                                    <navigationItem title="Drink Water" id="BRb-8S-Pzd">
-                                        <barButtonItem key="rightBarButtonItem" title="OK" width="40" id="VSg-FV-Y6U">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="Title" id="cEj-No-eTC"/>
                                 </items>
                             </navigationBar>
                         </subviews>

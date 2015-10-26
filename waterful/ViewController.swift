@@ -91,6 +91,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var goal: UILabel!
 
+    override func viewWillAppear(animated: Bool) {
+        // Setting up informatinos about water
+        
+        consumed.text = fetchWater()
+    }
     override func viewDidLoad() {
         
         let dateFormatter = NSDateFormatter()
@@ -114,11 +119,6 @@ class ViewController: UIViewController {
         plant_name.text = plant_info.name
         plant_dob.text = dateFormatter.stringFromDate(plant_info.bornDate!)
         plant_type.text = plant_info.type
-        
-        // Setting up informatinos about water
-        
-        consumed.text = fetchWater()
-        
         
         
         
