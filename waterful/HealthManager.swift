@@ -33,12 +33,16 @@ class HealthManager {
     // sample types to use
     let stepCountType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
     let workoutType = HKWorkoutType.workoutType()
+    let waterType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)
     
     // Sets sample types to use and requests healthkit authorization for that types
     func authorizeHealthKit(completion: ((success: Bool, error: NSError?) -> Void)!) {
         
+        // Set the sample types to share
+        let typesToShare = Set(arrayLiteral: waterType!)
+
         // Set the sample types to read
-        let typesToRead = Set(arrayLiteral: stepCountType!, workoutType)
+        let typesToRead = Set(arrayLiteral: stepCountType!, workoutType, waterType!)
         
         // If the store is not available, return
         if HKHealthStore.isHealthDataAvailable() == false {
@@ -48,7 +52,7 @@ class HealthManager {
             return
         }
         // Request HealthKit authorization
-        healthKitStore.requestAuthorizationToShareTypes(nil,
+        healthKitStore.requestAuthorizationToShareTypes(typesToShare,
             readTypes: typesToRead,
             completion: {(success: Bool, error: NSError?) -> Void in
                 if success == true && error == nil {
