@@ -11,6 +11,7 @@
 
 import Foundation
 import CoreData
+import HealthKit
 
 extension Setting {
 
@@ -19,6 +20,6 @@ extension Setting {
     @NSManaged var alarmStartTime: NSNumber?
     @NSManaged var goal: NSNumber?
     @NSManaged var todayAmount: NSNumber?
-    @NSManaged var unit: NSNumber?
+    @NSManaged var unit: HKUnit?
 
 }
