@@ -17,6 +17,7 @@
 		C7E495321BDCB9B3004FAF45 /* StepDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4952A1BDCB9B3004FAF45 /* StepDate.swift */; };
 		C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4952B1BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift */; };
 		C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4952C1BDCB9B3004FAF45 /* Setting.swift */; };
+		F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF28C51BDEF84E00E36E1B /* SettingTableViewController.swift */; };
 		F4B2E89C1BC6C9EC00A93E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */; };
 		F4B2E89E1BC6C9EC00A93E58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */; };
 		F4B2E8A11BC6C9EC00A93E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B2E89F1BC6C9EC00A93E58 /* Main.storyboard */; };
@@ -102,6 +103,7 @@
 		C7E4952A1BDCB9B3004FAF45 /* StepDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepDate.swift; path = waterful/core_data/StepDate.swift; sourceTree = "<group>"; };
 		C7E4952B1BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Setting+CoreDataProperties.swift"; path = "waterful/core_data/Setting+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C7E4952C1BDCB9B3004FAF45 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = waterful/core_data/Setting.swift; sourceTree = "<group>"; };
+		F4AF28C51BDEF84E00E36E1B /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		F4B2E8981BC6C9EC00A93E58 /* waterful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = waterful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */,
 				F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */,
+				F4AF28C51BDEF84E00E36E1B /* SettingTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
+				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
 				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
 				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
