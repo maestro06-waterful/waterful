@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */; };
 		C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */; };
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
 		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = waterful/NotificationManager.swift; sourceTree = "<group>"; };
 		C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -161,6 +163,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9DF662041BDF1E8A00123EA7 /* noti */ = {
+			isa = PBXGroup;
+			children = (
+				9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */,
+			);
+			name = noti;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		C7E495351BDCB9B8004FAF45 /* core_data */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +233,7 @@
 		F4B2E89A1BC6C9EC00A93E58 /* waterful */ = {
 			isa = PBXGroup;
 			children = (
+				9DF662041BDF1E8A00123EA7 /* noti */,
 				F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */,
 				C7E495361BDCBB89004FAF45 /* ViewControllers */,
 				C7E495351BDCB9B8004FAF45 /* core_data */,
@@ -387,6 +399,7 @@
 				TargetAttributes = {
 					F4B2E8971BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 458UT3PCPD;
 					};
 					F4B2E8AB1BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -401,7 +414,7 @@
 					};
 					F4B2E8D61BC6CA1700A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = XRUF4YU89Q;
+						DevelopmentTeam = 458UT3PCPD;
 					};
 				};
 			};
@@ -480,6 +493,7 @@
 				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
 				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
+				9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */,
 				F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,

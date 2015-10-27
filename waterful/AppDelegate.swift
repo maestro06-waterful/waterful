@@ -47,8 +47,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound]
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
+        
+//        NotificationManager.sharedInstance?.registerSimapleNotification()        
+        NotiManager.sharedInstance?.registerForActionableNotification()
+        NotiManager.sharedInstance?.scheduleLocalNotification()
 
+        
+        
         return true
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+
+        
+        if identifier == NotiManager.notiActionIdentifier.WaterLog1.rawValue {
+            // Showing reminder details in an alertview
+            UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: nil, cancelButtonTitle: "OK").show()
+        } else if identifier == NotiManager.notiActionIdentifier.WaterLog2.rawValue{
+            // WaterLog2 Notification click
+
+        } else if identifier == NotiManager.notiActionIdentifier.Snooze.rawValue {
+            // Confirmed the reminder. Mark the reminder as complete maybe?
+            // Snooze the reminder for 5 minutes
+            notification.fireDate = NSDate().dateByAddingTimeInterval(60*5)
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+        
+        completionHandler()
     }
 
     func applicationWillResignActive(application: UIApplication) {
