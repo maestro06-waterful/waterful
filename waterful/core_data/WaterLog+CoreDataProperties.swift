@@ -11,12 +11,12 @@
 
 import Foundation
 import CoreData
+import HealthKit
 
 extension WaterLog {
 
     @NSManaged var amount: NSNumber?
     @NSManaged var loggedTime: NSDate?
-    @NSManaged var logId: NSNumber?
-    @NSManaged var unit: NSNumber?
+    @NSManaged var unit: HKUnit?
 
 }
