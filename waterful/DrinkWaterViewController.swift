@@ -9,12 +9,13 @@
 
 import UIKit
 import CoreData
+import HealthKit
 
 class DrinkWaterViewController: UIViewController {
     
     @IBOutlet weak var waterInput: UITextField!
     
-    var amount : Int = 0
+    var amount : Double = 0
     
     func log()
     {
@@ -49,7 +50,10 @@ class DrinkWaterViewController: UIViewController {
         waterInput.text = String(amount)
     }
     
-    func logWater(amount : Int){
+    func logWater(amount : Double){
+
+        let unitML: HKUnit = HKUnit(fromString: "mL")
+        let curUnit: HKUnit = currentUnit()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -57,7 +61,8 @@ class DrinkWaterViewController: UIViewController {
         let water_info = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
             inManagedObjectContext: managedContext) as! WaterLog
         
-        water_info.amount = amount
+        water_info.unit = curUnit
+        water_info.amount = HKQuantity(unit: curUnit, doubleValue: amount).doubleValueForUnit(unitML)
         water_info.loggedTime = NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT))
         
         do {
@@ -67,10 +72,27 @@ class DrinkWaterViewController: UIViewController {
             print("Unresolved error")
             abort()
         }
-        
     }
+    
+    // Returns 'unit' attribute from 'Settings' entity
+    // If an exception occurs, it returns milli liter (global-standard unit)
+    func currentUnit() -> HKUnit {
 
-    
-    
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+
+        let fetchRequest = NSFetchRequest(entityName: "Setting")
+        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [Setting]
+
+        if fetchResults != nil {
+            if fetchResults!.count != 0 {
+                return fetchResults![0].valueForKey("unit") as! HKUnit
+            } else {
+                return HKUnit(fromString: "mL")
+            }
+        } else {
+            return HKUnit(fromString: "mL")
+        }
+    }
 }
 
