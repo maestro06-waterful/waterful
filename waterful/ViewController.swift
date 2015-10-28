@@ -140,7 +140,7 @@ class ViewController: UIViewController {
     }
     
     func setSetting() -> Setting {
-        
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         

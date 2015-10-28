@@ -402,6 +402,11 @@
 				TargetAttributes = {
 					F4B2E8971BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+						};
 					};
 					F4B2E8AB1BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
