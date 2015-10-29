@@ -12,7 +12,7 @@ import HealthKit
 import CoreData
 
 class HealthManager {
-   
+
     var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -33,12 +33,20 @@ class HealthManager {
     // sample types to use
     let stepCountType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
     let workoutType = HKWorkoutType.workoutType()
+    let waterType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)
+    let weightType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+
+    // weight
+    var weight: Double? = nil
     
     // Sets sample types to use and requests healthkit authorization for that types
     func authorizeHealthKit(completion: ((success: Bool, error: NSError?) -> Void)!) {
-        
+
         // Set the sample types to read
-        let typesToRead = Set(arrayLiteral: stepCountType!, workoutType)
+        let typesToShare = Set(arrayLiteral: waterType!)
+
+        // Set the sample types to read
+        let typesToRead = Set(arrayLiteral: stepCountType!, workoutType, waterType!, weightType!)
         
         // If the store is not available, return
         if HKHealthStore.isHealthDataAvailable() == false {
@@ -48,11 +56,12 @@ class HealthManager {
             return
         }
         // Request HealthKit authorization
-        healthKitStore.requestAuthorizationToShareTypes(nil,
+        healthKitStore.requestAuthorizationToShareTypes(typesToShare,
             readTypes: typesToRead,
             completion: {(success: Bool, error: NSError?) -> Void in
                 if success == true && error == nil {
                     print("Request Authorization succeeded.")
+                    self.weight = self.getWeight()
                     self.executeStepObserverQuery()
                     self.executeWorkoutObserverQuery()
                 } else {
@@ -66,6 +75,36 @@ class HealthManager {
         )
     }
     
+    // Returns the user's weight
+    func getWeight() -> Double? {
+
+        var weight: Double? = nil
+
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        // Sample Query to get the latest weight (body mass)
+        let weightSampleQuery = HKSampleQuery(sampleType: weightType!,
+            predicate: nil,
+            limit: 1,
+            sortDescriptors: [sortDescriptor]) {
+                (query, results, error) -> Void in
+                if let queryError = error {
+                    print("weight query error: \(queryError.localizedDescription)")
+                    return
+                }
+                if let queryResults = results {
+                    let latestSample = queryResults[0] as! HKQuantitySample
+                    weight = latestSample.quantity.doubleValueForUnit(HKUnit(fromString:"kg"))
+                    print("weight: \(weight)")
+                } else {
+                    print("There are no query results.")
+                    return
+                }
+        }
+        // Execute the sample query to get the weight
+        self.healthKitStore.executeQuery(weightSampleQuery)
+        return weight
+    }
+
     func executeWorkoutObserverQuery() {
         
         // Set the observer query for observing workout
