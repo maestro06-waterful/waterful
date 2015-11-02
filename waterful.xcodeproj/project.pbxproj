@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */; };
+		C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71504061BEE04C00023A871 /* NotificationBuilder.swift */; };
 		C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */; };
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
 		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
@@ -95,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = waterful/NotificationManager.swift; sourceTree = "<group>"; };
+		C71504061BEE04C00023A871 /* NotificationBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationBuilder.swift; path = waterful/NotificationBuilder.swift; sourceTree = "<group>"; };
 		C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		9DF662041BDF1E8A00123EA7 /* noti */ = {
 			isa = PBXGroup;
 			children = (
+				C71504061BEE04C00023A871 /* NotificationBuilder.swift */,
 				9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */,
 			);
 			name = noti;
@@ -498,6 +501,7 @@
 			files = (
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
+				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
 				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
 				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,

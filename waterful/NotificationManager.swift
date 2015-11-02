@@ -9,19 +9,33 @@
 import Foundation
 import UIKit
 
-class NotiInfo {
+class NotiInfo : NSObject, NSCoding {
 
     enum notiActionCategoryId : String {
         case SIMPLE = "Simple"
         case WATERLOG = "waterlogCategory"
+        
     }
     
-    var title :String = ""
-    var details: String = ""
-    var time : NSDate?
+    var name = ""
+    var details = ""
+    var time: NSDate?
     
-    init(){
-        
+    override init() {
+        super.init()
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.name = aDecoder.decodeObjectForKey("nameKey") as! String
+        self.details = aDecoder.decodeObjectForKey("detailsKey") as! String
+        self.time = aDecoder.decodeObjectForKey("timeKey") as? NSDate
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.name, forKey: "nameKey")
+        aCoder.encodeObject(self.details, forKey: "detailsKey")
+        aCoder.encodeObject(self.time, forKey: "timeKey")
     }
     
 }
@@ -39,12 +53,75 @@ class NotiManager {
     }
     
     var notiList: Array<NotiInfo> = []
+    var notiBuilder = NotiBuilder()
     
     enum notiActionIdentifier :String{
         case WaterLog1 = "waterlog1"
         case WaterLog2 = "waterLog2"
         case Snooze = "snooze"
     }
+    
+
+    enum NotiCategory : String {
+        case WATERLOG = "waterlogCategory"
+    }
+    
+    enum SmartNotiType : String{
+        case MORNING = "MOR"
+        case MORNING_HOT = "MOR_HOT"
+        case WORKOUT = "WORK"
+    }
+    
+    enum RecordNotiType : String{
+        case REMIND = "REMIND"
+    }
+    
+    enum ArchieveNotiType : String{
+        case TODAY = "AN_TODAY"
+    }
+    
+    func registerSmartNoti(notiType : SmartNotiType){
+        
+        let localNotification : UILocalNotification = notiBuilder.buildLocalNotification(
+            NotiBuilder.NotiType.SMART_NOTI, notiDetail: notiType.rawValue,
+            fireTime: NSDate().dateByAddingTimeInterval(5))
+        
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
+    }
+    
+    func registerRecordNoti(notiType : RecordNotiType){
+        
+        let localNotification : UILocalNotification = notiBuilder.buildLocalNotification(
+            NotiBuilder.NotiType.RECORD_NOTI, notiDetail: notiType.rawValue,
+            fireTime: NSDate().dateByAddingTimeInterval(5))
+        
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
+    }
+    
+    func registerArchieveNoti(notiType : ArchieveNotiType){
+        
+        let localNotification : UILocalNotification = notiBuilder.buildLocalNotification(
+            NotiBuilder.NotiType.ARCHIEVE_NOTI, notiDetail: notiType.rawValue,
+            fireTime: NSDate().dateByAddingTimeInterval(5))
+        
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
+    }
+    
+    private func applicationDidEnterBackground(){
+        let archivedReminderList = NSKeyedArchiver.archivedDataWithRootObject(self.notiList)
+        NSUserDefaults.standardUserDefaults().setObject(archivedReminderList, forKey: "reminderList")
+    }
+    
+    private func applicatoinWillFinishLauncing(){
+        if let aList: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("reminderList") {
+            let unArchivedList: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(aList as! NSData)
+            self.notiList = unArchivedList as! Array
+        }
+    }
+    
     
     func registerForActionableNotification() {
         registerForActionableNotificationWaterLog()
@@ -84,10 +161,10 @@ class NotiManager {
         reminderActionSnooze.authenticationRequired = false
         
         let waterlogCategory = UIMutableUserNotificationCategory()
-        waterlogCategory.identifier = "waterlogCategory"
+        waterlogCategory.identifier = NotiCategory.WATERLOG.rawValue
         
         waterlogCategory.setActions([notiActionWaterLog1, notiActionWaterLog2, reminderActionSnooze ], forContext: UIUserNotificationActionContext.Default)
-        waterlogCategory.setActions([notiActionWaterLog1, notiActionWaterLog2,reminderActionSnooze], forContext: UIUserNotificationActionContext.Minimal)
+        waterlogCategory.setActions([notiActionWaterLog1, reminderActionSnooze], forContext: UIUserNotificationActionContext.Minimal)
         
         // Register for notification: This will prompt for the user's consent to receive notifications from this app.
         let notificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Sound] , categories: Set(arrayLiteral: waterlogCategory))
@@ -97,20 +174,7 @@ class NotiManager {
     }
     
     func scheduleLocalNotification() {
-        
-        // Create reminder by setting a local notification
-        let localNotification = UILocalNotification() // Creating an instance of the notification.
-        localNotification.alertTitle = "Notification Title"
-        localNotification.alertBody = "Alert body to provide more details"
-        localNotification.alertAction = "ShowDetails"
-//        localNotification.fireDate = NSDate().dateByAddingTimeInterval(60*5) // 5 minutes(60 sec * 5) from now
-        localNotification.fireDate = NSDate().dateByAddingTimeInterval(5)
-        localNotification.timeZone = NSTimeZone.defaultTimeZone()
-        localNotification.soundName = UILocalNotificationDefaultSoundName // Use the default notification tone/ specify a file in the application bundle
-        localNotification.applicationIconBadgeNumber = 1 // Badge number to set on the application Icon.
-        localNotification.category = "waterlogCategory" // Category to use the specified actions
-//        localNotification.category = "reminderCategory" // Category to use the specified actions
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
+        registerSmartNoti(NotiManager.SmartNotiType.MORNING)
     }
     
 }

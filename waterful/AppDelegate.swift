@@ -69,11 +69,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if identifier == NotiManager.notiActionIdentifier.Snooze.rawValue {
             // Confirmed the reminder. Mark the reminder as complete maybe?
             // Snooze the reminder for 5 minutes
-            notification.fireDate = NSDate().dateByAddingTimeInterval(60*5)
+            notification.fireDate = NSDate().dateByAddingTimeInterval(10)
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
         }
         
         completionHandler()
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        // Point for handling the local notification when the app is open.
+        // Showing reminder details in an alertview
+        
+        
+        UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: nil, cancelButtonTitle: "OK").show()
     }
 
     func applicationWillResignActive(application: UIApplication) {
