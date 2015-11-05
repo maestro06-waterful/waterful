@@ -33,15 +33,20 @@ class WaterLogTableViewController: UITableViewController {
     func initializeLogData(){
 
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ";
 //        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
 //        dateFormatter.timeStyle = .ShortStyle
 //        let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
+//        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
 
         let waterLogTotalArray = fetchWaterLog()
         todayLogArray.removeAll()
         
         let today = getDate(NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT)))
+        print(dateFormatter.stringFromDate(NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT))))
+        print(String(NSTimeZone.defaultTimeZone().secondsFromGMT))
+        print(dateFormatter.stringFromDate(NSDate()))
         
         for result in waterLogTotalArray {
             if(getDate(result.loggedTime!) == today){
