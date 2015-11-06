@@ -104,6 +104,9 @@ class ViewController: UIViewController {
             if (getDate(result.loggedTime!) == today){
                 consumed = consumed + Int(result.amount!)
             }
+            else {
+                break
+            }
         }
         
         
@@ -186,9 +189,6 @@ class ViewController: UIViewController {
         let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
         
         mainImageView.image = drawImage(ProgressPercentage)
-        
-        
-
     }
     
     func undoLog(){
@@ -206,6 +206,9 @@ class ViewController: UIViewController {
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
                 todayResult.append(result)
+            }
+            else {
+                break
             }
         }
         

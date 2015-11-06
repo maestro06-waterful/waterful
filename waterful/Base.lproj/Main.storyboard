@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBs-05-isd">
-                                <rect key="frame" x="540" y="84" width="20" height="20"/>
+                                <rect key="frame" x="525" y="84" width="35" height="35"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="aZD-SK-tQc"/>
-                                    <constraint firstAttribute="width" constant="20" id="brd-IL-bDf"/>
+                                    <constraint firstAttribute="height" constant="35" id="aZD-SK-tQc"/>
+                                    <constraint firstAttribute="width" constant="35" id="brd-IL-bDf"/>
                                 </constraints>
-                                <state key="normal" title="Setting" backgroundImage="setting"/>
+                                <state key="normal" backgroundImage="setting"/>
                                 <connections>
                                     <segue destination="AxE-EH-p0Z" kind="show" id="vlk-AA-EHM"/>
                                 </connections>
@@ -107,10 +107,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXn-Sn-Hqf">
-                                <rect key="frame" x="540" y="124" width="20" height="20"/>
+                                <rect key="frame" x="525" y="139" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="EfE-kG-oAm"/>
-                                    <constraint firstAttribute="width" constant="20" id="JjJ-s8-khS"/>
+                                    <constraint firstAttribute="height" constant="35" id="EfE-kG-oAm"/>
+                                    <constraint firstAttribute="width" constant="35" id="JjJ-s8-khS"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="undo"/>
                                 <connections>
