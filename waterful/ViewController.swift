@@ -12,8 +12,11 @@ import CoreData
 
 
 class ViewController: UIViewController {
+    
     var setting_info : Setting!
     
+    @IBOutlet var mainView: UIView!
+
     @IBOutlet weak var consumed: UILabel!
     
     @IBOutlet weak var mainImageView: UIImageView!
@@ -45,6 +48,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateWater()
+        navigationController?.navigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -60,7 +64,8 @@ class ViewController: UIViewController {
         // first time user.
         if (setting_info == nil){
             setting_info = setSetting()
-            // !!!!! BLUR !!!!!!!
+            
+
             // !!!!!!!! SUBVIEW !!!!!!!!!!
             // press OK in subview -> !!!! END BLUR !!!!!
         }
@@ -177,6 +182,12 @@ class ViewController: UIViewController {
     func updateWater() {
         let consumedWater = fetchWater()
         consumed.text = String(consumedWater)
+        
+        let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
+        
+        mainImageView.image = drawImage(ProgressPercentage)
+        
+        
 
     }
     
@@ -209,6 +220,27 @@ class ViewController: UIViewController {
             // Do something in response to error condition
         }
         updateWater()
+    }
+    
+    func blurView() {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
+        blurView.frame = mainView.bounds
+        mainView.addSubview(blurView)
+    }
+    
+    func drawImage(progressPercentage : Double) -> UIImage{
+
+        let white_rect = CGRectMake(0, 0, mainImageView.frame.width, mainImageView.frame.height * CGFloat(1-progressPercentage))
+        
+        UIGraphicsBeginImageContextWithOptions(mainImageView.frame.size, false, 0)
+        
+        UIColor.whiteColor().setFill()
+        UIRectFill(white_rect)
+        
+        let coverImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return coverImage
     }
 }
 

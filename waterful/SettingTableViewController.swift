@@ -22,6 +22,7 @@ class SettingTableViewController: UITableViewController{
     
     
     override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBarHidden = false
     }
     override func viewDidLoad() {
         let setting_info : Setting = fetchSetting()
