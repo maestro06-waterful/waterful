@@ -24,6 +24,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var goal: UILabel!
     
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    
+    
+    
+    
     let dateFormatter = NSDateFormatter()
 
     @IBAction func button1Pressed(sender: AnyObject) {
@@ -60,8 +68,18 @@ class ViewController: UIViewController {
         mainImageView.layer.cornerRadius = mainImageView.frame.height/2
         mainImageView.clipsToBounds = true
         let dottedPattern = UIImage(named: "dottedPattern")
+        
         mainImageView.layer.borderWidth = 1
         mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        
+        let buttons : [UIButton] = [button1, button2, button3, button4]
+        for button in buttons {
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+            button.layer.cornerRadius = button.frame.height/4
+
+            
+        }
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
@@ -99,7 +117,6 @@ class ViewController: UIViewController {
     }
     
     func fetchWater() -> Int {
-        print(String(NSDate))
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         

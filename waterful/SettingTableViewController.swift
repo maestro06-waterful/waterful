@@ -19,11 +19,10 @@ class SettingTableViewController: UITableViewController{
     @IBOutlet weak var goalText: UILabel!
     @IBOutlet weak var unitText: UILabel!
     
-    
-    
     override func viewWillAppear(animated: Bool) {
         navigationController?.navigationBarHidden = false
     }
+    
     override func viewDidLoad() {
         let setting_info : Setting = fetchSetting()
         fromText.text = setting_info.alarmStartTime?.description

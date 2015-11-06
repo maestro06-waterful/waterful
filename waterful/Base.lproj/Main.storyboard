@@ -53,59 +53,63 @@
                             <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I5D-2a-GDb">
                                 <rect key="frame" x="200" y="154" width="200" height="200"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.25098039215686274" green="0.67843137254901964" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="TTC-gN-qa0"/>
                                     <constraint firstAttribute="width" constant="200" id="g2n-br-2IV"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFf-Rq-Exn">
-                                <rect key="frame" x="170" y="444.5" width="60" height="40"/>
+                                <rect key="frame" x="150" y="464.5" width="140" height="80"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.17931798986486486" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="LiI-sm-nqa"/>
-                                    <constraint firstAttribute="height" constant="40" id="RCD-dW-ZCh"/>
+                                    <constraint firstAttribute="width" constant="140" id="LiI-sm-nqa"/>
+                                    <constraint firstAttribute="height" constant="80" id="RCD-dW-ZCh"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="40ml"/>
                                 <connections>
                                     <action selector="button1Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tNy-eH-dSK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyZ-IK-QeO">
-                                <rect key="frame" x="370" y="444.5" width="60" height="40"/>
+                                <rect key="frame" x="310" y="464.5" width="140" height="80"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.17931798986486486" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Jdm-ZR-zRv"/>
-                                    <constraint firstAttribute="height" constant="40" id="qBc-Ko-9HY"/>
+                                    <constraint firstAttribute="width" constant="140" id="Jdm-ZR-zRv"/>
+                                    <constraint firstAttribute="height" constant="80" id="qBc-Ko-9HY"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="120ml"/>
                                 <connections>
                                     <action selector="button2Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vQ3-QP-q8t"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIr-7i-RBQ">
-                                <rect key="frame" x="370" y="534.5" width="60" height="40"/>
+                                <rect key="frame" x="310" y="574.5" width="140" height="80"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.17931798986486486" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Clz-Fx-7Sb"/>
-                                    <constraint firstAttribute="width" constant="60" id="ESs-SN-cu6"/>
+                                    <constraint firstAttribute="height" constant="80" id="Clz-Fx-7Sb"/>
+                                    <constraint firstAttribute="width" constant="140" id="ESs-SN-cu6"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="500ml"/>
                                 <connections>
                                     <action selector="button4Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ovD-PB-si2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D31-Bc-QcG">
-                                <rect key="frame" x="170" y="534.5" width="60" height="40"/>
+                                <rect key="frame" x="150" y="574.5" width="140" height="80"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.17931798986486486" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="dv2-Ry-nXm"/>
-                                    <constraint firstAttribute="height" constant="40" id="wIQ-0S-g3q"/>
+                                    <constraint firstAttribute="width" constant="140" id="dv2-Ry-nXm"/>
+                                    <constraint firstAttribute="height" constant="80" id="wIQ-0S-g3q"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="400ml"/>
                                 <connections>
                                     <action selector="button3Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cUT-wh-ppp"/>
@@ -128,27 +132,27 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="yBs-05-isd" secondAttribute="trailing" constant="20" id="3Mf-wm-r8T"/>
-                            <constraint firstItem="fyZ-IK-QeO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="ADH-Re-tc0"/>
+                            <constraint firstItem="fyZ-IK-QeO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="ADH-Re-tc0"/>
                             <constraint firstItem="I5D-2a-GDb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AG3-aZ-Qfk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zXn-Sn-Hqf" secondAttribute="trailing" constant="20" id="T97-DR-uh4"/>
-                            <constraint firstItem="D31-Bc-QcG" firstAttribute="top" secondItem="fyZ-IK-QeO" secondAttribute="bottom" constant="50" id="Vj2-WU-vNl"/>
+                            <constraint firstItem="D31-Bc-QcG" firstAttribute="top" secondItem="fyZ-IK-QeO" secondAttribute="bottom" constant="30" id="Vj2-WU-vNl"/>
                             <constraint firstItem="ni6-Ej-Ogc" firstAttribute="top" secondItem="I5D-2a-GDb" secondAttribute="bottom" constant="20" id="WRS-Ev-Fuv"/>
                             <constraint firstItem="ni6-Ej-Ogc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XSR-bt-r2L"/>
                             <constraint firstItem="hwX-p2-0xd" firstAttribute="top" secondItem="I5D-2a-GDb" secondAttribute="bottom" constant="20" id="ZEP-Lt-7h0"/>
                             <constraint firstItem="yBs-05-isd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="aKz-l9-wZg"/>
-                            <constraint firstItem="ZIr-7i-RBQ" firstAttribute="top" secondItem="hFf-Rq-Exn" secondAttribute="bottom" constant="50" id="bYw-gQ-boe"/>
+                            <constraint firstItem="ZIr-7i-RBQ" firstAttribute="top" secondItem="hFf-Rq-Exn" secondAttribute="bottom" constant="30" id="bYw-gQ-boe"/>
                             <constraint firstItem="zXn-Sn-Hqf" firstAttribute="top" secondItem="yBs-05-isd" secondAttribute="bottom" constant="20" id="c3T-Ug-xbX"/>
                             <constraint firstItem="I5D-2a-GDb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="eAl-2I-aMH"/>
-                            <constraint firstItem="fyZ-IK-QeO" firstAttribute="top" secondItem="hwX-p2-0xd" secondAttribute="bottom" constant="50" id="jgY-Oo-vuG"/>
-                            <constraint firstItem="D31-Bc-QcG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-100" id="kC8-Jp-lcQ"/>
+                            <constraint firstItem="fyZ-IK-QeO" firstAttribute="top" secondItem="hwX-p2-0xd" secondAttribute="bottom" constant="70" id="jgY-Oo-vuG"/>
+                            <constraint firstItem="D31-Bc-QcG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="kC8-Jp-lcQ"/>
                             <constraint firstItem="hwX-p2-0xd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="nJK-0V-LWT"/>
                             <constraint firstItem="rUZ-MH-4ZW" firstAttribute="top" secondItem="I5D-2a-GDb" secondAttribute="bottom" constant="20" id="ntb-mI-sCJ"/>
                             <constraint firstItem="I5D-2a-GDb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="90" id="qHR-lB-4u6"/>
                             <constraint firstItem="rUZ-MH-4ZW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-100" id="sAt-c0-YNW"/>
-                            <constraint firstItem="ZIr-7i-RBQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="sRn-cS-Cul"/>
-                            <constraint firstItem="hFf-Rq-Exn" firstAttribute="top" secondItem="rUZ-MH-4ZW" secondAttribute="bottom" constant="50" id="uGB-ij-Fwg"/>
+                            <constraint firstItem="ZIr-7i-RBQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="sRn-cS-Cul"/>
+                            <constraint firstItem="hFf-Rq-Exn" firstAttribute="top" secondItem="rUZ-MH-4ZW" secondAttribute="bottom" constant="70" id="uGB-ij-Fwg"/>
                             <constraint firstItem="yBs-05-isd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="vvv-Cl-ayN"/>
-                            <constraint firstItem="hFf-Rq-Exn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-100" id="yL5-hb-2az"/>
+                            <constraint firstItem="hFf-Rq-Exn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="yL5-hb-2az"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -159,6 +163,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="wYx-6n-6YJ"/>
                     <connections>
+                        <outlet property="button1" destination="hFf-Rq-Exn" id="SMH-q5-INU"/>
+                        <outlet property="button2" destination="fyZ-IK-QeO" id="0kf-kr-Rtg"/>
+                        <outlet property="button3" destination="D31-Bc-QcG" id="J2U-0d-GXF"/>
+                        <outlet property="button4" destination="ZIr-7i-RBQ" id="cAI-Tr-65D"/>
                         <outlet property="consumed" destination="rUZ-MH-4ZW" id="wE0-Pp-pUQ"/>
                         <outlet property="goal" destination="hwX-p2-0xd" id="e4Q-Kc-pXx"/>
                         <outlet property="mainImageView" destination="I5D-2a-GDb" id="EdU-q1-v0r"/>
