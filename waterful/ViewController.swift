@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainImageView: UIImageView!
     
     @IBOutlet weak var goal: UILabel!
+    
+    let dateFormatter = NSDateFormatter()
 
     @IBAction func button1Pressed(sender: AnyObject) {
         logWater(40)
@@ -57,9 +59,10 @@ class ViewController: UIViewController {
         mainImageView.layer.cornerRadius = mainImageView.frame.height/2
         mainImageView.clipsToBounds = true
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
+        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         
+
         setting_info = fetchSetting()
         // first time user.
         if (setting_info == nil){
@@ -82,7 +85,13 @@ class ViewController: UIViewController {
     }
     
     func getDate(date : NSDate) -> String{
-        return (date.description as NSString).substringToIndex(10)
+        let dateString = dateFormatter.stringFromDate(date)
+        return (dateString as NSString).substringToIndex(10)
+    }
+    
+    func getCurrentTime() ->  NSDate {
+        let date = dateFormatter.stringFromDate(NSDate())
+        return dateFormatter.dateFromString(date)!
     }
     
     func fetchWater() -> Int {
@@ -98,7 +107,7 @@ class ViewController: UIViewController {
         
         var consumed : Int = 0
         
-        let today = getDate(NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT)))
+        let today = getDate(getCurrentTime())
         
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
@@ -169,7 +178,7 @@ class ViewController: UIViewController {
             inManagedObjectContext: managedContext) as! WaterLog
         
         water_info.amount = amount
-        water_info.loggedTime = NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT))
+        water_info.loggedTime = getCurrentTime()
         
         do {
             try managedContext.save()
@@ -199,7 +208,7 @@ class ViewController: UIViewController {
         
         let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         
-        let today = getDate(NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT)))
+        let today = getDate(getCurrentTime())
         
         var todayResult : [WaterLog] = []
         
@@ -245,5 +254,6 @@ class ViewController: UIViewController {
         
         return coverImage
     }
+
 }
 
