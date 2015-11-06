@@ -32,7 +32,6 @@
 		F4B2E8E31BC6CA1700A93E58 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */; };
 		F4B2E8E51BC6CA1700A93E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */; };
 		F4B2E8E91BC6CA1700A93E58 /* waterful_watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F4B2E8CB1BC6CA1700A93E58 /* waterful_watch.app */; };
-		F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +125,6 @@
 		F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4B2E8E61BC6CA1700A93E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkWaterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */,
-				F4F611211BC767E600A61D20 /* DrinkWaterViewController.swift */,
 				F4AF28C51BDEF84E00E36E1B /* SettingTableViewController.swift */,
 			);
 			name = ViewControllers;
@@ -481,7 +478,6 @@
 				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
 				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
-				F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,
 				F4B2E89E1BC6C9EC00A93E58 /* ViewController.swift in Sources */,
