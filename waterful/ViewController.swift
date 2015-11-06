@@ -21,8 +21,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var consumed: UILabel!
     
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var lastUnitView: UIImageView!
     
     @IBOutlet weak var goal: UILabel!
+    
+    @IBOutlet weak var unitLeft: UILabel!
     
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
@@ -71,6 +74,8 @@ class ViewController: UIViewController {
         
         mainImageView.layer.borderWidth = 1
         mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        
+
         
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
@@ -218,6 +223,15 @@ class ViewController: UIViewController {
         
         let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
         
+        let lastElement : WaterLog! = getLastElement()
+        if lastElement != nil {
+            lastUnitView.image = UIImage(named: String(lastElement.amount!) + "ml" + ".png")
+            print(String(lastElement.amount!) + "ml")
+        }
+        else {
+            lastUnitView.image = nil
+        }
+        
         mainImageView.image = drawImage(ProgressPercentage)
     }
     
@@ -261,7 +275,7 @@ class ViewController: UIViewController {
         mainView.addSubview(blurView)
     }
     
-    func drawImage(progressPercentage : Double) -> UIImage{
+    func drawImage(progressPercentage : Double) -> UIImage {
 
         let white_rect = CGRectMake(0, 0, mainImageView.frame.width, mainImageView.frame.height * CGFloat(1-progressPercentage))
         
@@ -275,6 +289,20 @@ class ViewController: UIViewController {
         
         return coverImage
     }
-
+    
+    func getLastElement() -> WaterLog! {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "WaterLog")
+        
+        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        if (fetchResults?.count>0){
+            return fetchResults![(fetchResults?.endIndex)!-1]
+        }
+        else {
+            return nil
+        }
+    }
 }
 
