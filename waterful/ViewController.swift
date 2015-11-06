@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import QuartzCore
 
 
 
@@ -58,6 +59,9 @@ class ViewController: UIViewController {
         mainImageView.layer.masksToBounds = false
         mainImageView.layer.cornerRadius = mainImageView.frame.height/2
         mainImageView.clipsToBounds = true
+        let dottedPattern = UIImage(named: "dottedPattern")
+        mainImageView.layer.borderWidth = 1
+        mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
