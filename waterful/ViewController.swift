@@ -224,14 +224,27 @@ class ViewController: UIViewController {
         let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
         
         let lastElement : WaterLog! = getLastElement()
+        // show image of last unit.
         if lastElement != nil {
-            lastUnitView.image = UIImage(named: String(lastElement.amount!) + "ml" + ".png")
-            print(String(lastElement.amount!) + "ml")
+            lastUnitView.image = UIImage(named: String(lastElement.amount!) + "ml")
+            // show how much drinks you have to drink with the unit.
+            let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
+            if waterLeft > 0 {
+                unitLeft.text = String( waterLeft / Double(lastElement.amount!) ) + " left"
+            }
+            else {
+                unitLeft.text = nil
+            }
         }
         else {
             lastUnitView.image = nil
+            unitLeft.text = nil
         }
         
+
+        
+        
+        // cover blue background with white image to show progress status
         mainImageView.image = drawImage(ProgressPercentage)
     }
     
