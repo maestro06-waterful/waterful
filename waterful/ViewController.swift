@@ -227,7 +227,7 @@ class ViewController: UIViewController {
             // show how much drinks you have to drink with the unit.
             let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
             if waterLeft > 0 {
-                unitLeft.text = String( round(waterLeft * 100 / Double(lastElement.amount!)) / 100 ) + " left"
+                unitLeft.text = "X " + String( Int (ceil( waterLeft / Double(lastElement.amount!)) )) + " left"
             }
             else {
                 unitLeft.text = nil
