@@ -12,6 +12,7 @@
 		C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */; };
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
 		C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */; };
+		C7BB7FA91BEE0EEC00C4C12F /* WaterPatternPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */; };
 		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
 		C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495261BDCB9B3004FAF45 /* Plant.swift */; };
 		C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */; };
@@ -101,6 +102,7 @@
 		C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPattern.swift; sourceTree = "<group>"; };
+		C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPatternPredictor.swift; sourceTree = "<group>"; };
 		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C7E495261BDCB9B3004FAF45 /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plant.swift; path = waterful/core_data/Plant.swift; sourceTree = "<group>"; };
 		C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WaterLog+CoreDataProperties.swift"; path = "waterful/core_data/WaterLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */,
+				C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */,
 			);
 			name = PatternPredictor;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				F4B2E89C1BC6C9EC00A93E58 /* AppDelegate.swift in Sources */,
 				C7E495301BDCB9B3004FAF45 /* WaterLog.swift in Sources */,
 				C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */,
+				C7BB7FA91BEE0EEC00C4C12F /* WaterPatternPredictor.swift in Sources */,
 				C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */,
 				C7E495321BDCB9B3004FAF45 /* StepDate.swift in Sources */,
 			);
