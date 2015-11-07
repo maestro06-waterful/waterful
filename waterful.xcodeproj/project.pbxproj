@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */; };
+		C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71504061BEE04C00023A871 /* NotificationBuilder.swift */; };
+		C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */; };
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
+		C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */; };
+		C7BB7FA91BEE0EEC00C4C12F /* WaterPatternPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */; };
 		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
 		C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495261BDCB9B3004FAF45 /* Plant.swift */; };
 		C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */; };
@@ -91,7 +96,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = waterful/NotificationManager.swift; sourceTree = "<group>"; };
+		C71504061BEE04C00023A871 /* NotificationBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationBuilder.swift; path = waterful/NotificationBuilder.swift; sourceTree = "<group>"; };
+		C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
+		C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPattern.swift; sourceTree = "<group>"; };
+		C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPatternPredictor.swift; sourceTree = "<group>"; };
 		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C7E495261BDCB9B3004FAF45 /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plant.swift; path = waterful/core_data/Plant.swift; sourceTree = "<group>"; };
 		C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WaterLog+CoreDataProperties.swift"; path = "waterful/core_data/WaterLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -159,6 +169,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9DF662041BDF1E8A00123EA7 /* noti */ = {
+			isa = PBXGroup;
+			children = (
+				C71504061BEE04C00023A871 /* NotificationBuilder.swift */,
+				9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */,
+			);
+			name = noti;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C7BB7FA51BEE0DD900C4C12F /* PatternPredictor */ = {
+			isa = PBXGroup;
+			children = (
+				C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */,
+				C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */,
+			);
+			name = PatternPredictor;
+			sourceTree = "<group>";
+		};
 		C7E495351BDCB9B8004FAF45 /* core_data */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +249,8 @@
 		F4B2E89A1BC6C9EC00A93E58 /* waterful */ = {
 			isa = PBXGroup;
 			children = (
+				C7BB7FA51BEE0DD900C4C12F /* PatternPredictor */,
+				9DF662041BDF1E8A00123EA7 /* noti */,
 				F4B2E89B1BC6C9EC00A93E58 /* AppDelegate.swift */,
 				C7E495361BDCBB89004FAF45 /* ViewControllers */,
 				C7E495351BDCB9B8004FAF45 /* core_data */,
@@ -227,6 +258,7 @@
 				F4B2E8A21BC6C9EC00A93E58 /* Assets.xcassets */,
 				F4B2E8A41BC6C9EC00A93E58 /* LaunchScreen.storyboard */,
 				F4B2E8A71BC6C9EC00A93E58 /* Info.plist */,
+				C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */,
 			);
 			path = waterful;
 			sourceTree = "<group>";
@@ -384,6 +416,11 @@
 				TargetAttributes = {
 					F4B2E8971BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+						};
 					};
 					F4B2E8AB1BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -398,7 +435,7 @@
 					};
 					F4B2E8D61BC6CA1700A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = XRUF4YU89Q;
+						DevelopmentTeam = 9TL9TH34MP;
 					};
 				};
 			};
@@ -475,14 +512,20 @@
 			files = (
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
+				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
 				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
 				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
+				9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */,
+				F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,
+				C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */,
 				F4B2E89E1BC6C9EC00A93E58 /* ViewController.swift in Sources */,
 				F4B2E89C1BC6C9EC00A93E58 /* AppDelegate.swift in Sources */,
 				C7E495301BDCB9B3004FAF45 /* WaterLog.swift in Sources */,
+				C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */,
+				C7BB7FA91BEE0EEC00C4C12F /* WaterPatternPredictor.swift in Sources */,
 				C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */,
 				C7E495321BDCB9B3004FAF45 /* StepDate.swift in Sources */,
 			);
@@ -655,10 +698,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = waterful/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.waterful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -667,10 +712,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = waterful/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.waterful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

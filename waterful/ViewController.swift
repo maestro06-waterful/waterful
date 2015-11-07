@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import QuartzCore
 
-
+import HealthKit
 
 class ViewController: UIViewController {
     
@@ -150,7 +150,7 @@ class ViewController: UIViewController {
     
     // set settings, if there is no.
     func setSetting() -> Setting {
-        
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -161,8 +161,7 @@ class ViewController: UIViewController {
         setting_info.alarmEndTime = 23
         setting_info.alarmStartTime = 9
         setting_info.alarmInterval = 3
-        setting_info.unit = 1
-        
+        setting_info.unit = HKUnit(fromString: "mL")
         
         do {
             try managedContext.save()
