@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     
     
     
-    let dateFormatter = NSDateFormatter()
+
 
     @IBAction func button1Pressed(sender: AnyObject) {
         logWater(40)
@@ -86,8 +86,7 @@ class ViewController: UIViewController {
             
         }
         
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
-        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
+        
         
 
         setting_info = fetchSetting()
@@ -112,13 +111,12 @@ class ViewController: UIViewController {
     }
     
     func getDate(date : NSDate) -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         let dateString = dateFormatter.stringFromDate(date)
-        return (dateString as NSString).substringToIndex(10)
-    }
-    
-    func getCurrentTime() ->  NSDate {
-        let date = dateFormatter.stringFromDate(NSDate())
-        return dateFormatter.dateFromString(date)!
+        return dateString
+        
     }
     
     func fetchWater() -> Int {
@@ -133,7 +131,7 @@ class ViewController: UIViewController {
         
         var consumed : Int = 0
         
-        let today = getDate(getCurrentTime())
+        let today = getDate(NSDate())
         
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
@@ -203,7 +201,7 @@ class ViewController: UIViewController {
             inManagedObjectContext: managedContext) as! WaterLog
         
         water_info.amount = amount
-        water_info.loggedTime = getCurrentTime()
+        water_info.loggedTime = NSDate()
         
         do {
             try managedContext.save()
@@ -229,7 +227,7 @@ class ViewController: UIViewController {
             // show how much drinks you have to drink with the unit.
             let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
             if waterLeft > 0 {
-                unitLeft.text = String( waterLeft / Double(lastElement.amount!) ) + " left"
+                unitLeft.text = String( round(waterLeft * 100 / Double(lastElement.amount!)) / 100 ) + " left"
             }
             else {
                 unitLeft.text = nil
@@ -255,7 +253,7 @@ class ViewController: UIViewController {
         
         let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         
-        let today = getDate(getCurrentTime())
+        let today = getDate(NSDate())
         
         var todayResult : [WaterLog] = []
         

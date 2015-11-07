@@ -435,7 +435,7 @@
 					};
 					F4B2E8D61BC6CA1700A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 9TL9TH34MP;
+						DevelopmentTeam = XRUF4YU89Q;
 					};
 				};
 			};
@@ -517,7 +517,6 @@
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
 				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
 				9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */,
-				F4F611221BC767E600A61D20 /* DrinkWaterViewController.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,
 				C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */,
