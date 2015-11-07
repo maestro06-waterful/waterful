@@ -155,15 +155,16 @@ class NotiManager {
         
         let waterlogCategory = UIMutableUserNotificationCategory()
         waterlogCategory.identifier = NotiCategory.WATERLOG.rawValue
-        
+
         waterlogCategory.setActions([notiAction!.log1NotiAction, notiAction!.log2NotiAction, notiAction!.snoozeNotiAction ], forContext: UIUserNotificationActionContext.Default)
         waterlogCategory.setActions([notiAction!.log1NotiAction, notiAction!.snoozeNotiAction], forContext: UIUserNotificationActionContext.Minimal)
+
         
         let notificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Sound] , categories: Set(arrayLiteral: waterlogCategory))
 
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     }
-    
+
     private func notiSettingSimple(){
         
         let notificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Sound] , categories: nil)

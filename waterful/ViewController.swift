@@ -8,59 +8,100 @@
 
 import UIKit
 import CoreData
+import QuartzCore
+
 import HealthKit
 
 class ViewController: UIViewController {
+    
+    var setting_info : Setting!
+    
+    @IBOutlet var mainView: UIView!
 
-    @IBOutlet weak var plant: UIButton!
-    
-    @IBOutlet weak var plant_name: UILabel!
-    
-    @IBOutlet weak var plant_type: UILabel!
-    
-    @IBOutlet weak var plant_dob: UILabel!
-    
     @IBOutlet weak var consumed: UILabel!
     
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var lastUnitView: UIImageView!
+    
     @IBOutlet weak var goal: UILabel!
+    
+    @IBOutlet weak var unitLeft: UILabel!
+    
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    
+    
+    
+    
 
+
+    @IBAction func button1Pressed(sender: AnyObject) {
+        logWater(40)
+    }
+    
+    @IBAction func button2Pressed(sender: AnyObject) {
+        logWater(120)
+    }
+    
+    @IBAction func button3Pressed(sender: AnyObject) {
+        logWater(400)
+    }
+    
+    @IBAction func button4Pressed(sender: AnyObject) {
+        logWater(500)
+    }
+    
+    @IBAction func undoPressed(sender: AnyObject) {
+        undoLog()
+    }
+
+    
+    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
-        
-        consumed.text = fetchWater()
+        updateWater()
+        navigationController?.navigationBarHidden = true
     }
+    
     override func viewDidLoad() {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        // Setting up informations for plant
+        mainImageView.layer.masksToBounds = false
+        mainImageView.layer.cornerRadius = mainImageView.frame.height/2
+        mainImageView.clipsToBounds = true
+        let dottedPattern = UIImage(named: "dottedPattern")
+        
+        mainImageView.layer.borderWidth = 1
+        mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        
 
-        var plant_info : Plant! = fetchPlant()
-        if (plant_info == nil){
-            
-            plant_info = createPlant()
+        
+        let buttons : [UIButton] = [button1, button2, button3, button4]
+        for button in buttons {
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+            button.layer.cornerRadius = button.frame.height/4
 
-            let alertController = UIAlertController(title: "Hello First Time User!", message:
-                "You just receieved your plant, 뚜벅이", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "water him", style: UIAlertActionStyle.Default,handler: nil))
             
-            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
-        var setting_info : Setting! = fetchSetting()
+        
+        
+
+        setting_info = fetchSetting()
+        // first time user.
         if (setting_info == nil){
             setting_info = setSetting()
+            
+
+            // !!!!!!!! SUBVIEW !!!!!!!!!!
+            // press OK in subview -> !!!! END BLUR !!!!!
         }
-        
-        plant_name.text = plant_info.name
-        plant_dob.text = dateFormatter.stringFromDate(plant_info.bornDate!)
-        plant_type.text = plant_info.type
+
         goal.text = setting_info.goal?.description
         
-        
-        
         super.viewDidLoad()
-        plant.setBackgroundImage(UIImage(named: "2_sprout.png"), forState: UIControlState.Normal)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -68,55 +109,18 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    func createPlant() -> Plant {
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        
-        let plant_info = NSEntityDescription.insertNewObjectForEntityForName("Plant",
-            inManagedObjectContext: managedContext) as! Plant
-        plant_info.name = "뚜벅이"
-        plant_info.bornDate = NSDate()
-        plant_info.type = "포인세티아"
-        plant_info.growthRate = 0
-        
-        do {
-            try managedContext.save()
-            
-        } catch {
-            print("Unresolved error")
-            abort()
-        }
-        
-        return plant_info
-    }
-    
-    func fetchPlant() -> Plant! {
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        let fetchRequest = NSFetchRequest(entityName: "Plant")
-        
-        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [Plant]
-        
-        if (fetchResults!.count == 0){
-            return nil
-        }
-            
-        else{
-            return fetchResults![0]
-        }
-    }
     
     func getDate(date : NSDate) -> String{
-        return (date.description as NSString).substringToIndex(10)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
+        let dateString = dateFormatter.stringFromDate(date)
+        return dateString
+        
     }
     
-    func fetchWater() -> String {
-        print(String(NSDate))
+    func fetchWater() -> Int {
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -127,18 +131,22 @@ class ViewController: UIViewController {
         
         var consumed : Int = 0
         
-        let today = getDate(NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT)))
+        let today = getDate(NSDate())
         
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
                 consumed = consumed + Int(result.amount!)
             }
+            else {
+                break
+            }
         }
         
         
-        return String(consumed)
+        return consumed
     }
     
+    // set settings, if there is no.
     func setSetting() -> Setting {
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -164,6 +172,7 @@ class ViewController: UIViewController {
         return setting_info
     }
 
+    // fetch settings from
     func fetchSetting() -> Setting! {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -177,8 +186,133 @@ class ViewController: UIViewController {
             return nil
         }
             
-        else{
+        else {
             return fetchResults![0]
         }
     }
+    
+    // store amount of water user consumed
+    func logWater(amount : Int){
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let water_info = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
+            inManagedObjectContext: managedContext) as! WaterLog
+        
+        water_info.amount = amount
+        water_info.loggedTime = NSDate()
+        
+        do {
+            try managedContext.save()
+            
+        } catch {
+            print("Unresolved error")
+            abort()
+        }
+        updateWater()
+    }
+    
+    // update text of consumed water
+    func updateWater() {
+        let consumedWater = fetchWater()
+        consumed.text = String(consumedWater)
+        
+        let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
+        
+        let lastElement : WaterLog! = getLastElement()
+        // show image of last unit.
+        if lastElement != nil {
+            lastUnitView.image = UIImage(named: String(lastElement.amount!) + "ml")
+            // show how much drinks you have to drink with the unit.
+            let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
+            if waterLeft > 0 {
+                unitLeft.text = "X " + String( Int (ceil( waterLeft / Double(lastElement.amount!)) )) + " left"
+            }
+            else {
+                unitLeft.text = nil
+            }
+        }
+        else {
+            lastUnitView.image = nil
+            unitLeft.text = nil
+        }
+        
+
+        
+        
+        // cover blue background with white image to show progress status
+        mainImageView.image = drawImage(ProgressPercentage)
+    }
+    
+    func undoLog(){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "WaterLog")
+        
+        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        
+        let today = getDate(NSDate())
+        
+        var todayResult : [WaterLog] = []
+        
+        for result in fetchResults! {
+            if (getDate(result.loggedTime!) == today){
+                todayResult.append(result)
+            }
+            else {
+                break
+            }
+        }
+        
+        let tmp = todayResult.endIndex-1
+        if (tmp >= 0){
+            managedContext.deleteObject(todayResult[tmp])
+        }
+        
+        do {
+            try managedContext.save()
+        } catch {
+            // Do something in response to error condition
+        }
+        updateWater()
+    }
+    
+    func blurView() {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
+        blurView.frame = mainView.bounds
+        mainView.addSubview(blurView)
+    }
+    
+    func drawImage(progressPercentage : Double) -> UIImage {
+
+        let white_rect = CGRectMake(0, 0, mainImageView.frame.width, mainImageView.frame.height * CGFloat(1-progressPercentage))
+        
+        UIGraphicsBeginImageContextWithOptions(mainImageView.frame.size, false, 0)
+        
+        UIColor.whiteColor().setFill()
+        UIRectFill(white_rect)
+        
+        let coverImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return coverImage
+    }
+    
+    func getLastElement() -> WaterLog! {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "WaterLog")
+        
+        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        if (fetchResults?.count>0){
+            return fetchResults![(fetchResults?.endIndex)!-1]
+        }
+        else {
+            return nil
+        }
+    }
 }
+
