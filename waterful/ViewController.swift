@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var goal: UILabel!
     
     @IBOutlet weak var unitLeft: UILabel!
+    @IBOutlet weak var amountLeft: UILabel!
     
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
@@ -36,6 +37,12 @@ class ViewController: UIViewController {
     
     
 
+    @IBAction func mainButton(sender: AnyObject) {
+        let lastElement = getLastElement()
+        if lastElement != nil {
+            logWater(Int(lastElement.amount!))
+        }
+    }
 
     @IBAction func button1Pressed(sender: AnyObject) {
         logWater(40)
@@ -66,6 +73,12 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+
+        let backgroundImageView = UIImageView.init(image: UIImage(named:"back3"))
+        backgroundImageView.frame = mainView.bounds
+        backgroundImageView.contentMode = .ScaleAspectFill
+        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        
         
         mainImageView.layer.masksToBounds = false
         mainImageView.layer.cornerRadius = mainImageView.frame.height/2
@@ -155,7 +168,7 @@ class ViewController: UIViewController {
         let setting_info = NSEntityDescription.insertNewObjectForEntityForName("Setting",
             inManagedObjectContext: managedContext) as! Setting
         
-        setting_info.goal = 3000
+        setting_info.goal = 1500
         setting_info.alarmEndTime = 23
         setting_info.alarmStartTime = 9
         setting_info.alarmInterval = 3
@@ -219,23 +232,27 @@ class ViewController: UIViewController {
         consumed.text = String(consumedWater)
         
         let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
-        
         let lastElement : WaterLog! = getLastElement()
+        let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
+        
         // show image of last unit.
         if lastElement != nil {
-            lastUnitView.image = UIImage(named: String(lastElement.amount!) + "ml")
+            lastUnitView.image = UIImage(named: String(lastElement.amount!) + String(setting_info.unit!))
             // show how much drinks you have to drink with the unit.
-            let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
+            
             if waterLeft > 0 {
-                unitLeft.text = "X " + String( Int (ceil( waterLeft / Double(lastElement.amount!)) )) + " left"
+                unitLeft.text = "* " + String( Int (ceil( waterLeft / Double(lastElement.amount!)) )) + " left."
+                amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
             }
             else {
                 unitLeft.text = nil
+                amountLeft.text = nil
             }
         }
         else {
             lastUnitView.image = nil
             unitLeft.text = nil
+            amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
         }
         
 
