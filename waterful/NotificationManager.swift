@@ -52,6 +52,8 @@ class NotiManager {
         
     }
     
+    private let fireTimeInterval = 600
+    
     var notiList: Array<NotiInfo> = []
     var notiBuilder = NotiBuilder()
     
@@ -77,37 +79,62 @@ class NotiManager {
     }
     
     enum ArchieveNotiType : String{
-        case TODAY = "AN_TODAY"
+        case TODAY = "TODAY"
     }
     
-    func registerSmartNoti(notiType : SmartNotiType){
+    func registerSmartNoti(notiType : SmartNotiType, fireDate : NSDate){
+        notiSettingSimple()
         
         let localNotification : UILocalNotification = notiBuilder.buildLocalNotification(
             NotiBuilder.NotiType.SMART_NOTI, notiDetail: notiType.rawValue,
-            fireTime: NSDate().dateByAddingTimeInterval(5))
+            fireTime: fireDate)
         
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
     }
     
-    func registerRecordNoti(notiType : RecordNotiType){
+    func registerRecordNoti(notiType : RecordNotiType, fireDate : NSDate){
+        notiSettingActionable()
         
         let localNotification : UILocalNotification = notiBuilder.buildLocalNotification(
             NotiBuilder.NotiType.RECORD_NOTI, notiDetail: notiType.rawValue,
-            fireTime: NSDate().dateByAddingTimeInterval(5))
+            fireTime: fireDate)
         
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
     }
     
-    func registerArchieveNoti(notiType : ArchieveNotiType){
+    func registerArchieveNoti(notiType : ArchieveNotiType, fireDate : NSDate){
+        notiSettingSimple()
         
         let localNotification : UILocalNotification = notiBuilder.buildLocalNotification(
             NotiBuilder.NotiType.ARCHIEVE_NOTI, notiDetail: notiType.rawValue,
-            fireTime: NSDate().dateByAddingTimeInterval(5))
+            fireTime: fireDate)
         
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification) // Scheduling the notification.
+    }
+    
+    func cancelNoti(fireTime : NSDate) {
+        let notifications : [UILocalNotification] = getScheduledNoti(fireTime)
+        for noti in notifications {
+            UIApplication.sharedApplication().cancelLocalNotification(noti)
+        }
+
+    }
+    
+    func cancelNoti(notiType : NotiBuilder.NotiType){
+        let notifications : [UILocalNotification] = getScheduledNoti(notiType)
+        for noti in notifications {
+            UIApplication.sharedApplication().cancelLocalNotification(noti)
+        }
+    }
+    
+    func cancelAllNoti(){
+        let notifications : [UILocalNotification] = getScheduledNoti()
+        if notifications.count > 0 {
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+        }
     }
     
     private func applicationDidEnterBackground(){
@@ -122,59 +149,83 @@ class NotiManager {
         }
     }
     
-    
-    func registerForActionableNotification() {
-        registerForActionableNotificationWaterLog()
-//        registerSimapleNotification()
+    private func notiSettingActionable(){
         
-    }
-    
-    func registerSimapleNotification(){
-        let notificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Sound, UIUserNotificationType.Badge] , categories: nil)
-        //*NOTE*
-        // Registering UIUserNotificationSettings more than once results in previous settings being overwritten.
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-    }
-    
-    private func registerForActionableNotificationWaterLog(){
-        
-        let notiActionWaterLog1 = UIMutableUserNotificationAction()
-        notiActionWaterLog1.identifier = notiActionIdentifier.WaterLog1.rawValue
-        notiActionWaterLog1.title = "종이컵 한 잔"
-        notiActionWaterLog1.activationMode = UIUserNotificationActivationMode.Background
-        notiActionWaterLog1.destructive = false; // 빨간 버튼
-        notiActionWaterLog1.authenticationRequired = false
-        
-        let notiActionWaterLog2 = UIMutableUserNotificationAction()
-        notiActionWaterLog2.identifier = notiActionIdentifier.WaterLog2.rawValue
-        notiActionWaterLog2.title = "페트병 하나"
-        notiActionWaterLog2.activationMode = UIUserNotificationActivationMode.Background
-        notiActionWaterLog2.destructive = false; // 빨간 버튼
-        notiActionWaterLog2.authenticationRequired = false
-        
-        
-        let reminderActionSnooze = UIMutableUserNotificationAction()
-        reminderActionSnooze.identifier = notiActionIdentifier.Snooze.rawValue
-        reminderActionSnooze.title = "Snooze"
-        reminderActionSnooze.activationMode = UIUserNotificationActivationMode.Background
-        reminderActionSnooze.destructive = true
-        reminderActionSnooze.authenticationRequired = false
+        let notiAction = notiBuilder.buildMutableUserNotificationAction()
         
         let waterlogCategory = UIMutableUserNotificationCategory()
         waterlogCategory.identifier = NotiCategory.WATERLOG.rawValue
+
+        waterlogCategory.setActions([notiAction!.log1NotiAction, notiAction!.log2NotiAction, notiAction!.snoozeNotiAction ], forContext: UIUserNotificationActionContext.Default)
+        waterlogCategory.setActions([notiAction!.log1NotiAction, notiAction!.snoozeNotiAction], forContext: UIUserNotificationActionContext.Minimal)
+
         
-        waterlogCategory.setActions([notiActionWaterLog1, notiActionWaterLog2, reminderActionSnooze ], forContext: UIUserNotificationActionContext.Default)
-        waterlogCategory.setActions([notiActionWaterLog1, reminderActionSnooze], forContext: UIUserNotificationActionContext.Minimal)
-        
-        // Register for notification: This will prompt for the user's consent to receive notifications from this app.
         let notificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Sound] , categories: Set(arrayLiteral: waterlogCategory))
-        //*NOTE*
-        // Registering UIUserNotificationSettings more than once results in previous settings being overwritten.
+
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+    }
+
+    private func notiSettingSimple(){
+        
+        let notificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Sound] , categories: nil)
+
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     }
     
-    func scheduleLocalNotification() {
-        registerSmartNoti(NotiManager.SmartNotiType.MORNING)
+    private func getScheduledNoti() -> [UILocalNotification] {
+        let app = UIApplication.sharedApplication()
+        return app.scheduledLocalNotifications!
     }
     
+    private func getScheduledNoti(fireTime : NSDate) -> [UILocalNotification]{
+        let app = UIApplication.sharedApplication()
+        let notifications = app.scheduledLocalNotifications
+        
+        var returnNoti : [UILocalNotification] = []
+//        var currentDate : NSDate = NSDate()
+        
+        if let counts = notifications?.count{
+            for noti in notifications!{
+                let fireTimeNoti : NSDate = noti.fireDate!
+
+                let timeValueInteval : NSTimeInterval = fireTime.timeIntervalSinceNow
+                let timeNotiInterval : NSTimeInterval = fireTimeNoti.timeIntervalSinceNow
+                
+                let interval : Double = Double(timeValueInteval.description)!
+                let interval2 : Double = Double(timeNotiInterval.description)!
+                
+                if abs(Int(interval - interval2)) < fireTimeInterval {
+                    returnNoti.append(noti)
+                }
+            }
+            
+        }
+        
+        return returnNoti
+        
+    }
+    
+    private func getScheduledNoti(notiType : NotiBuilder.NotiType) -> [UILocalNotification]{
+        let app = UIApplication.sharedApplication()
+        let notifications = app.scheduledLocalNotifications
+        
+        var returnNoti : [UILocalNotification] = []
+        //        var currentDate : NSDate = NSDate()
+        
+        if let counts = notifications?.count{
+            for noti in notifications!{
+                
+                let title = noti.alertTitle
+                print(title! + "" + notiType.rawValue)
+                
+                if notiType.rawValue == title {
+                    returnNoti.append(noti)
+                }
+            }
+            
+        }
+        
+        return returnNoti
+        
+    }
 }

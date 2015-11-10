@@ -48,11 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
         
-//        NotificationManager.sharedInstance?.registerSimapleNotification()        
-        NotiManager.sharedInstance?.registerForActionableNotification()
-        NotiManager.sharedInstance?.scheduleLocalNotification()
-
-        
         
         return true
     }
