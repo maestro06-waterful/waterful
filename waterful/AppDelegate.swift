@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     var window: UIWindow?
     var isBackground: Bool = true
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         alarm.fireDate = fireDate
         alarm.soundName = UILocalNotificationDefaultSoundName
         alarm.alertBody = alertBody
-
+        
         app.scheduleLocalNotification(alarm)
     }
 
@@ -48,6 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
         
+
+        if WCSession.isSupported() {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
         
         return true
     }
@@ -166,4 +173,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    // Watch Connectivity Delegates
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        
+    }
+    
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        
+    }
+    
+    func sessionWatchStateDidChange(session: WCSession) {
+        
+    }
+    
+    func sessionReachabilityDidChange(session: WCSession) {
+        
+    }
+    
 }

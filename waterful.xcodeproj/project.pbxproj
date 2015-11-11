@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */; };
+		9D1AE44A1BF3B06E005ED5D2 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1AE4491BF3B06E005ED5D2 /* WatchConnectivity.framework */; };
 		C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71504061BEE04C00023A871 /* NotificationBuilder.swift */; };
 		C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */; };
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
@@ -97,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = waterful/NotificationManager.swift; sourceTree = "<group>"; };
+		9D1AE4491BF3B06E005ED5D2 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		C71504061BEE04C00023A871 /* NotificationBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationBuilder.swift; path = waterful/NotificationBuilder.swift; sourceTree = "<group>"; };
 		C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D1AE44A1BF3B06E005ED5D2 /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +229,7 @@
 		F4B2E88F1BC6C9EC00A93E58 = {
 			isa = PBXGroup;
 			children = (
+				9D1AE4491BF3B06E005ED5D2 /* WatchConnectivity.framework */,
 				F4B2E89A1BC6C9EC00A93E58 /* waterful */,
 				F4B2E8AF1BC6C9EC00A93E58 /* waterfulTests */,
 				F4B2E8BA1BC6C9EC00A93E58 /* waterfulUITests */,
