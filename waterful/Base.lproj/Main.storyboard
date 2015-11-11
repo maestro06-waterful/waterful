@@ -138,14 +138,14 @@
                                 <rect key="frame" x="300" y="354" width="0.0" height="0.0"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUk-Zr-k21" userLabel="amountLeft">
                                 <rect key="frame" x="300" y="354" width="0.0" height="0.0"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXn-Sn-Hqf" userLabel="undo">
@@ -205,6 +205,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="3Mf-wm-r8T"/>
+                                <exclude reference="aKz-l9-wZg"/>
                                 <exclude reference="buc-6c-Nz6"/>
                                 <exclude reference="cwY-Ec-AkE"/>
                                 <exclude reference="v4f-GU-7f0"/>
@@ -212,8 +214,6 @@
                                 <exclude reference="e0l-PD-lln"/>
                                 <exclude reference="Mh8-PI-mLd"/>
                                 <exclude reference="rr0-0G-G5s"/>
-                                <exclude reference="3Mf-wm-r8T"/>
-                                <exclude reference="aKz-l9-wZg"/>
                                 <exclude reference="c3T-Ug-xbX"/>
                             </mask>
                         </variation>
