@@ -192,20 +192,35 @@ class ViewController: UIViewController {
         }
     }
     
+    func currentUnit() -> HKUnit {
+
+        let unitML: HKUnit = HKUnit(fromString: "mL")
+
+        if setting_info != nil {
+            return setting_info.valueForKey("unit") as! HKUnit
+        }
+        return unitML
+    }
+
     // store amount of water user consumed
     func logWater(amount : Double){
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         
+        let unitML: HKUnit = HKUnit(fromString: "mL")
+        let curUnit: HKUnit = currentUnit()
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let water_info = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
+        let waterLog = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
             inManagedObjectContext: managedContext) as! WaterLog
         
-        water_info.amount = amount
-        water_info.loggedTime = NSDate()
+        waterLog.unit = curUnit
+        // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
+        waterLog.amount = HKQuantity(unit: curUnit, doubleValue: amount).doubleValueForUnit(unitML)
+        waterLog.loggedTime = NSDate()
         
         
         do {
