@@ -32,15 +32,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
-    
-    
-    
-    
 
     @IBAction func mainButton(sender: AnyObject) {
         let lastElement = getLastElement()
         if lastElement != nil {
-            logWater(Int(lastElement.amount!))
+            logWater(Double(lastElement.amount!))
         }
     }
 
@@ -64,8 +60,6 @@ class ViewController: UIViewController {
         undoLog()
     }
 
-    
-    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateWater()
@@ -84,23 +78,17 @@ class ViewController: UIViewController {
         mainImageView.layer.cornerRadius = mainImageView.frame.height/2
         mainImageView.clipsToBounds = true
         let dottedPattern = UIImage(named: "dottedPattern")
-        
+
         mainImageView.layer.borderWidth = 1
         mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
-        
 
-        
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
             button.layer.cornerRadius = button.frame.height/4
-
         }
         
-        
-        
-
         setting_info = fetchSetting()
         // first time user.
         if (setting_info == nil){
@@ -131,7 +119,7 @@ class ViewController: UIViewController {
         
     }
     
-    func fetchWater() -> Int {
+    func fetchWater() -> Double {
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -142,13 +130,13 @@ class ViewController: UIViewController {
         var fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         fetchResults = fetchResults?.reverse()
         
-        var consumed : Int = 0
+        var consumed : Double = 0
         
         let today = getDate(NSDate())
 
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
-                consumed = consumed + Int(result.amount!)
+                consumed = consumed + Double(result.amount!)
             }
             else {
                 break
@@ -168,7 +156,7 @@ class ViewController: UIViewController {
         let setting_info = NSEntityDescription.insertNewObjectForEntityForName("Setting",
             inManagedObjectContext: managedContext) as! Setting
         
-        setting_info.goal = 1500
+        setting_info.goal = Double(1500)
         setting_info.alarmEndTime = 23
         setting_info.alarmStartTime = 9
         setting_info.alarmInterval = 3
@@ -205,7 +193,7 @@ class ViewController: UIViewController {
     }
     
     // store amount of water user consumed
-    func logWater(amount : Int){
+    func logWater(amount : Double){
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
@@ -235,7 +223,7 @@ class ViewController: UIViewController {
         let consumedWater = fetchWater()
         consumed.text = String(consumedWater)
         
-        let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
+        let ProgressPercentage = consumedWater / Double(setting_info.goal!)
         let lastElement : WaterLog! = getLastElement()
         let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
         
@@ -259,9 +247,6 @@ class ViewController: UIViewController {
             unitLeft.text = nil
             amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
         }
-        
-
-        
         
         // cover blue background with white image to show progress status
         mainImageView.image = drawImage(ProgressPercentage)
