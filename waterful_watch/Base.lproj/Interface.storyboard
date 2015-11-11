@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -10,39 +10,42 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="waterful_watch" customModuleProvider="target">
                     <items>
-                        <button width="1" height="60" alignment="center" id="J5z-5b-4W5">
-                            <connections>
-                                <segue destination="KVt-At-ypf" kind="push" id="Hbf-hD-adG"/>
-                            </connections>
-                        </button>
-                        <label alignment="right" text="뚜벅이" id="wWa-hW-Ior">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <label alignment="right" text="2015.10.09" id="ISt-tt-kHZ">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
+                        <imageView width="100" height="100" alignment="center" image="waterdrop" id="2vD-n9-OTq"/>
+                        <group width="1" alignment="left" id="Sfw-Ee-SAv">
+                            <items>
+                                <button width="0.5" alignment="left" title="40ml" id="frv-dV-29I">
+                                    <connections>
+                                        <action selector="button1Pressed" destination="AgC-eL-Hgc" id="w71-qU-Y3s"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" alignment="left" title="120ml" id="vk6-q1-5Rf">
+                                    <connections>
+                                        <action selector="button2Pressed" destination="AgC-eL-Hgc" id="Kvo-PP-KT7"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="iod-jF-dac">
+                            <items>
+                                <button width="0.5" alignment="left" title="400ml" id="nN6-6n-SQc">
+                                    <connections>
+                                        <action selector="button3Pressed" destination="AgC-eL-Hgc" id="h6l-4y-zMs"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" alignment="left" title="500ml" id="AbH-BF-8qe">
+                                    <connections>
+                                        <action selector="button4Pressed" destination="AgC-eL-Hgc" id="YK4-tR-DOY"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="plant" destination="J5z-5b-4W5" id="KN8-0L-L6v"/>
+                        <outlet property="mainImage" destination="2vD-n9-OTq" id="THN-RZ-clb"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
-        </scene>
-        <!--Interface Controller-->
-        <scene sceneID="2LQ-wp-3BI">
-            <objects>
-                <controller hidesWhenLoading="NO" id="KVt-At-ypf">
-                    <items>
-                        <label alignment="left" text="drink.." id="1vx-JP-Eql"/>
-                        <button width="1" alignment="left" title="40ml" id="BlQ-0h-y9V"/>
-                        <button width="1" alignment="left" title="120ml" id="Gij-Xu-wKK"/>
-                        <button width="1" alignment="left" title="400ml" id="Rxg-nF-eSZ"/>
-                        <button width="1" alignment="left" title="500ml" id="3uY-d7-xgB"/>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="425" y="345"/>
+            <point key="canvasLocation" x="220" y="362"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

@@ -74,7 +74,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
 
-        let backgroundImageView = UIImageView.init(image: UIImage(named:"back3"))
+        let backgroundImageView = UIImageView.init(image: UIImage(named:"back5"))
         backgroundImageView.frame = mainView.bounds
         backgroundImageView.contentMode = .ScaleAspectFill
         self.view.insertSubview(backgroundImageView, atIndex: 0)
@@ -96,7 +96,6 @@ class ViewController: UIViewController {
             button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
             button.layer.cornerRadius = button.frame.height/4
 
-            
         }
         
         
@@ -140,12 +139,13 @@ class ViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        var fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        fetchResults = fetchResults?.reverse()
         
         var consumed : Int = 0
         
         let today = getDate(NSDate())
-        
+
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
                 consumed = consumed + Int(result.amount!)
@@ -206,6 +206,9 @@ class ViewController: UIViewController {
     
     // store amount of water user consumed
     func logWater(amount : Int){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
+        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -215,6 +218,7 @@ class ViewController: UIViewController {
         
         water_info.amount = amount
         water_info.loggedTime = NSDate()
+        
         
         do {
             try managedContext.save()
@@ -238,6 +242,7 @@ class ViewController: UIViewController {
         // show image of last unit.
         if lastElement != nil {
             lastUnitView.image = UIImage(named: String(lastElement.amount!) + String(setting_info.unit!))
+
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
@@ -268,7 +273,8 @@ class ViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        var fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        fetchResults = fetchResults?.reverse()
         
         let today = getDate(NSDate())
         
