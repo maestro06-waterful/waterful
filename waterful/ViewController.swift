@@ -225,11 +225,13 @@ class ViewController: UIViewController {
         
         do {
             try managedContext.save()
-            
         } catch {
             print("Unresolved error")
             abort()
         }
+        // save HK Sample object for logging drinking water.
+        self.requestAuthForSavingHKWaterObject(amount)
+
         updateWater()
     }
     
@@ -339,3 +341,51 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController {
+
+    // Requests HealthKit authorization for saving HKSample object for logging water.
+    func requestAuthForSavingHKWaterObject(amount: Double) {
+
+        // Set the water type to data types to share (write).
+        let dataTypesToShare = Set(arrayLiteral: HealthManager.sharedInstance.waterType!)
+
+        // request the healthkit authorization to share (write) water logs.
+        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(dataTypesToShare,
+            readTypes: nil, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.healthKitSaveWaterLog(amount)
+                } else {
+                    print("requestAuthForSavingHKWaterObject() failed.")
+                }
+            }
+        )
+    }
+
+    // Saves a HKSample object representing drinking water
+    func healthKitSaveWaterLog(amount: Double) {
+
+        let curUnit: HKUnit = self.currentUnit()
+
+        let waterType = HealthManager.sharedInstance.waterType!
+        let waterQuantity = HKQuantity(unit: curUnit, doubleValue: amount)
+
+        // Creates a water sample (HKQuantitySample object)
+        let waterSample = HKQuantitySample(type: waterType,
+            quantity: waterQuantity,
+            startDate: NSDate(),
+            endDate: NSDate())
+
+        // Saves the water sample into the healthkit store.
+        HealthManager.sharedInstance.healthKitStore.saveObject(waterSample,
+            withCompletion: {
+                (success: Bool, error: NSError?) -> Void in
+                if error != nil {
+                    print("Error saving water sample: \(error?.localizedDescription)")
+                } else {
+                    print("water sample saved successfully.")
+                }
+            }
+        )
+    }
+}
