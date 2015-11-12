@@ -237,7 +237,7 @@ class ViewController: UIViewController {
 
         // show image of last unit.
         if lastWaterLog != nil {
-            let lastUnitImage = UIImage(named: String(format: "%.0f", lastWaterLog.amount!) + String(setting_info.unit!))
+            let lastUnitImage = UIImage(named: (String(format: "%.0f", lastWaterLog.amount!.doubleValue)) + String(setting_info.unit!))
             shortcut.setBackgroundImage(lastUnitImage, forState: .Normal)
             // show how much drinks you have to drink with the unit.
             
