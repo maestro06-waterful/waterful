@@ -41,7 +41,7 @@ class WaterPattern {
                 }
             }
             dataPoints[hour] = totalAmount
-            print("hour: \(hour): total amount: \(totalAmount)")
+//            print("hour: \(hour): total amount: \(totalAmount)")
         }
     }
 
