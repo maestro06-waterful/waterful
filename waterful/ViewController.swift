@@ -18,10 +18,7 @@ class ViewController: UIViewController {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     // Setting object from core data framework
-    var setting_info : Setting!
-
-    // Last water log object
-    var lastWaterLog: WaterLog!
+    var setting_info : Setting! = nil
 
     @IBOutlet var mainView: UIView!
 
@@ -91,10 +88,6 @@ class ViewController: UIViewController {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
             button.layer.cornerRadius = button.frame.height/4
-        }
-
-        if self.lastWaterLog == nil {
-            self.lastWaterLog = getLastWaterLog()
         }
 
         setting_info = fetchSetting()
@@ -197,31 +190,30 @@ class ViewController: UIViewController {
 
     // store amount of water user consumed
     func saveWaterLog(amount : Double){
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
-        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
-        
+
         let unitML: HKUnit = HKUnit(fromString: "mL")
         let currentUnit: HKUnit = self.currentUnit()
         
+        // insert new object into core data framework.
         let waterLog = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
             inManagedObjectContext: managedObjectContext) as! WaterLog
-        
+
         waterLog.unit = currentUnit
         // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
         waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
         waterLog.loggedTime = NSDate()
         
-        
         do {
+            // save the managet object context
             try managedObjectContext.save()
+            
+            // save HK Sample object for logging drinking water.
+            self.requesSavingHKWaterSample(amount)
         } catch {
             print("Unresolved error")
             abort()
         }
-        // save HK Sample object for logging drinking water.
-        self.requesSavingHKWaterSample(amount)
-
+        // update view in repspons to change of core data objects in WaterLog entity.
         updateWater()
     }
 
@@ -232,11 +224,12 @@ class ViewController: UIViewController {
         consumed.text = String(consumedWater)
         
         let progressPercentage = consumedWater / Double(setting_info.goal!)
-        let lastWaterLog : WaterLog! = self.lastWaterLog
+        let lastWaterLog : WaterLog! = self.getLastWaterLog()
         let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
 
         // show image of last unit.
         if lastWaterLog != nil {
+
             lastUnitView.image = UIImage(named: String(lastWaterLog.amount!) + String(setting_info.unit!))
             // show how much drinks you have to drink with the unit.
             
@@ -259,41 +252,49 @@ class ViewController: UIViewController {
         mainImageView.image = drawImage(progressPercentage)
     }
     
-    // Delete the last water log
-    func undoLastWaterLog(){
+    // Returns core data objects, which is saved in today, in WaterLog entity.
+    func getTodayWaterLogs() -> [WaterLog]? {
         
-        let fetchRequest = NSFetchRequest(entityName: "WaterLog")
-        
-        var fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
-        fetchResults = fetchResults?.reverse()
-        
+        // today water logs to return.
+        var todayWaterLogs = [WaterLog]()
         let today = getDate(NSDate())
         
-        var todayResult : [WaterLog] = []
+        let fetchRequest = NSFetchRequest(entityName: "WaterLog")
+        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         
-        for result in fetchResults! {
-            if (getDate(result.loggedTime!) == today){
-                todayResult.append(result)
+        if let results = fetchResults {
+            for result in results {
+                if getDate(result.loggedTime!) == today {
+                    todayWaterLogs.append(result)
+                }
             }
-            else {
-                break
-            }
-        }
-
-        // delete the last core data object in WaterLog entity.
-        let tmp = todayResult.endIndex-1
-        if (tmp >= 0){
-            managedObjectContext.deleteObject(todayResult[tmp])
+        } else {
+            // There's no fetch results, return nil.
+            return nil
         }
         
-        do {
-            try managedObjectContext.save()
-        } catch {
-            // Do something in response to error condition
-        }
-        // Delete last saved HKSample object meaning drinking water.
-        self.requestDeletingLastHKWaterSample()
+        return todayWaterLogs
+    }
+    
+    // Delete the last water log
+    func undoLastWaterLog(){
 
+        if let todayWaterLogs = getTodayWaterLogs() {
+            
+            let endIndex = todayWaterLogs.endIndex - 1
+            if endIndex >= 0 {
+                // Delete the last object in WaterLog entity.
+                managedObjectContext.deleteObject(todayWaterLogs[endIndex])
+                // Delete last saved HKSample object meaning drinking water.
+                self.requestDeletingLastHKWaterSample()
+            }
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Do something in response to error condition
+            }
+        }
+        // update view in repspons to change of core data objects in WaterLog entity.
         updateWater()
     }
 
