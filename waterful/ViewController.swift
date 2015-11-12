@@ -24,8 +24,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var consumed: UILabel!
     
-    @IBOutlet weak var mainImageView: UIImageView!
-    @IBOutlet weak var lastUnitView: UIImageView!
+    @IBOutlet weak var waterImageView: UIImageView!
     
     @IBOutlet weak var goal: UILabel!
     
@@ -36,8 +35,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
-
-    @IBAction func mainButton(sender: AnyObject) {
+    @IBOutlet weak var shortcut: UIButton!
+    
+    @IBAction func shortcutPressed(sender: AnyObject) {
         if let lastWaterLog = getLastWaterLog() {
             saveWaterLog(Double(lastWaterLog.amount!))
         }
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateWater()
-        navigationController?.navigationBarHidden = true
+        setting_info = fetchSetting()
     }
     
     override func viewDidLoad() {
@@ -76,19 +76,26 @@ class ViewController: UIViewController {
         backgroundImageView.contentMode = .ScaleAspectFill
         self.view.insertSubview(backgroundImageView, atIndex: 0)
         
-        mainImageView.layer.masksToBounds = false
-        mainImageView.layer.cornerRadius = mainImageView.frame.height/2
-        mainImageView.clipsToBounds = true
+        waterImageView.layer.masksToBounds = false
+        waterImageView.layer.cornerRadius = waterImageView.frame.height/2
+        waterImageView.clipsToBounds = true
         let dottedPattern = UIImage(named: "dottedPattern")
+        
 
-        mainImageView.layer.borderWidth = 1
-        mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        waterImageView.layer.borderWidth = 1
+        waterImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        
+        shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
+        shortcut.clipsToBounds = true
+        shortcut.contentMode = UIViewContentMode.Center
 
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
+
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
-            button.layer.cornerRadius = button.frame.height/4
+            button.layer.cornerRadius = button.frame.height/2
+            
         }
 
         setting_info = fetchSetting()
@@ -230,8 +237,8 @@ class ViewController: UIViewController {
 
         // show image of last unit.
         if lastWaterLog != nil {
-
-            lastUnitView.image = UIImage(named: String(lastWaterLog.amount!) + String(setting_info.unit!))
+            let lastUnitImage = UIImage(named: (String(format: "%.0f", lastWaterLog.amount!.doubleValue)) + String(setting_info.unit!))
+            shortcut.setBackgroundImage(lastUnitImage, forState: .Normal)
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
@@ -244,13 +251,13 @@ class ViewController: UIViewController {
             }
         }
         else {
-            lastUnitView.image = nil
+            shortcut.imageView?.image = nil
             unitLeft.text = nil
             amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
         }
         
         // cover blue background with white image to show progress status
-        mainImageView.image = drawImage(progressPercentage)
+        waterImageView.image = drawImage(progressPercentage)
     }
     
     // Returns core data objects, which is saved in today, in WaterLog entity.
@@ -307,9 +314,9 @@ class ViewController: UIViewController {
 
     func drawImage(progressPercentage : Double) -> UIImage {
 
-        let white_rect = CGRectMake(0, 0, mainImageView.frame.width, mainImageView.frame.height * CGFloat(1-progressPercentage))
+        let white_rect = CGRectMake(0, 0, waterImageView.frame.width, waterImageView.frame.height * CGFloat(1-progressPercentage))
         
-        UIGraphicsBeginImageContextWithOptions(mainImageView.frame.size, false, 0)
+        UIGraphicsBeginImageContextWithOptions(waterImageView.frame.size, false, 0)
         
         UIColor.whiteColor().setFill()
         UIRectFill(white_rect)
