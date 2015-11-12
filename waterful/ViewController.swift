@@ -74,8 +74,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         // make gradient background
         let gl : CAGradientLayer = CAGradientLayer()
-        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.70, alpha: 1).CGColor]
-        gl.locations = [0.7,1.0]
+        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
+        gl.locations = [0.5,1.0]
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
         
