@@ -65,16 +65,11 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
-        updateWater()
         setting_info = fetchSetting()
+        updateWater()
     }
     
     override func viewDidLoad() {
-
-        let backgroundImageView = UIImageView.init(image: UIImage(named:"back5"))
-        backgroundImageView.frame = mainView.bounds
-        backgroundImageView.contentMode = .ScaleAspectFill
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
         
         waterImageView.layer.masksToBounds = false
         waterImageView.layer.cornerRadius = waterImageView.frame.height/2
@@ -91,11 +86,7 @@ class ViewController: UIViewController {
 
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
-
-            button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
             button.layer.cornerRadius = button.frame.height/2
-            
         }
 
         setting_info = fetchSetting()
@@ -108,7 +99,6 @@ class ViewController: UIViewController {
             // press OK in subview -> !!!! END BLUR !!!!!
         }
 
-        goal.text = setting_info.goal?.description
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -230,6 +220,8 @@ class ViewController: UIViewController {
 
         let consumedWater = fetchWater()
         consumed.text = String(consumedWater)
+        goal.text = setting_info.goal?.description
+
         
         let progressPercentage = consumedWater / Double(setting_info.goal!)
         let lastWaterLog : WaterLog! = self.getLastWaterLog()
@@ -251,7 +243,7 @@ class ViewController: UIViewController {
             }
         }
         else {
-            shortcut.imageView?.image = nil
+            shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
             amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
         }
