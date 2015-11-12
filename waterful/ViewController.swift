@@ -80,20 +80,20 @@ class ViewController: UIViewController {
         self.view.layer.insertSublayer(gl, atIndex: 0)
         
         // make water image view circular.
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
         waterImageView.layer.masksToBounds = false
         waterImageView.layer.cornerRadius = waterImageView.frame.height/2
         waterImageView.clipsToBounds = true
-        let dottedPattern = UIImage(named: "dottedPattern")
         
         waterImageView.layer.borderWidth = 1
-        waterImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        waterImageView.layer.borderColor = themeColor.CGColor
         
         // make shortcut button circular.
         shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
         shortcut.clipsToBounds = true
         shortcut.contentMode = UIViewContentMode.Center
 
-        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
+        
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
             button.layer.cornerRadius = button.frame.height/2
