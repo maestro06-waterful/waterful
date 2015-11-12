@@ -13,9 +13,16 @@ import QuartzCore
 import HealthKit
 
 class ViewController: UIViewController {
-    
+
+    // managed object context to control core data framework
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+
+    // Setting object from core data framework
     var setting_info : Setting!
-    
+
+    // Last water log object
+    var lastWaterLog: WaterLog!
+
     @IBOutlet var mainView: UIView!
 
     @IBOutlet weak var consumed: UILabel!
@@ -32,40 +39,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
-    
-    
-    
-    
 
     @IBAction func mainButton(sender: AnyObject) {
-        let lastElement = getLastElement()
-        if lastElement != nil {
-            logWater(Int(lastElement.amount!))
+        if let lastWaterLog = getLastWaterLog() {
+            saveWaterLog(Double(lastWaterLog.amount!))
         }
     }
 
     @IBAction func button1Pressed(sender: AnyObject) {
-        logWater(40)
+        saveWaterLog(40)
     }
     
     @IBAction func button2Pressed(sender: AnyObject) {
-        logWater(120)
+        saveWaterLog(120)
     }
     
     @IBAction func button3Pressed(sender: AnyObject) {
-        logWater(400)
+        saveWaterLog(400)
     }
     
     @IBAction func button4Pressed(sender: AnyObject) {
-        logWater(500)
+        saveWaterLog(500)
     }
     
     @IBAction func undoPressed(sender: AnyObject) {
-        undoLog()
+        undoLastWaterLog()
     }
 
-    
-    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateWater()
@@ -79,27 +79,24 @@ class ViewController: UIViewController {
         backgroundImageView.contentMode = .ScaleAspectFill
         self.view.insertSubview(backgroundImageView, atIndex: 0)
         
-        
         mainImageView.layer.masksToBounds = false
         mainImageView.layer.cornerRadius = mainImageView.frame.height/2
         mainImageView.clipsToBounds = true
         let dottedPattern = UIImage(named: "dottedPattern")
-        
+
         mainImageView.layer.borderWidth = 1
         mainImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
-        
 
-        
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
             button.layer.cornerRadius = button.frame.height/4
-
         }
-        
-        
-        
+
+        if self.lastWaterLog == nil {
+            self.lastWaterLog = getLastWaterLog()
+        }
 
         setting_info = fetchSetting()
         // first time user.
@@ -128,55 +125,42 @@ class ViewController: UIViewController {
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         let dateString = dateFormatter.stringFromDate(date)
         return dateString
-        
     }
     
-    func fetchWater() -> Int {
-
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
+    func fetchWater() -> Double {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        var fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         fetchResults = fetchResults?.reverse()
         
-        var consumed : Int = 0
+        var consumed : Double = 0
         
         let today = getDate(NSDate())
 
         for result in fetchResults! {
             if (getDate(result.loggedTime!) == today){
-                consumed = consumed + Int(result.amount!)
-            }
-            else {
-                break
+                consumed = consumed + Double(result.amount!)
             }
         }
-        
         
         return consumed
     }
     
     // set settings, if there is no.
     func setSetting() -> Setting {
-
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
         
         let setting_info = NSEntityDescription.insertNewObjectForEntityForName("Setting",
-            inManagedObjectContext: managedContext) as! Setting
+            inManagedObjectContext: managedObjectContext) as! Setting
         
-        setting_info.goal = 1500
+        setting_info.goal = Double(1500)
         setting_info.alarmEndTime = 23
         setting_info.alarmStartTime = 9
         setting_info.alarmInterval = 3
         setting_info.unit = HKUnit(fromString: "mL")
         
         do {
-            try managedContext.save()
-            
+            try managedObjectContext.save()
         } catch {
             print("Unresolved error")
             abort()
@@ -187,66 +171,78 @@ class ViewController: UIViewController {
 
     // fetch settings from
     func fetchSetting() -> Setting! {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: "Setting")
-        
-        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [Setting]
+        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [Setting]
 
         if (fetchResults!.count == 0){
             return nil
-        }
-            
-        else {
+        } else {
             return fetchResults![0]
         }
     }
     
+    // Returns the unit attribute in Setting entity in core data framework.
+    func currentUnit() -> HKUnit {
+
+        let unitML: HKUnit = HKUnit(fromString: "mL")
+
+        if setting_info != nil {
+            return setting_info.valueForKey("unit") as! HKUnit
+        }
+        
+        // If there's no setting entity,
+        // return milli litter unit as the global-standard unit.
+        return unitML
+    }
+
     // store amount of water user consumed
-    func logWater(amount : Int){
+    func saveWaterLog(amount : Double){
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
+        let unitML: HKUnit = HKUnit(fromString: "mL")
+        let currentUnit: HKUnit = self.currentUnit()
         
-        let water_info = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
-            inManagedObjectContext: managedContext) as! WaterLog
+        let waterLog = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
+            inManagedObjectContext: managedObjectContext) as! WaterLog
         
-        water_info.amount = amount
-        water_info.loggedTime = NSDate()
+        waterLog.unit = currentUnit
+        // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
+        waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
+        waterLog.loggedTime = NSDate()
         
         
         do {
-            try managedContext.save()
-            
+            try managedObjectContext.save()
         } catch {
             print("Unresolved error")
             abort()
         }
+        // save HK Sample object for logging drinking water.
+        self.requesSavingHKWaterSample(amount)
+
         updateWater()
     }
-    
+
     // update text of consumed water
     func updateWater() {
+
         let consumedWater = fetchWater()
         consumed.text = String(consumedWater)
         
-        let ProgressPercentage = Double(consumedWater) / Double(setting_info.goal!)
-        let lastElement : WaterLog! = getLastElement()
+        let progressPercentage = consumedWater / Double(setting_info.goal!)
+        let lastWaterLog : WaterLog! = self.lastWaterLog
         let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
-        
-        // show image of last unit.
-        if lastElement != nil {
-            lastUnitView.image = UIImage(named: String(lastElement.amount!) + String(setting_info.unit!))
 
+        // show image of last unit.
+        if lastWaterLog != nil {
+            lastUnitView.image = UIImage(named: String(lastWaterLog.amount!) + String(setting_info.unit!))
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
-                unitLeft.text = "* " + String( Int (ceil( waterLeft / Double(lastElement.amount!)) )) + " left."
+                unitLeft.text = "* " + String( Int (ceil( waterLeft / Double(lastWaterLog.amount!)) )) + " left."
                 amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
             }
             else {
@@ -260,20 +256,16 @@ class ViewController: UIViewController {
             amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
         }
         
-
-        
-        
         // cover blue background with white image to show progress status
-        mainImageView.image = drawImage(ProgressPercentage)
+        mainImageView.image = drawImage(progressPercentage)
     }
     
-    func undoLog(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
+    // Delete the last water log
+    func undoLastWaterLog(){
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        var fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         fetchResults = fetchResults?.reverse()
         
         let today = getDate(NSDate())
@@ -288,26 +280,30 @@ class ViewController: UIViewController {
                 break
             }
         }
-        
+
+        // delete the last core data object in WaterLog entity.
         let tmp = todayResult.endIndex-1
         if (tmp >= 0){
-            managedContext.deleteObject(todayResult[tmp])
+            managedObjectContext.deleteObject(todayResult[tmp])
         }
         
         do {
-            try managedContext.save()
+            try managedObjectContext.save()
         } catch {
             // Do something in response to error condition
         }
+        // Delete last saved HKSample object meaning drinking water.
+        self.requestDeletingLastHKWaterSample()
+
         updateWater()
     }
-    
+
     func blurView() {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
         blurView.frame = mainView.bounds
         mainView.addSubview(blurView)
     }
-    
+
     func drawImage(progressPercentage : Double) -> UIImage {
 
         let white_rect = CGRectMake(0, 0, mainImageView.frame.width, mainImageView.frame.height * CGFloat(1-progressPercentage))
@@ -322,14 +318,13 @@ class ViewController: UIViewController {
         
         return coverImage
     }
-    
-    func getLastElement() -> WaterLog! {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
+
+    // Returns the last WaterLog object in core data framework.
+    func getLastWaterLog() -> WaterLog! {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        let fetchResults = (try? managedContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         if (fetchResults?.count>0){
             return fetchResults![(fetchResults?.endIndex)!-1]
         }
@@ -339,3 +334,117 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController {
+
+    // Requests HealthKit authorization for saving HKSample object for logging water.
+    func requesSavingHKWaterSample(amount: Double) {
+
+        // Set the water type to data types to share (write).
+        let dataTypesToShare = Set(arrayLiteral: HealthManager.sharedInstance.waterType!)
+
+        // request the healthkit authorization to share (write) water logs.
+        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(dataTypesToShare,
+            readTypes: nil, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.saveHKWaterSample(amount)
+                } else {
+                    print("requestAuthForSavingHKWaterObject() failed.")
+                }
+            }
+        )
+    }
+
+    // Saves a HKSample object representing drinking water
+    func saveHKWaterSample(amount: Double) {
+
+        let currentUnit: HKUnit = self.currentUnit()
+
+        let waterType = HealthManager.sharedInstance.waterType!
+        let waterQuantity = HKQuantity(unit: currentUnit, doubleValue: amount)
+
+        // Creates a water sample (HKQuantitySample object)
+        let waterSample = HKQuantitySample(type: waterType,
+            quantity: waterQuantity,
+            startDate: NSDate(),
+            endDate: NSDate())
+
+        // Saves the water sample into the healthkit store.
+        HealthManager.sharedInstance.healthKitStore.saveObject(waterSample,
+            withCompletion: {
+                (success: Bool, error: NSError?) -> Void in
+                if error != nil {
+                    print("Error saving water sample: \(error?.localizedDescription)")
+                } else {
+                    print("water sample saved successfully.")
+                }
+            }
+        )
+    }
+
+    // Requests HealthKit authorization for deleting last saved HKSample object.
+    func requestDeletingLastHKWaterSample() {
+
+        // Set the water type to data types to share and read
+        let dataTypes = Set(arrayLiteral: HealthManager.sharedInstance.waterType!)
+
+        // request the healthkit authorization to share (write) water logs.
+        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(dataTypes,
+            readTypes: dataTypes, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.deleteLastHKWaterSample()
+                } else {
+                    print("requestAuthForSavingHKWaterObject() failed.")
+                }
+            }
+        )
+    }
+
+    // Deletes the last saved HK Sample object representing drinking water.
+    func deleteLastHKWaterSample() {
+
+        // Sort the query in descending order.
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+
+        // HKSample query which gets the last saved HKQuantitySample object meaning drinking water.
+        let sampleQuery = HKSampleQuery(sampleType: HealthManager.sharedInstance.waterType!,
+            predicate: nil,
+            limit: 1,
+            sortDescriptors: [sortDescriptor],
+            resultsHandler: {
+                (query, results, error) -> Void in
+
+                if error != nil{
+                    print("error: \(error?.localizedDescription)")
+                    return
+                }
+
+                // If there's some query results,
+                if let queryResults = results {
+                    // Delete the last saved sample object.
+                    HealthManager.sharedInstance.healthKitStore.deleteObject(queryResults[0]) {
+                        (success, error) -> Void in
+
+                        if error != nil {
+                            print("error: \(error?.localizedDescription)")
+                            return
+                        }
+
+                        if success {
+                            print("water sample deleted successfully.")
+                        } else {
+                            print("water sample deleted not successfully.")
+                            print("error: \(error?.localizedDescription)")
+                        }
+                    }
+                } else {
+                    print("There's no HK Sample query results about drinking water")
+                }
+            }
+        )
+        
+        // Execute the sample query
+        HealthManager.sharedInstance.healthKitStore.executeQuery(sampleQuery)
+    }
+}
