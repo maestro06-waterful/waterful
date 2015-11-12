@@ -69,7 +69,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateWater()
-        navigationController?.navigationBarHidden = true
     }
     
     override func viewDidLoad() {

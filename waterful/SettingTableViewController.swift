@@ -21,7 +21,7 @@ class SettingTableViewController: UITableViewController{
     @IBOutlet weak var unitText: UILabel!
 
     override func viewWillAppear(animated: Bool) {
-        navigationController?.navigationBarHidden = false
+
     }
     
     override func viewDidLoad() {
