@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         updateSetting()
         updateWater()
     }
+
     
     override func viewDidLoad() {
         // make gradient background
@@ -77,25 +78,22 @@ class ViewController: UIViewController {
         gl.locations = [0.7,1.0]
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
-
         
-        // color navigation bar
-        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
-        navigationController?.navigationBar.barTintColor = themeColor
-        
+        // make water image view circular.
         waterImageView.layer.masksToBounds = false
         waterImageView.layer.cornerRadius = waterImageView.frame.height/2
         waterImageView.clipsToBounds = true
         let dottedPattern = UIImage(named: "dottedPattern")
         
-
         waterImageView.layer.borderWidth = 1
         waterImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
         
+        // make shortcut button circular.
         shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
         shortcut.clipsToBounds = true
         shortcut.contentMode = UIViewContentMode.Center
 
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
             button.layer.cornerRadius = button.frame.height/2
