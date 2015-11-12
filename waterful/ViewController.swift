@@ -23,10 +23,11 @@ class ViewController: UIViewController {
     @IBOutlet var mainView: UIView!
 
     @IBOutlet weak var consumed: UILabel!
+    @IBOutlet weak var goal: UILabel!
+    @IBOutlet weak var consumedUnit: UILabel!
+    @IBOutlet weak var goalUnit: UILabel!
     
     @IBOutlet weak var waterImageView: UIImageView!
-    
-    @IBOutlet weak var goal: UILabel!
     
     @IBOutlet weak var unitLeft: UILabel!
     @IBOutlet weak var amountLeft: UILabel!
@@ -65,7 +66,7 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
-        setting_info = fetchSetting()
+        updateSetting()
         updateWater()
     }
     
@@ -78,7 +79,7 @@ class ViewController: UIViewController {
         self.view.layer.insertSublayer(gl, atIndex: 0)
 
         
-        // color navigatino bar
+        // color navigation bar
         let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
         navigationController?.navigationBar.barTintColor = themeColor
         
@@ -226,14 +227,20 @@ class ViewController: UIViewController {
         // update view in repspons to change of core data objects in WaterLog entity.
         updateWater()
     }
+    
+    // update text regards of settings
+    func updateSetting() {
+        setting_info = fetchSetting()
+        goal.text = setting_info.goal?.description
+        goalUnit.text = setting_info.unit?.description
+        consumedUnit.text = setting_info.unit?.description
+    }
 
     // update text of consumed water
     func updateWater() {
 
         let consumedWater = fetchWater()
-        consumed.text = String(consumedWater)
-        goal.text = setting_info.goal?.description
-
+        consumed.text = String(format:"%.0f", consumedWater)
         
         let progressPercentage = consumedWater / Double(setting_info.goal!)
         let lastWaterLog : WaterLog! = self.getLastWaterLog()
