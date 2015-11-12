@@ -23,10 +23,11 @@ class ViewController: UIViewController {
     @IBOutlet var mainView: UIView!
 
     @IBOutlet weak var consumed: UILabel!
+    @IBOutlet weak var goal: UILabel!
+    @IBOutlet weak var consumedUnit: UILabel!
+    @IBOutlet weak var goalUnit: UILabel!
     
     @IBOutlet weak var waterImageView: UIImageView!
-    
-    @IBOutlet weak var goal: UILabel!
     
     @IBOutlet weak var unitLeft: UILabel!
     @IBOutlet weak var amountLeft: UILabel!
@@ -65,37 +66,38 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
+        updateSetting()
         updateWater()
-        setting_info = fetchSetting()
     }
+
     
     override func viewDidLoad() {
-
-        let backgroundImageView = UIImageView.init(image: UIImage(named:"back5"))
-        backgroundImageView.frame = mainView.bounds
-        backgroundImageView.contentMode = .ScaleAspectFill
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        // make gradient background
+        let gl : CAGradientLayer = CAGradientLayer()
+        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
+        gl.locations = [0.5,1.0]
+        gl.frame = mainView.bounds
+        self.view.layer.insertSublayer(gl, atIndex: 0)
         
+        // make water image view circular.
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
         waterImageView.layer.masksToBounds = false
         waterImageView.layer.cornerRadius = waterImageView.frame.height/2
         waterImageView.clipsToBounds = true
-        let dottedPattern = UIImage(named: "dottedPattern")
         
-
         waterImageView.layer.borderWidth = 1
-        waterImageView.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
+        waterImageView.layer.borderColor = themeColor.CGColor
         
+        // make shortcut button circular.
         shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
         shortcut.clipsToBounds = true
         shortcut.contentMode = UIViewContentMode.Center
 
+        
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
-
-            button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor(patternImage: dottedPattern!).CGColor
             button.layer.cornerRadius = button.frame.height/2
-            
+            button.backgroundColor = themeColor
         }
 
         setting_info = fetchSetting()
@@ -108,7 +110,6 @@ class ViewController: UIViewController {
             // press OK in subview -> !!!! END BLUR !!!!!
         }
 
-        goal.text = setting_info.goal?.description
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -224,12 +225,20 @@ class ViewController: UIViewController {
         // update view in repspons to change of core data objects in WaterLog entity.
         updateWater()
     }
+    
+    // update text regards of settings
+    func updateSetting() {
+        setting_info = fetchSetting()
+        goal.text = setting_info.goal?.description
+        goalUnit.text = setting_info.unit?.description
+        consumedUnit.text = setting_info.unit?.description
+    }
 
     // update text of consumed water
     func updateWater() {
 
         let consumedWater = fetchWater()
-        consumed.text = String(consumedWater)
+        consumed.text = String(format:"%.0f", consumedWater)
         
         let progressPercentage = consumedWater / Double(setting_info.goal!)
         let lastWaterLog : WaterLog! = self.getLastWaterLog()
@@ -242,7 +251,7 @@ class ViewController: UIViewController {
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
-                unitLeft.text = "* " + String( Int (ceil( waterLeft / Double(lastWaterLog.amount!)) )) + " left."
+                unitLeft.text = "* " + (String(format: "%.1f", waterLeft / lastWaterLog.amount!.doubleValue)) + " left."
                 amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
             }
             else {
@@ -251,7 +260,7 @@ class ViewController: UIViewController {
             }
         }
         else {
-            shortcut.imageView?.image = nil
+            shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
             amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
         }
