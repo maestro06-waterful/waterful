@@ -70,6 +70,17 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        // make gradient background
+        let gl : CAGradientLayer = CAGradientLayer()
+        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.70, alpha: 1).CGColor]
+        gl.locations = [0.7,1.0]
+        gl.frame = mainView.bounds
+        self.view.layer.insertSublayer(gl, atIndex: 0)
+
+        
+        // color navigatino bar
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
+        navigationController?.navigationBar.barTintColor = themeColor
         
         waterImageView.layer.masksToBounds = false
         waterImageView.layer.cornerRadius = waterImageView.frame.height/2
@@ -87,6 +98,7 @@ class ViewController: UIViewController {
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
             button.layer.cornerRadius = button.frame.height/2
+            button.backgroundColor = themeColor
         }
 
         setting_info = fetchSetting()
@@ -234,7 +246,7 @@ class ViewController: UIViewController {
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
-                unitLeft.text = "* " + String( Int (ceil( waterLeft / Double(lastWaterLog.amount!)) )) + " left."
+                unitLeft.text = "* " + (String(format: "%.1f", waterLeft / lastWaterLog.amount!.doubleValue)) + " left."
                 amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
             }
             else {
