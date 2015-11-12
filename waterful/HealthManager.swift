@@ -61,9 +61,9 @@ class HealthManager {
             completion: {(success: Bool, error: NSError?) -> Void in
                 if success == true && error == nil {
                     print("Request Authorization succeeded.")
-                    self.weight = self.getWeight()
+//                    self.weight = self.getWeight()
                     self.executeStepObserverQuery()
-                    self.executeWorkoutObserverQuery()
+//                    self.executeWorkoutObserverQuery()
                 } else {
                     print("Request Authorization failed.")
                 }
@@ -229,6 +229,11 @@ class HealthManager {
                     print("Wake up...!")
                     appDelegate.registerNotification(NSDate().dateByAddingTimeInterval(60),
                         alertBody: "방금 일어나셨군요! 하루를 알차게 잘 보내시기 바랍니다.")
+                    
+                    let predictor = WaterPatternPredictor()
+                    predictor.composePatterns()
+                    predictor.predictPattern()
+                    
                 } else {
                     print("It passed an hour after wake up")
                 }

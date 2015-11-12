@@ -131,7 +131,7 @@ class ViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        var fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         fetchResults = fetchResults?.reverse()
         
         var consumed : Double = 0
@@ -265,7 +265,7 @@ class ViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         
-        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
+        var fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         fetchResults = fetchResults?.reverse()
         
         let today = getDate(NSDate())
