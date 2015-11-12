@@ -66,6 +66,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateWater()
+        setting_info = fetchSetting()
     }
     
     override func viewDidLoad() {
@@ -236,8 +237,7 @@ class ViewController: UIViewController {
 
         // show image of last unit.
         if lastWaterLog != nil {
-            print (String(lastWaterLog.amount!) + String(setting_info.unit!))
-            let lastUnitImage = UIImage(named: String(lastWaterLog.amount!) + String(setting_info.unit!))
+            let lastUnitImage = UIImage(named: String(format: "%.0f", lastWaterLog.amount!) + String(setting_info.unit!))
             shortcut.setBackgroundImage(lastUnitImage, forState: .Normal)
             // show how much drinks you have to drink with the unit.
             
