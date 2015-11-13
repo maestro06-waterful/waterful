@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
     </dependencies>
     <scenes>
@@ -10,7 +10,14 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="waterful_watch" customModuleProvider="target">
                     <items>
-                        <imageView width="100" height="100" alignment="center" image="waterdrop" id="2vD-n9-OTq"/>
+                        <label alignment="left" text="consumed" id="zrI-ed-g9m">
+                            <color key="textColor" red="0.098039215690000001" green="0.77647058820000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="25"/>
+                        </label>
+                        <label alignment="center" text="/" id="cXD-Oe-myA"/>
+                        <label alignment="right" text="goal" id="bIO-ZW-Y8E">
+                            <fontDescription key="font" type="system" pointSize="25"/>
+                        </label>
                         <group width="1" alignment="left" id="Sfw-Ee-SAv">
                             <items>
                                 <button width="0.5" alignment="left" title="40ml" id="frv-dV-29I">
@@ -41,7 +48,8 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="mainImage" destination="2vD-n9-OTq" id="THN-RZ-clb"/>
+                        <outlet property="consumedLabel" destination="zrI-ed-g9m" id="dMA-a7-PM6"/>
+                        <outlet property="goalLabel" destination="bIO-ZW-Y8E" id="7az-rJ-mQE"/>
                     </connections>
                 </controller>
             </objects>

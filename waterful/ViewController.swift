@@ -508,4 +508,10 @@ extension ViewController{
         }
     }
     
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+            let consumed = fetchWater()
+            let goal = fetchSetting().goal
+            replyHandler(["consumed" : consumed, "goal": goal!])
+    }
+    
 }
