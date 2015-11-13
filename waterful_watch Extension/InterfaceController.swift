@@ -8,6 +8,7 @@
 
 import WatchKit
 import Foundation
+import WatchConnectivity
 
 
 class InterfaceController: WKInterfaceController {
@@ -23,6 +24,16 @@ class InterfaceController: WKInterfaceController {
     }
     @IBAction func button4Pressed() {
         // log 500
+        
+        
+        if WCSession.isSupported() {
+            let session = WCSession.defaultSession()
+            session.sendMessage(["Message":10], replyHandler: {(recvMessage : [String:AnyObject]) -> Void in
+                print(String(recvMessage["TotalCount"]))
+                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                }, errorHandler: nil)
+        }
+
     }
     
 

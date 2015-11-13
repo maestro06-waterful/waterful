@@ -177,6 +177,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // Watch Connectivity Delegates
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         
+        print("** Phone : session ReceiveMessage")
+        
+        replyHandler(["TotalWater" : 10])
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.postNotificationName("receiveWaterData", object: nil)
+        
+        
     }
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
