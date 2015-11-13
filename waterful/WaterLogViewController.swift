@@ -57,6 +57,41 @@ class WaterLogViewController: UITableViewController {
         return Array(waterLogs.keys).count
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Array(waterLogs.keys)[section]
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let date = Array(waterLogs.keys)[section]
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel!.text = date
+        header.textLabel?.font = UIFont(name: "Helvetica", size: 20)
+        
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        var sum : Double = 0
+        let date = Array(waterLogs.keys)[section]
+        for item in waterLogs[date]! {
+            sum = sum + (item.amount?.doubleValue)!
+        }
+
+        let footer = view as! UITableViewHeaderFooterView
+        footer.textLabel!.text = "TOTAL: " + String(format: "%0.f", sum)
+        footer.textLabel!.textAlignment = NSTextAlignment.Right
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        var sum : Double = 0
+        let date = Array(waterLogs.keys)[section]
+        for item in waterLogs[date]! {
+            sum = sum + (item.amount?.doubleValue)!
+        }
+        return "SUM: " + String(format: "%0.f", sum)
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         let date = Array(waterLogs.keys)[section]
@@ -64,9 +99,7 @@ class WaterLogViewController: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Array(waterLogs.keys)[section]
-    }
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var tableViewCell = waterLogTableView.dequeueReusableCellWithIdentifier("CELL") as UITableViewCell!
@@ -82,7 +115,8 @@ class WaterLogViewController: UITableViewController {
         let loggedTime = getTime(waterLogs[date]![indexPath.row].loggedTime!)
         let amount = String(format: "%.0f", waterLogs[date]![indexPath.row].amount!.doubleValue) + (setting.unit?.description)!
 
-        tableViewCell!.textLabel?.text = "\t" + loggedTime + "\t\t\t\t\t" + amount
+        tableViewCell!.textLabel?.text = loggedTime + "\t\t\t\t\t\t" + amount
+        tableViewCell.imageView!.image = UIImage(named: amount)
         
         return tableViewCell!
     }
