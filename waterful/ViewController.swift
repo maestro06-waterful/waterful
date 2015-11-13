@@ -9,13 +9,16 @@
 import UIKit
 import CoreData
 import QuartzCore
-
+import WatchConnectivity
 import HealthKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WCSessionDelegate {
 
     // managed object context to control core data framework
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    // session with watch
+    private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
 
     // Setting object from core data framework
     var setting_info : Setting! = nil
@@ -69,9 +72,23 @@ class ViewController: UIViewController {
         updateSetting()
         updateWater()
     }
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        configureWCSession()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        configureWCSession()
+    }
     
     override func viewDidLoad() {
+        //create watch session
+        configureWCSession()
+        
         let logo : UIImage = UIImage(named: "logo")!
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
         logoView.contentMode = .ScaleAspectFit
@@ -355,6 +372,8 @@ class ViewController: UIViewController {
             return nil
         }
     }
+    
+    
 }
 
 extension ViewController {
@@ -470,4 +489,29 @@ extension ViewController {
         // Execute the sample query
         HealthManager.sharedInstance.healthKitStore.executeQuery(sampleQuery)
     }
+    
+}
+
+extension ViewController{
+    
+    // handle watch
+    private func configureWCSession() {
+        session?.delegate = self;
+        session?.activateSession()
+    }
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        let amount = applicationContext["amount"] as! Double
+        
+        //Use this to update the UI instantaneously (otherwise, takes a little while)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.saveWaterLog(amount)
+        }
+    }
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+            let consumed = fetchWater()
+            let goal = fetchSetting().goal
+            replyHandler(["consumed" : consumed, "goal": goal!])
+    }
+    
 }

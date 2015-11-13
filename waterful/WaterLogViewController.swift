@@ -10,11 +10,11 @@ import UIKit
 import CoreData
 import Foundation
 
-class WaterLogViewController: UITableViewController {
+class WaterLogViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     @IBOutlet var waterLogTableView: UITableView!
     
-    var waterLogs : [WaterLog]!
+    var waterLogs : [String :[WaterLog]]!
     var setting : Setting!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -30,55 +30,122 @@ class WaterLogViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        waterLogTableView.reloadData()
+        //waterLogTableView.reloadData()
     }
     
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.Delete
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            removeItem(waterLogs![indexPath.row])
+            let date = Array(waterLogs.keys)[indexPath.section]
+            removeItem(waterLogs![date]![indexPath.row])
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             waterLogs = getWaterLogs()
             waterLogTableView.reloadData()
         }
     }
     
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.waterLogs.count;
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return Array(waterLogs.keys).count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var tableViewCell = waterLogTableView.dequeueReusableCellWithIdentifier("CELL") as UITableViewCell!
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Array(waterLogs.keys)[section]
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let date = Array(waterLogs.keys)[section]
         
-        if tableViewCell == nil {
-            tableViewCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL")
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel!.text = date
+        header.textLabel?.font = UIFont(name: "Helvetica", size: 20)
+        
+    }
+    
+    func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        var sum : Double = 0
+        let date = Array(waterLogs.keys)[section]
+        for item in waterLogs[date]! {
+            sum = sum + (item.amount?.doubleValue)!
         }
+
+        let footer = view as! UITableViewHeaderFooterView
+        footer.textLabel!.text = "TOTAL: " + String(format: "%0.f", sum)
+        footer.textLabel!.textAlignment = NSTextAlignment.Right
+    }
+    
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        var sum : Double = 0
+        let date = Array(waterLogs.keys)[section]
+        for item in waterLogs[date]! {
+            sum = sum + (item.amount?.doubleValue)!
+        }
+        return "SUM: " + String(format: "%0.f", sum)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section.
+        let date = Array(waterLogs.keys)[section]
+        return (waterLogs[date]?.count)!
+        
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let tableViewCell = waterLogTableView.dequeueReusableCellWithIdentifier("CELL") as! WaterLogTableCell
         
         //we know that cell is not empty now so we use ! to force unwrapping
-        tableViewCell!.editing = true
-        tableViewCell!.textLabel?.text = String(getTimestamp(waterLogs[indexPath.row].loggedTime!)) + "\t\t\t\t\t\t" + String(format: "%.0f", self.waterLogs[indexPath.row].amount!.doubleValue) + (setting.unit?.description)!
-
-        return tableViewCell!
+        tableViewCell.editing = true
+        //let date = Array(waterLogs.keys)[indexPath.row
+        let date = Array(waterLogs.keys)[indexPath.section]
+        let loggedTime = getTime(waterLogs[date]![indexPath.row].loggedTime!)
+        let amount = String(format: "%.0f", waterLogs[date]![indexPath.row].amount!.doubleValue) + (setting.unit?.description)!
+        
+        tableViewCell.loggedTime.text = loggedTime
+        tableViewCell.amount.text = amount
+        tableViewCell.icon.image = UIImage(named: amount)
+        
+        return tableViewCell
+        
     }
     
-
     
-    func getWaterLogs() -> [WaterLog]? {
+    func getWaterLogs() -> [String :[WaterLog]]? {
         // today water logs to return.
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         
-        return fetchResults
+        var waterLogs : [String :[WaterLog]]! = [String :[WaterLog]]()
+        
+        for result in fetchResults!.reverse() {
+            let date = getDate(result.loggedTime!)
+            if (waterLogs[date] == nil) {
+                waterLogs[date] = []
+            }
+            
+            waterLogs[date]?.append(result)
+        }
+        
+        return waterLogs
+    }
+    
+    func getTime(date: NSDate) -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
+        let timeString = dateFormatter.stringFromDate(date)
+        return timeString
     }
     
     func getDate(date : NSDate) -> String{
@@ -91,7 +158,7 @@ class WaterLogViewController: UITableViewController {
     
     func getTimestamp(date : NSDate) -> String{
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         let dateString = dateFormatter.stringFromDate(date)
         return dateString
@@ -121,9 +188,10 @@ class WaterLogViewController: UITableViewController {
 
 }
 
-class waterLogTableCell : UITableViewCell {
+class WaterLogTableCell : UITableViewCell {
     
-    @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var loggedTime: UILabel!
+    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var icon: UIImageView!
     
 }
