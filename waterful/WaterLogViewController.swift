@@ -14,7 +14,7 @@ class WaterLogViewController: UITableViewController {
     
     @IBOutlet var waterLogTableView: UITableView!
     
-    var waterLogs : [WaterLog]!
+    var waterLogs : [String :[WaterLog]]!
     var setting : Setting!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -30,7 +30,7 @@ class WaterLogViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        waterLogTableView.reloadData()
+        //waterLogTableView.reloadData()
     }
     
     
@@ -44,16 +44,28 @@ class WaterLogViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            removeItem(waterLogs![indexPath.row])
+            let date = Array(waterLogs.keys)[indexPath.section]
+            removeItem(waterLogs![date]![indexPath.row])
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             waterLogs = getWaterLogs()
             waterLogTableView.reloadData()
         }
     }
     
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return Array(waterLogs.keys).count
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.waterLogs.count;
+        // Return the number of rows in the section.
+        let date = Array(waterLogs.keys)[section]
+        return (waterLogs[date]?.count)!
+        
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Array(waterLogs.keys)[section]
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -65,20 +77,41 @@ class WaterLogViewController: UITableViewController {
         
         //we know that cell is not empty now so we use ! to force unwrapping
         tableViewCell!.editing = true
-        tableViewCell!.textLabel?.text = String(getTimestamp(waterLogs[indexPath.row].loggedTime!)) + "\t\t\t\t\t\t" + String(format: "%.0f", self.waterLogs[indexPath.row].amount!.doubleValue) + (setting.unit?.description)!
+        //let date = Array(waterLogs.keys)[indexPath.row
+        let date = Array(waterLogs.keys)[indexPath.section]
+        let loggedTime = getTime(waterLogs[date]![indexPath.row].loggedTime!)
+        let amount = String(format: "%.0f", waterLogs[date]![indexPath.row].amount!.doubleValue) + (setting.unit?.description)!
 
+        tableViewCell!.textLabel?.text = "\t" + loggedTime + "\t\t\t\t\t" + amount
+        
         return tableViewCell!
     }
     
-
-    
-    func getWaterLogs() -> [WaterLog]? {
+    func getWaterLogs() -> [String :[WaterLog]]? {
         // today water logs to return.
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
         let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [WaterLog]
         
-        return fetchResults
+        var waterLogs : [String :[WaterLog]]! = [String :[WaterLog]]()
+        
+        for result in fetchResults!.reverse() {
+            let date = getDate(result.loggedTime!)
+            if (waterLogs[date] == nil) {
+                waterLogs[date] = []
+            }
+            
+            waterLogs[date]?.append(result)
+        }
+        
+        return waterLogs
+    }
+    func getTime(date: NSDate) -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
+        let timeString = dateFormatter.stringFromDate(date)
+        return timeString
     }
     
     func getDate(date : NSDate) -> String{
@@ -91,7 +124,7 @@ class WaterLogViewController: UITableViewController {
     
     func getTimestamp(date : NSDate) -> String{
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:MM"
         dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
         let dateString = dateFormatter.stringFromDate(date)
         return dateString
