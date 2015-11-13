@@ -3,10 +3,9 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--waterful-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,7 +67,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFf-Rq-Exn">
-                                <rect key="frame" x="124" y="510" width="85" height="85"/>
+                                <rect key="frame" x="124" y="495" width="85" height="85"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.10458273396746953" green="0.86031205904346564" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -84,7 +83,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D31-Bc-QcG">
-                                <rect key="frame" x="301" y="510" width="85" height="85"/>
+                                <rect key="frame" x="301" y="495" width="85" height="85"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -100,7 +99,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIr-7i-RBQ">
-                                <rect key="frame" x="390" y="510" width="85" height="85"/>
+                                <rect key="frame" x="390" y="495" width="85" height="85"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -142,7 +141,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyZ-IK-QeO">
-                                <rect key="frame" x="213" y="510" width="85" height="85"/>
+                                <rect key="frame" x="213" y="495" width="85" height="85"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -161,25 +160,25 @@
                                 <rect key="frame" x="203" y="460" width="54.5" height="13.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recommended" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPu-Yf-Qg6">
                                 <rect key="frame" x="342.5" y="460" width="75.5" height="13.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="unit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kt3-mp-Lnj">
-                                <rect key="frame" x="299" y="445.5" width="21.5" height="14.5"/>
+                                <rect key="frame" x="299" y="443" width="21.5" height="14.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="unit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsT-uM-fwb">
-                                <rect key="frame" x="398" y="445" width="21.5" height="14.5"/>
+                                <rect key="frame" x="398" y="443" width="21.5" height="14.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,6 +190,7 @@
                         <constraints>
                             <constraint firstItem="EPu-Yf-Qg6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="2hC-qX-7UW"/>
                             <constraint firstItem="D31-Bc-QcG" firstAttribute="top" secondItem="hwX-p2-0xd" secondAttribute="bottom" constant="50" id="39y-Hm-CTX"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZIr-7i-RBQ" secondAttribute="bottom" constant="20" id="3Tt-PZ-hoO"/>
                             <constraint firstItem="D31-Bc-QcG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="44" id="5d4-F5-RKE"/>
                             <constraint firstItem="Zrv-7M-ykr" firstAttribute="top" secondItem="I5D-2a-GDb" secondAttribute="bottom" constant="-50" id="5hP-1z-lKR"/>
                             <constraint firstItem="fyZ-IK-QeO" firstAttribute="leading" secondItem="hFf-Rq-Exn" secondAttribute="trailing" constant="4" id="9tF-B1-6e1"/>
@@ -200,6 +200,8 @@
                             <constraint firstItem="Zrv-7M-ykr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FOm-hD-wW6"/>
                             <constraint firstItem="7Lu-Fg-djo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="70" id="GAQ-sJ-Tgq"/>
                             <constraint firstItem="RUk-Zr-k21" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Icx-ms-s9z"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fyZ-IK-QeO" secondAttribute="bottom" constant="20" id="Pyg-QO-WLF"/>
+                            <constraint firstItem="Kt3-mp-Lnj" firstAttribute="top" secondItem="rUZ-MH-4ZW" secondAttribute="bottom" constant="-17" id="QNM-bK-Hf6"/>
                             <constraint firstItem="RUk-Zr-k21" firstAttribute="top" secondItem="Zrv-7M-ykr" secondAttribute="bottom" id="Shd-4P-Q84"/>
                             <constraint firstItem="YkH-XP-K86" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="70" id="T3W-yW-vL2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zXn-Sn-Hqf" secondAttribute="trailing" constant="20" id="T97-DR-uh4"/>
@@ -207,8 +209,11 @@
                             <constraint firstItem="ni6-Ej-Ogc" firstAttribute="top" secondItem="I5D-2a-GDb" secondAttribute="bottom" constant="40" id="WRS-Ev-Fuv"/>
                             <constraint firstItem="EsT-uM-fwb" firstAttribute="leading" secondItem="hwX-p2-0xd" secondAttribute="trailing" id="X3g-GQ-MW9"/>
                             <constraint firstItem="ni6-Ej-Ogc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XSR-bt-r2L"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="D31-Bc-QcG" secondAttribute="bottom" constant="20" id="ZDu-fZ-t5p"/>
                             <constraint firstItem="hwX-p2-0xd" firstAttribute="top" secondItem="I5D-2a-GDb" secondAttribute="bottom" constant="40" id="ZEP-Lt-7h0"/>
                             <constraint firstItem="zXn-Sn-Hqf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Zj8-5T-oju"/>
+                            <constraint firstItem="EsT-uM-fwb" firstAttribute="top" secondItem="hwX-p2-0xd" secondAttribute="bottom" constant="-17" id="dxt-fj-yUU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hFf-Rq-Exn" secondAttribute="bottom" constant="20" id="isD-8L-Tmg"/>
                             <constraint firstItem="fyZ-IK-QeO" firstAttribute="top" secondItem="hwX-p2-0xd" secondAttribute="bottom" constant="50" id="jgY-Oo-vuG"/>
                             <constraint firstItem="hwX-p2-0xd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="70" id="nJK-0V-LWT"/>
                             <constraint firstItem="ZIr-7i-RBQ" firstAttribute="leading" secondItem="D31-Bc-QcG" secondAttribute="trailing" constant="4" id="nga-6R-vqO"/>
@@ -228,33 +233,39 @@
                             <mask key="subviews">
                                 <exclude reference="YkH-XP-K86"/>
                             </mask>
+                            <mask key="constraints">
+                                <exclude reference="uGB-ij-Fwg"/>
+                                <exclude reference="jgY-Oo-vuG"/>
+                                <exclude reference="tBf-pW-fCY"/>
+                                <exclude reference="39y-Hm-CTX"/>
+                                <exclude reference="VD0-7D-Ba9"/>
+                                <exclude reference="qBB-fQ-g35"/>
+                            </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="waterful" id="wYx-6n-6YJ">
-                        <rightBarButtonItems>
-                            <barButtonItem style="plain" id="IMO-A3-U2O">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rbk-W7-Q0F" userLabel="setting">
-                                    <rect key="frame" x="545" y="4" width="35" height="35"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <animations/>
-                                    <state key="normal" image="setting"/>
-                                    <connections>
-                                        <segue destination="AxE-EH-p0Z" kind="show" id="L3Z-xN-WLk"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem style="plain" id="aOb-xV-zXb">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DuY-tw-E2U" userLabel="log">
-                                    <rect key="frame" x="502" y="4" width="35" height="35"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <animations/>
-                                    <state key="normal" backgroundImage="log"/>
-                                    <connections>
-                                        <segue destination="cYN-Ip-vDw" kind="push" id="9or-RH-rcg"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                    <navigationItem key="navigationItem" id="wYx-6n-6YJ">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="aOb-xV-zXb">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DuY-tw-E2U" userLabel="log">
+                                <rect key="frame" x="20" y="4" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <state key="normal" backgroundImage="log"/>
+                                <connections>
+                                    <segue destination="cYN-Ip-vDw" kind="push" id="9or-RH-rcg"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="IMO-A3-U2O">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rbk-W7-Q0F" userLabel="setting">
+                                <rect key="frame" x="545" y="4" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <state key="normal" image="setting"/>
+                                <connections>
+                                    <segue destination="AxE-EH-p0Z" kind="show" id="L3Z-xN-WLk"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="amountLeft" destination="RUk-Zr-k21" id="lq9-50-jcd"/>

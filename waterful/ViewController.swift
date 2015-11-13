@@ -72,6 +72,12 @@ class ViewController: UIViewController {
 
     
     override func viewDidLoad() {
+        let logo : UIImage = UIImage(named: "logo")!
+        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
+        logoView.contentMode = .ScaleAspectFit
+        logoView.image = logo
+        self.navigationItem.titleView = logoView
+        
         // make gradient background
         let gl : CAGradientLayer = CAGradientLayer()
         gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
