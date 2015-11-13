@@ -50,6 +50,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         session?.activateSession()
     }
     
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
@@ -57,10 +58,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
         getStatus()
         updateView()
         
+        super.willActivate()
     }
 
     override func didDeactivate() {
@@ -84,7 +85,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             replyHandler: { (response) in
                 let res = response
                 self.consumed = res["consumed"] as! Double
-                print (String(self.consumed))
                 self.goal = res["goal"] as! Double
                 self.updateView()
                 

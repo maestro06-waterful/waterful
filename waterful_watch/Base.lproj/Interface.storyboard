@@ -14,32 +14,36 @@
                             <color key="textColor" red="0.098039215690000001" green="0.77647058820000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" type="system" pointSize="25"/>
                         </label>
-                        <label alignment="center" text="/" id="cXD-Oe-myA"/>
-                        <label alignment="right" text="goal" id="bIO-ZW-Y8E">
-                            <fontDescription key="font" type="system" pointSize="25"/>
-                        </label>
-                        <group width="1" alignment="left" id="Sfw-Ee-SAv">
+                        <group width="1" alignment="left" id="pZ6-No-DMd">
                             <items>
-                                <button width="0.5" alignment="left" title="40ml" id="frv-dV-29I">
+                                <label alignment="center" text="/" id="cXD-Oe-myA"/>
+                                <label alignment="right" text="goal" numberOfLines="2" id="bIO-ZW-Y8E">
+                                    <fontDescription key="font" type="system" pointSize="25"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="0.29999999999999999" alignment="left" id="Sfw-Ee-SAv">
+                            <items>
+                                <button width="0.5" height="1" alignment="left" title="40ml" id="frv-dV-29I">
                                     <connections>
                                         <action selector="button1Pressed" destination="AgC-eL-Hgc" id="w71-qU-Y3s"/>
                                     </connections>
                                 </button>
-                                <button width="0.5" alignment="left" title="120ml" id="vk6-q1-5Rf">
+                                <button width="0.5" height="1" alignment="left" title="120ml" id="vk6-q1-5Rf">
                                     <connections>
                                         <action selector="button2Pressed" destination="AgC-eL-Hgc" id="Kvo-PP-KT7"/>
                                     </connections>
                                 </button>
                             </items>
                         </group>
-                        <group width="1" alignment="left" id="iod-jF-dac">
+                        <group width="1" height="0.29999999999999999" alignment="left" id="iod-jF-dac">
                             <items>
-                                <button width="0.5" alignment="left" title="400ml" id="nN6-6n-SQc">
+                                <button width="0.5" height="1" alignment="left" title="400ml" id="nN6-6n-SQc">
                                     <connections>
                                         <action selector="button3Pressed" destination="AgC-eL-Hgc" id="h6l-4y-zMs"/>
                                     </connections>
                                 </button>
-                                <button width="0.5" alignment="left" title="500ml" id="AbH-BF-8qe">
+                                <button width="0.5" height="1" alignment="left" title="500ml" id="AbH-BF-8qe">
                                     <connections>
                                         <action selector="button4Pressed" destination="AgC-eL-Hgc" id="YK4-tR-DOY"/>
                                     </connections>
