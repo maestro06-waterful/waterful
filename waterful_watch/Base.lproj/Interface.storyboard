@@ -10,14 +10,14 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="waterful_watch" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="consumed" id="zrI-ed-g9m">
+                        <label width="1" height="0.25" alignment="left" text="consumed" id="zrI-ed-g9m">
                             <color key="textColor" red="0.098039215690000001" green="0.77647058820000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" type="system" pointSize="25"/>
+                            <fontDescription key="font" type="system" pointSize="28"/>
                         </label>
-                        <group width="1" alignment="left" id="pZ6-No-DMd">
+                        <group width="1" height="0.14999999999999999" alignment="left" id="pZ6-No-DMd">
                             <items>
                                 <label alignment="center" text="/" id="cXD-Oe-myA"/>
-                                <label alignment="right" text="goal" numberOfLines="2" id="bIO-ZW-Y8E">
+                                <label alignment="right" verticalAlignment="bottom" text="goal" numberOfLines="2" id="bIO-ZW-Y8E">
                                     <fontDescription key="font" type="system" pointSize="25"/>
                                 </label>
                             </items>
