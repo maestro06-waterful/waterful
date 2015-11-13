@@ -251,7 +251,7 @@
                                 <animations/>
                                 <state key="normal" backgroundImage="log"/>
                                 <connections>
-                                    <segue destination="cYN-Ip-vDw" kind="push" id="9or-RH-rcg"/>
+                                    <segue destination="FHh-UY-uNy" kind="show" id="BCf-lm-fjp"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -294,6 +294,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QIl-YM-G41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1475" y="372"/>
+        </scene>
+        <!--Water Log View Controller-->
+        <scene sceneID="HOs-Wq-aSa">
+            <objects>
+                <tableViewController id="FHh-UY-uNy" customClass="WaterLogViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hrh-bi-YAy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="y0X-ep-JVt" customClass="waterLogTableCell" customModule="waterful" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y0X-ep-JVt" id="Xkz-7S-hEf">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUB-tM-bEd" userLabel="log time">
+                                            <rect key="frame" x="48" y="11.5" width="42" height="20.5"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgL-YJ-M3v" userLabel="amount">
+                                            <rect key="frame" x="510" y="11.5" width="42" height="20.5"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="RgL-YJ-M3v" firstAttribute="centerY" secondItem="Xkz-7S-hEf" secondAttribute="centerY" id="XGv-pY-hgh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="RgL-YJ-M3v" secondAttribute="trailing" constant="40" id="Z2O-Qa-NlO"/>
+                                        <constraint firstItem="EUB-tM-bEd" firstAttribute="leading" secondItem="Xkz-7S-hEf" secondAttribute="leadingMargin" constant="40" id="eRN-8D-NCI"/>
+                                        <constraint firstItem="EUB-tM-bEd" firstAttribute="centerY" secondItem="Xkz-7S-hEf" secondAttribute="centerY" id="u9X-6b-izX"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="amount" destination="RgL-YJ-M3v" id="xRG-cz-ERV"/>
+                                    <outlet property="loggedTime" destination="EUB-tM-bEd" id="DKQ-pV-iYc"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FHh-UY-uNy" id="Sht-IV-GS2"/>
+                            <outlet property="delegate" destination="FHh-UY-uNy" id="V9X-xW-wc7"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="waterLogTableView" destination="Hrh-bi-YAy" id="CEa-Vu-WAt"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fg6-Ls-qlP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1637" y="1255"/>
         </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="jEk-UB-PJx">
@@ -688,58 +748,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69V-xq-Pdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2247" y="372"/>
-        </scene>
-        <!--Water Log Table View Controller-->
-        <scene sceneID="xb5-5L-ygo">
-            <objects>
-                <tableViewController id="cYN-Ip-vDw" customClass="WaterLogTableViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q2h-eA-Dvh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WaterLogTableViewCell" rowHeight="60" id="2LU-V9-9mK" customClass="WaterLogTableViewCell" customModule="waterful" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="60"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2LU-V9-9mK" id="8zZ-0R-CrN">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVX-MY-JMD">
-                                            <rect key="frame" x="0.0" y="8" width="600" height="44"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBv-24-rkl">
-                                            <rect key="frame" x="471" y="19" width="42" height="21"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                                <connections>
-                                    <outlet property="label_logCount" destination="rBv-24-rkl" id="8GA-pB-z32"/>
-                                    <outlet property="label_logDate" destination="UVX-MY-JMD" id="rQ0-bn-6i3"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="cYN-Ip-vDw" id="RlB-Yv-DRs"/>
-                            <outlet property="delegate" destination="cYN-Ip-vDw" id="Llx-aK-kCL"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="CIL-oX-Lfr"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ki0-G4-eeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1667" y="1094"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AZs-fS-Trk">
