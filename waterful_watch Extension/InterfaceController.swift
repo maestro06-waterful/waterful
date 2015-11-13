@@ -15,24 +15,20 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var mainImage: WKInterfaceImage!
     @IBAction func button1Pressed() {
         // log 40
+        sendMessageWC(40, totalAmount: 100)
     }
     @IBAction func button2Pressed() {
         // log 120
+        sendMessageWC(120, totalAmount: 100)
     }
     @IBAction func button3Pressed() {
         // log 400
+        sendMessageWC(400, totalAmount: 100)
     }
     @IBAction func button4Pressed() {
         // log 500
-        
-        
-        if WCSession.isSupported() {
-            let session = WCSession.defaultSession()
-            session.sendMessage(["Message":10], replyHandler: {(recvMessage : [String:AnyObject]) -> Void in
-                print(String(recvMessage["TotalCount"]))
-                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                }, errorHandler: nil)
-        }
+        sendMessageWC(500, totalAmount: 100)
+
 
     }
     
@@ -52,6 +48,31 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+    }
+    
+    func sendMessageWC(amount : Int, totalAmount : Int, logDate : NSDate = NSDate()){
+        if WCSession.isSupported() {
+            let session = WCSession.defaultSession()
+            
+            let message = [ "TotalAmount" : totalAmount, "Amount" : amount, "LogDate" : logDate]
+            
+
+            
+            if session.reachable{
+                session.sendMessage( message, replyHandler: {(recvMessage : [String:AnyObject]) -> Void in
+                    print(String(recvMessage["TotalAmount"]!))
+//                  print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                    }, errorHandler: nil)
+            } else {
+                
+                do {
+                    try session.updateApplicationContext(message)
+                } catch {
+                    print("error")
+                }
+                
+            }
+        }
     }
 
 }

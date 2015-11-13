@@ -179,15 +179,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         print("** Phone : session ReceiveMessage")
         
-        replyHandler(["TotalWater" : 10])
+        let totalAmount  = message["TotalAmount"]
+        let amount = message["Amount"]
+        let logDate = message["LogDate"]
         
+        let replyMessage = ["TotalAmount" : 10]
+        
+        replyHandler(replyMessage)
+        
+        // NotificationCenter 를 이용하여 View Controller Update
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName("receiveWaterData", object: nil)
-        
+        notificationCenter.postNotificationName("WaterLogUpdate", object: message)
         
     }
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+
+        print("** Phone : session ReceiveApplicationContext")
+        
+        let totalAmount  = applicationContext["TotalAmount"]
+        let amount = applicationContext["Amount"]
+        let logDate = applicationContext["LogDate"]
+        
         
     }
     
