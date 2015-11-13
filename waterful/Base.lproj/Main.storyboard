@@ -305,25 +305,60 @@
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CELL" textLabel="5XZ-oo-YG2" style="IBUITableViewCellStyleDefault" id="y0X-ep-JVt" customClass="waterLogTableCell" customModule="waterful" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CELL" id="y0X-ep-JVt" customClass="WaterLogTableCell" customModule="waterful" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y0X-ep-JVt" id="Xkz-7S-hEf">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5XZ-oo-YG2">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMP-bx-JGp">
+                                            <rect key="frame" x="38" y="11.5" width="33.5" height="20.5"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukr-9s-99x">
+                                            <rect key="frame" x="484" y="11.5" width="58" height="20.5"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6zE-hh-meR">
+                                            <rect key="frame" x="552" y="6.5" width="30" height="30"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="EHM-GH-kvR"/>
+                                                <constraint firstAttribute="height" constant="30" id="yqh-qW-vuI"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="hMP-bx-JGp" firstAttribute="centerY" secondItem="Xkz-7S-hEf" secondAttribute="centerY" id="KCX-gf-EUX"/>
+                                        <constraint firstItem="6zE-hh-meR" firstAttribute="centerY" secondItem="Xkz-7S-hEf" secondAttribute="centerY" id="OsR-J3-a7M"/>
+                                        <constraint firstItem="ukr-9s-99x" firstAttribute="centerY" secondItem="Xkz-7S-hEf" secondAttribute="centerY" id="dc7-iJ-OIZ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ukr-9s-99x" secondAttribute="trailing" constant="30" id="fAh-Su-8MH"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="6zE-hh-meR" secondAttribute="trailing" constant="10" id="jqJ-xb-wZ8"/>
+                                        <constraint firstItem="hMP-bx-JGp" firstAttribute="leading" secondItem="Xkz-7S-hEf" secondAttribute="leadingMargin" constant="30" id="muT-m3-sM7"/>
+                                        <constraint firstItem="6zE-hh-meR" firstAttribute="leading" secondItem="ukr-9s-99x" secondAttribute="trailing" constant="10" id="p55-0t-QNr"/>
+                                        <constraint firstItem="ukr-9s-99x" firstAttribute="leading" secondItem="6zE-hh-meR" secondAttribute="trailing" constant="10" id="r0Q-qI-IFS"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="fAh-Su-8MH"/>
+                                            <exclude reference="r0Q-qI-IFS"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <outlet property="amount" destination="ukr-9s-99x" id="AhG-t6-oBD"/>
+                                    <outlet property="icon" destination="6zE-hh-meR" id="LTb-IE-iJg"/>
+                                    <outlet property="loggedTime" destination="hMP-bx-JGp" id="2SG-c1-imS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
