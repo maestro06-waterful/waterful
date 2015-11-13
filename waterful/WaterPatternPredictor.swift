@@ -19,8 +19,8 @@ class WaterPatternPredictor {
 
         waterPatterns = [WaterPattern]()
 
-        for index in 1...7 {
-            let (startDate, objects) = getWaterLogsInCoreData(index)
+        for var day = 7; day >= 1; day-- {
+            let (startDate, objects) = getWaterLogsInCoreData(day)
             let pattern = WaterPattern()
             pattern.composeDataPoints(startDate!, waterLogs: objects as! [WaterLog])
             waterPatterns?.append(pattern)
@@ -45,6 +45,7 @@ class WaterPatternPredictor {
                 dataPoints[hour] = total / Double(patterns.count)
             }
 
+            // a closure which sorts by value in descending order
             let sortByValue = {
                 (elem1:(key: Int, val: Double), elem2:(key: Int, val: Double))->Bool in
                 if elem1.val > elem2.val {
@@ -53,8 +54,27 @@ class WaterPatternPredictor {
                     return false
                 }
             }
+            // sort data points by value in descending order
             let sortedDataPoints = dataPoints.sort(sortByValue)
             print("best intake: \(sortedDataPoints[0].1)")
+
+            // Cancel all notification about predicting drinking pattern from records
+            NotiManager.sharedInstance?.cancelNoti(.RECORD_NOTI)
+
+            // register notification at 2 best-probable time for drinking water.
+            for index in 0...1 {
+                let now = NSDate()
+                let predictedHour = sortedDataPoints[index].0 + 1
+                let predictedTime = Double(predictedHour * 3_600)
+                let predictedDate = now.dateByAddingTimeInterval(predictedTime)
+
+                // setting at least 7 days notification in advance.
+                // It guarantees the case prediction cannot be executed not frequently.
+                for day in 0...6 {
+                    NotiManager.sharedInstance?.registerRecordNoti(.REMIND,
+                        fireDate: predictedDate.dateByAddingTimeInterval(Double(86_400 * day)))
+                }
+            }
         }
     }
 
@@ -78,25 +98,21 @@ class WaterPatternPredictor {
     // Returns CoreData WaterLog objects in latest week
     func getWaterLogsInCoreData(daysAgo: Int) -> (startDate: NSDate?, waterLogs: [AnyObject]?) {
 
-        let midNight = NSDate(timeIntervalSinceNow: NSTimeInterval(NSTimeZone.defaultTimeZone().secondsFromGMT))
-
-        // Set one day to 86,400 seconds
-        let day: Double = 86_400
+        let now = NSDate()
+        let day: Double = 86_400    // 86,400 seconds = a day
 
         // managed object context instance
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        // "StepDate" entity in core data model
-        let entityDescription = NSEntityDescription.entityForName("WaterLog", inManagedObjectContext: managedObjectContext)
-        let request = NSFetchRequest()
 
-        let startDay = midNight.dateByAddingTimeInterval(-day * Double(daysAgo))  // "daysAgo" days ago
-        let endDay = midNight.dateByAddingTimeInterval(-day * Double(daysAgo-1))  // 1 day after start day
+        let startDay = now.dateByAddingTimeInterval(-day * Double(daysAgo))  // "daysAgo" days ago
+        let endDay = now.dateByAddingTimeInterval(-day * Double(daysAgo-1))  // 1 day after start day
 
+        // predicate for logged time
         let startDayPred = NSPredicate(format: "(loggedTime > %@)", startDay)
         let endDayPred = NSPredicate(format: "(loggedTime < %@)", endDay)
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startDayPred, endDayPred])
-
-        request.entity = entityDescription
+        
+        let request = NSFetchRequest(entityName: "WaterLog")
         request.predicate = predicate
 
         // Query results to return
