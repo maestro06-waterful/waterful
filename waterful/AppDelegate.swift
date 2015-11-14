@@ -27,14 +27,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         app.scheduleLocalNotification(alarm)
     }
 
+    func createShortCutItems() {
+
+        // shortcut items (entry paths) to launching the app.
+        let item1 = UIMutableApplicationShortcutItem(type: "com.waterful.shortcuts.dynamic.drink", localizedTitle: "Drink in the latest cup size")
+        let item2 = UIMutableApplicationShortcutItem(type: "com.waterful.shortcuts.static.history", localizedTitle: "View History")
+        let item3 = UIMutableApplicationShortcutItem(type: "com.waterful.shortcuts.static.record", localizedTitle: "Record drinking water")
+
+        let shortCutItems = [UIApplicationShortcutItem](arrayLiteral: item1, item2, item3)
+
+        UIApplication.sharedApplication().shortcutItems = shortCutItems
+    }
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+        self.createShortCutItems()
+
         // Override point for customization after application launch.
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().barTintColor = UIColor(patternImage: UIImage(named: "themeColor")!)
-
-
 
         // healthkit setting
         HealthManager.sharedInstance.authorizeHealthKit {
@@ -53,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound]
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
-        
         
         return true
     }
