@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "back5.jpg",
+      "filename" : "waterdrop-1.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "waterdrop-2.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "waterdrop-3.jpg",
       "scale" : "3x"
     }
   ],
