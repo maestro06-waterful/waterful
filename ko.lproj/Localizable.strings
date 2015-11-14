@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  waterful
+
+  Created by HONGYOONSEOK on 2015. 11. 14..
+  Copyright © 2015년 suz. All rights reserved.
+*/
+
+"Name" = "이름 (ko)";
+"Text" = "텍스트 (ko)";
+
+"SN_MOR" = "좋은 아침이예요~ 하루의 시작을 한 잔의 물과 함께 시작하는 건 어떨까요?";
