@@ -58,6 +58,11 @@
                                     <action selector="undoPressed" destination="AgC-eL-Hgc" id="iOe-hv-lGh"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="refresh" id="XTh-Uw-XZb">
+                                <connections>
+                                    <action selector="refreshPressed" destination="AgC-eL-Hgc" id="Pxv-Dx-yHs"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
