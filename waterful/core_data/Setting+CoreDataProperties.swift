@@ -21,5 +21,10 @@ extension Setting {
     @NSManaged var goal: NSNumber?
     @NSManaged var todayAmount: NSNumber?
     @NSManaged var unit: HKUnit?
+    
+    @NSManaged var sipVolume: NSNumber?
+    @NSManaged var cupVolume: NSNumber?
+    @NSManaged var mugVolume: NSNumber?
+    @NSManaged var bottleVolume: NSNumber?
 
 }

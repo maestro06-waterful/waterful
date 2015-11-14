@@ -108,12 +108,14 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         tableViewCell.editing = true
         //let date = Array(waterLogs.keys)[indexPath.row
         let date = Array(waterLogs.keys)[indexPath.section]
-        let loggedTime = getTime(waterLogs[date]![indexPath.row].loggedTime!)
-        let amount = String(format: "%.0f", waterLogs[date]![indexPath.row].amount!.doubleValue) + (setting.unit?.description)!
+        let element :WaterLog = waterLogs[date]![indexPath.row]
+        let loggedTime = getTime(element.loggedTime!)
+        let amount = String(format: "%.0f", element.amount!.doubleValue) + (setting.unit?.description)!
+        let container = element.container
         
         tableViewCell.loggedTime.text = loggedTime
         tableViewCell.amount.text = amount
-        tableViewCell.icon.image = UIImage(named: amount)
+        tableViewCell.icon.image = UIImage(named: container!)
         
         return tableViewCell
         

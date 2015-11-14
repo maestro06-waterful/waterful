@@ -61,6 +61,10 @@
                         </items>
                     </menu>
                     <connections>
+                        <outlet property="button1" destination="frv-dV-29I" id="Q60-nx-jPp"/>
+                        <outlet property="button2" destination="vk6-q1-5Rf" id="U6Y-ae-fEE"/>
+                        <outlet property="button3" destination="nN6-6n-SQc" id="ox5-5N-GeH"/>
+                        <outlet property="button4" destination="AbH-BF-8qe" id="wLz-do-rbh"/>
                         <outlet property="consumedLabel" destination="zrI-ed-g9m" id="dMA-a7-PM6"/>
                         <outlet property="goalLabel" destination="bIO-ZW-Y8E" id="7az-rJ-mQE"/>
                     </connections>
