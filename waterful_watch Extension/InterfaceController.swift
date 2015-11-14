@@ -51,82 +51,83 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         undoLastWaterLog()
     }
     
-    private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
-    
-    override init() {
-        super.init()
-        
-        session?.delegate = self
-        session?.activateSession()
+    override func didAppear() {
+        getStatus()
+        updateView()
+
     }
-    
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        
         // Configure interface objects here.
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
-        getStatus()
-        updateView()
-        
         super.willActivate()
     }
 
     override func didDeactivate() {
+        
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
     
     func sendAmount(container: String){
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
+        
         let applicationDict = ["container" : container]
         do {
-            try session?.updateApplicationContext(applicationDict)
+            try WCSession.defaultSession().updateApplicationContext(applicationDict)
 
-            
         } catch {
             print("error")
         }
     }
     
     func getStatus() {
-        if WCSession.defaultSession().reachable == true{
-            session?.sendMessage(["command" : "fetchStatus"],
-                replyHandler: { (response) in
-                        print("response in watch")
-                        print(response)
-                        self.consumed = response["consumed"] as! Double
-                        self.goal = response["goal"] as! Double
-                        self.sipVolume = response["sipVolume"] as! Double
-                        self.cupVolume = response["cupVolume"] as! Double
-                        self.mugVolume = response["mugVolume"] as! Double
-                        self.bottleVolume = response["bottleVolume"] as! Double
-                        
-                    
-                }, errorHandler: { (error) in
-                    NSLog("Error sending message: %@", error)
-                    
-                }
-            )
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
         }
-        self.updateView()
-    }
-    
-    func updateView() {
         
-        consumedLabel.setText(String(format:"%0.f", consumed))
-        goalLabel.setText(String(format:"%0.f", goal))
-        
-        button1.setTitle(String(format:"%0.1f", sipVolume) + "ml")
-        button2.setTitle(String(format:"%0.1f", cupVolume) + "ml")
-        button3.setTitle(String(format:"%0.1f", mugVolume) + "ml")
-        button4.setTitle(String(format:"%0.1f", bottleVolume) + "ml")
-        
+        if WCSession.defaultSession().reachable == true {
             
+            let request :[ String : AnyObject ] = ["command" : "fetchStatus"]
+            let session = WCSession.defaultSession()
+            
+            session.sendMessage(request, replyHandler: { response in
+                
+                let res = response
+                self.consumed = res["consumed"] as! Double
+                self.goal = res["goal"] as! Double
+                self.sipVolume = res["sipVolume"] as! Double
+                self.cupVolume = res["cupVolume"] as! Double
+                self.mugVolume = res["mugVolume"] as! Double
+                self.bottleVolume = res["bottleVolume"] as! Double
+                self.updateView()
+                
+                }, errorHandler: { error in
+                    print("error: \(error)")
+            })
+        }
+        
     }
     
     func undoLastWaterLog() {
+        
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
+        
         if WCSession.defaultSession().reachable == true {
             
             let request = ["command" : "undo"]
@@ -143,6 +144,19 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                     print("error: \(error)")
             })
         }
+    }
+    
+    func updateView() {
+        
+        consumedLabel.setText(String(format:"%0.f", consumed))
+        goalLabel.setText(String(format:"%0.f", goal))
+        
+        button1.setTitle(String(format:"%0.1f", sipVolume) + "ml")
+        button2.setTitle(String(format:"%0.1f", cupVolume) + "ml")
+        button3.setTitle(String(format:"%0.1f", mugVolume) + "ml")
+        button4.setTitle(String(format:"%0.1f", bottleVolume) + "ml")
+        
+            
     }
     
     
