@@ -181,7 +181,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         button3.setTitle(String(format:"%0.0f", mugVolume) + "ml")
         button4.setTitle(String(format:"%0.0f", bottleVolume) + "ml")
         
-            
     }
     
     
