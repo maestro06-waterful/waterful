@@ -345,6 +345,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                 // Do something in response to error condition
             }
         }
+        
         // update view in repspons to change of core data objects in WaterLog entity.
         updateWater()
     }
@@ -542,6 +543,7 @@ extension ViewController{
         var response : [String : AnyObject] = [String : AnyObject]()
         
         switch message["command"] as! String {
+            
         case "undo" :
             undoLastWaterLog()
             response["consumed"] = fetchWater()
@@ -555,6 +557,7 @@ extension ViewController{
             response["mugVolume"] = setting_info.mugVolume?.doubleValue
             response["bottleVolume"] = setting_info.bottleVolume?.doubleValue
             print(response)
+            
         default:
             break
         }
