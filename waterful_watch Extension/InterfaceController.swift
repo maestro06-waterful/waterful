@@ -50,6 +50,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func undoPressed() {
         undoLastWaterLog()
     }
+    
     @IBAction func refreshPressed() {
         getStatus()
         getContainer()
