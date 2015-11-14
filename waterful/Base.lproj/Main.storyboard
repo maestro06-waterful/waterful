@@ -298,7 +298,7 @@
         <!--Water Log View Controller-->
         <scene sceneID="HOs-Wq-aSa">
             <objects>
-                <tableViewController id="FHh-UY-uNy" customClass="WaterLogViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WaterLogView" id="FHh-UY-uNy" customClass="WaterLogViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Hrh-bi-YAy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -878,7 +878,7 @@
         <!--Navigation Controller-->
         <scene sceneID="AZs-fS-Trk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mgT-L2-hci" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigator" automaticallyAdjustsScrollViewInsets="NO" id="mgT-L2-hci" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gLR-Y0-X6b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
