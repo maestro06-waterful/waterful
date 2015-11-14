@@ -71,7 +71,7 @@
         <!--Glance Interface Controller-->
         <scene sceneID="duq-c0-8OI">
             <objects>
-                <glanceController topTemplateType="groupLeftSmall" bottomTemplateType="extraLargeLargeBody1Footer" id="r6X-JX-WOj" customClass="GlanceInterfaceController" customModule="waterful_watch_Extension">
+                <glanceController topTemplateType="groupLeftLarge" bottomTemplateType="extraLargeLargeBody1Footer" id="r6X-JX-WOj" customClass="GlanceInterfaceController" customModule="waterful_watch_Extension">
                     <items>
                         <group alignment="left" id="F7f-jm-bvI">
                             <items>
@@ -79,8 +79,8 @@
                             </items>
                         </group>
                         <label alignment="left" id="cFX-T9-HqL"/>
-                        <label alignment="left" text="waterful" id="1iA-Xv-fm7" userLabel="waterful"/>
-                        <label alignment="left" id="aC7-jk-zll"/>
+                        <label alignment="left" baselineAdjustment="alignCenters" id="1iA-Xv-fm7"/>
+                        <label alignment="left" text="waterful" id="aC7-jk-zll"/>
                         <label alignment="left" text="c" id="jk0-qn-V1W">
                             <color key="textColor" red="0.098039215690000001" green="0.77647058820000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         </label>
