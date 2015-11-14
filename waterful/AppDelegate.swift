@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func createShortCutItems() {
 
         // shortcut items (entry paths) to launching the app.
-        let item1 = UIMutableApplicationShortcutItem(type: "waterful.shortcuts.dynamic.drink", localizedTitle: "Drink in the latest cup size")
-        let item2 = UIMutableApplicationShortcutItem(type: "waterful.shortcuts.static.history", localizedTitle: "View History")
-        let item3 = UIMutableApplicationShortcutItem(type: "waterful.shortcuts.static.record", localizedTitle: "Record drinking water")
+        let item1 = UIMutableApplicationShortcutItem(type: shortcutActionType.DrinkFast.rawValue, localizedTitle: "Drink in the latest cup size")
+        let item2 = UIMutableApplicationShortcutItem(type: shortcutActionType.LogView.rawValue, localizedTitle: "View History")
+        let item3 = UIMutableApplicationShortcutItem(type: shortcutActionType.MainView.rawValue, localizedTitle: "Record drinking water")
 
         let shortCutItems = [UIApplicationShortcutItem](arrayLiteral: item1, item2, item3)
 
@@ -211,6 +211,7 @@ extension ExtensionShortCutItems {
 
             switch shortcutItemType {
             case .MainView:
+                self.launchMainView()
                 isHandled = true
             case .LogView:
                 isHandled = true
@@ -225,5 +226,16 @@ extension ExtensionShortCutItems {
         // perform action for shortcut item selected
         let resultHandlingShortcut = performShortcutAction(shortcutItem)
         completionHandler(resultHandlingShortcut)
+    }
+
+    // Launches main view controlled by ViewController class.
+    func launchMainView() {
+        // storybard instance
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        // main navigation controller instance
+        let controller = storyboard.instantiateViewControllerWithIdentifier("MainNavigator")
+
+        self.window?.rootViewController = controller
+        self.window?.makeKeyAndVisible()
     }
 }
