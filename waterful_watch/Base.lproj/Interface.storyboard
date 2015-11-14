@@ -68,6 +68,34 @@
             </objects>
             <point key="canvasLocation" x="220" y="362"/>
         </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="duq-c0-8OI">
+            <objects>
+                <glanceController topTemplateType="groupLeftSmall" bottomTemplateType="extraLargeLargeBody1Footer" id="r6X-JX-WOj" customClass="GlanceInterfaceController" customModule="waterful_watch_Extension">
+                    <items>
+                        <group alignment="left" id="F7f-jm-bvI">
+                            <items>
+                                <imageView width="1" height="1" alignment="left" image="waterdrop_watch" id="3IF-HP-Uw9"/>
+                            </items>
+                        </group>
+                        <label alignment="left" id="cFX-T9-HqL"/>
+                        <label alignment="left" text="waterful" id="1iA-Xv-fm7" userLabel="waterful"/>
+                        <label alignment="left" id="aC7-jk-zll"/>
+                        <label alignment="left" text="c" id="jk0-qn-V1W">
+                            <color key="textColor" red="0.098039215690000001" green="0.77647058820000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <label alignment="left" text="/ g" id="JYu-9G-pZj"/>
+                        <label alignment="left" id="e95-Uw-wdM"/>
+                        <label alignment="left" id="eo4-a1-czh"/>
+                    </items>
+                    <connections>
+                        <outlet property="consumedLabel" destination="jk0-qn-V1W" id="YZe-uR-lua"/>
+                        <outlet property="goalLabel" destination="JYu-9G-pZj" id="gcV-Qb-gC0"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="220" y="880"/>
+        </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
             <objects>
