@@ -214,6 +214,7 @@ extension ExtensionShortCutItems {
                 self.launchMainView()
                 isHandled = true
             case .LogView:
+                self.launchWaterLogView()
                 isHandled = true
             case .DrinkFast:
                 isHandled = true
@@ -234,6 +235,20 @@ extension ExtensionShortCutItems {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         // main navigation controller instance
         let controller = storyboard.instantiateViewControllerWithIdentifier("MainNavigator")
+
+        self.window?.rootViewController = controller
+        self.window?.makeKeyAndVisible()
+    }
+
+    // Launches history view controlled by WaterLogViewController class.
+    func launchWaterLogView() {
+        // storybard instance
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        // main navigation controller instance
+        let controller = storyboard.instantiateViewControllerWithIdentifier("MainNavigator") as! UINavigationController
+
+        let historyView = storyboard.instantiateViewControllerWithIdentifier("WaterLogView")
+        controller.pushViewController(historyView, animated: false)
 
         self.window?.rootViewController = controller
         self.window?.makeKeyAndVisible()
