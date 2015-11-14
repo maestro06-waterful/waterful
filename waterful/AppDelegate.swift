@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
         
+        NotiManager.sharedInstance?.registerSmartNoti(NotiManager.SmartNotiType.MORNING, fireDate: NSDate().dateByAddingTimeInterval(5))
+        
         return true
     }
     
