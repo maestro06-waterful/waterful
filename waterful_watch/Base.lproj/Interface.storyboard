@@ -51,6 +51,15 @@
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="coN-q9-IYO">
+                        <items>
+                            <menuItem title="undo" icon="trash" id="CGl-cc-rj4">
+                                <connections>
+                                    <action selector="undoPressed" destination="AgC-eL-Hgc" id="iOe-hv-lGh"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="consumedLabel" destination="zrI-ed-g9m" id="dMA-a7-PM6"/>
                         <outlet property="goalLabel" destination="bIO-ZW-Y8E" id="7az-rJ-mQE"/>

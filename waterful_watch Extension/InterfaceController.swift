@@ -40,6 +40,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
     }
     
+    @IBAction func undoPressed() {
+        undoLastWaterLog()
+    }
     
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
     
@@ -81,18 +84,20 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func getStatus() {
-        session?.sendMessage(["request" : "fetchStatus"],
-            replyHandler: { (response) in
-                let res = response
-                self.consumed = res["consumed"] as! Double
-                self.goal = res["goal"] as! Double
-                self.updateView()
-                
-            }, errorHandler: { (error) in
-                NSLog("Error sending message: %@", error)
-                
-            }
-        )
+        if WCSession.defaultSession().reachable == true{
+            session?.sendMessage(["command" : "fetchStatus"],
+                replyHandler: { (response) in
+                    let res = response
+                    self.consumed = res["consumed"] as! Double
+                    self.goal = res["goal"] as! Double
+                    self.updateView()
+                    
+                }, errorHandler: { (error) in
+                    NSLog("Error sending message: %@", error)
+                    
+                }
+            )
+        }
     }
     
     func updateView() {
@@ -100,4 +105,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         goalLabel.setText(String(format:"%0.f", goal))
     }
     
+    func undoLastWaterLog() {
+        if WCSession.defaultSession().reachable == true {
+            
+            let request = ["command" : "undo"]
+            let session = WCSession.defaultSession()
+            
+            session.sendMessage(request, replyHandler: { response in
+                let res = response
+                
+                self.consumed = res["consumed"] as! Double
+                
+                self.updateView()
+                
+                }, errorHandler: { error in
+                    print("error: \(error)")
+            })
+        }
+    }
 }
