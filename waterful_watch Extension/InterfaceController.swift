@@ -94,16 +94,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         if WCSession.defaultSession().reachable == true{
             session?.sendMessage(["command" : "fetchStatus"],
                 replyHandler: { (response) in
-                    print("response in watch")
-                    print(response)
-                    self.consumed = response["consumed"] as! Double
-                    self.goal = response["goal"] as! Double
-                    self.sipVolume = response["sipVolume"] as! Double
-                    self.cupVolume = response["cupVolume"] as! Double
-                    self.mugVolume = response["mugVolume"] as! Double
-                    self.bottleVolume = response["bottleVolume"] as! Double
-                    
-                    self.updateView()
+                        print("response in watch")
+                        print(response)
+                        self.consumed = response["consumed"] as! Double
+                        self.goal = response["goal"] as! Double
+                        self.sipVolume = response["sipVolume"] as! Double
+                        self.cupVolume = response["cupVolume"] as! Double
+                        self.mugVolume = response["mugVolume"] as! Double
+                        self.bottleVolume = response["bottleVolume"] as! Double
+                        
                     
                 }, errorHandler: { (error) in
                     NSLog("Error sending message: %@", error)
@@ -111,9 +110,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 }
             )
         }
+        self.updateView()
     }
     
     func updateView() {
+        
         consumedLabel.setText(String(format:"%0.f", consumed))
         goalLabel.setText(String(format:"%0.f", goal))
         
@@ -143,4 +144,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             })
         }
     }
+    
+    
 }
