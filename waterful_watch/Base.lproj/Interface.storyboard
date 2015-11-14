@@ -58,7 +58,7 @@
                                     <action selector="undoPressed" destination="AgC-eL-Hgc" id="K1q-kf-bpc"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="refresh" icon="repeat" id="XTh-Uw-XZb">
+                            <menuItem title="refresh" icon="resume" id="XTh-Uw-XZb">
                                 <connections>
                                     <action selector="refreshPressed" destination="AgC-eL-Hgc" id="kIx-E7-tfO"/>
                                 </connections>
