@@ -134,10 +134,10 @@ class ViewController: UIViewController, WCSessionDelegate {
             // press OK in subview -> !!!! END BLUR !!!!!
         }
 
-        button1.setTitle(String(format: "%0.1f", (setting_info.sipVolume?.doubleValue)!), forState: .Normal)
-        button2.setTitle(String(format: "%0.1f", (setting_info.cupVolume?.doubleValue)!), forState: .Normal)
-        button3.setTitle(String(format: "%0.1f", (setting_info.mugVolume?.doubleValue)!), forState: .Normal)
-        button4.setTitle(String(format: "%0.1f", (setting_info.bottleVolume?.doubleValue)!), forState: .Normal)
+        button1.setTitle(String(format: "%0.0f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button2.setTitle(String(format: "%0.0f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button3.setTitle(String(format: "%0.0f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button4.setTitle(String(format: "%0.0f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
 
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -547,8 +547,14 @@ extension ViewController{
             replyHandler(["consumed": fetchWater()])
         case "fetchStatus" :
             let consumed = fetchWater()
-            let goal = fetchSetting().goal
-            replyHandler(["consumed" : consumed, "goal": goal!])
+            let setting_info = fetchSetting()
+            let goal = setting_info.goal
+            
+            let sipVolume = setting_info.sipVolume
+            let cupVolume = setting_info.cupVolume?.doubleValue
+            let mugVolume = setting_info.mugVolume?.doubleValue
+            let bottleVolume = setting_info.bottleVolume?.doubleValue
+            replyHandler(["consumed" : consumed, "goal": goal!, "sipVolume" : sipVolume!, "cupVolume" : cupVolume!, "mugVolume" : mugVolume!, "bottleVolume" : bottleVolume!])
         default:
             break
         }
