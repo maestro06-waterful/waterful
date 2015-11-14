@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Foundation
+import HealthKit
 
 class WaterLogViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
@@ -45,7 +46,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let date = Array(waterLogs.keys)[indexPath.section]
-            removeItem(waterLogs![date]![indexPath.row])
+            removeItem(date, rowIndex: indexPath.row)
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             waterLogs = getWaterLogs()
             waterLogTableView.reloadData()
@@ -179,15 +180,84 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
-    func removeItem(item : WaterLog){
-        managedObjectContext.deleteObject(item)
+    func removeItem(date: String, rowIndex: Int) {
+        managedObjectContext.deleteObject(self.waterLogs[date]![rowIndex])
         do {
             try managedObjectContext.save()
         } catch {
             // Do something in response to error condition
         }
+        self.requestDeletingHKWaterSample(rowIndex)
     }
 
+}
+
+extension WaterLogViewController {
+    
+    // Requests HealthKit authorization for deleting HKSample object with specified index.
+    func requestDeletingHKWaterSample(index: Int) {
+        
+        let dataTypes = Set(arrayLiteral: HealthManager.sharedInstance.waterType!)
+        
+        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(dataTypes,
+            readTypes: dataTypes,
+            completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.deleteHKWaterSample(index)
+                } else {
+                    print("requestDeletingHKWaterSample() failed.")
+                }
+            }
+        )
+    }
+
+    // Deletes the HK Sample object with specified index.
+    func deleteHKWaterSample(index: Int) {
+        
+        // Sort the query in descending order.
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
+        // HKSample query which gets the last saved HKQuantitySample object meaning drinking water.
+        let sampleQuery = HKSampleQuery(sampleType: HealthManager.sharedInstance.waterType!,
+            predicate: nil,
+            limit: 0,
+            sortDescriptors: [sortDescriptor],
+            resultsHandler: {
+                (query, results, error) -> Void in
+                
+                if error != nil{
+                    print("error: \(error?.localizedDescription)")
+                    return
+                }
+                
+                // If there's some query results,
+                if let queryResults = results {
+                    // Delete the last saved sample object.
+                    HealthManager.sharedInstance.healthKitStore.deleteObject(queryResults[index]) {
+                        (success, error) -> Void in
+                        
+                        if error != nil {
+                            print("error: \(error?.localizedDescription)")
+                            return
+                        }
+                        
+                        if success {
+                            print("water sample deleted successfully.")
+                        } else {
+                            print("water sample deleted not successfully.")
+                            print("error: \(error?.localizedDescription)")
+                        }
+                    }
+                } else {
+                    print("There's no HK Sample query results about drinking water")
+                }
+            }
+        )
+        
+        // Execute the sample query
+        HealthManager.sharedInstance.healthKitStore.executeQuery(sampleQuery)
+    }
 }
 
 class WaterLogTableCell : UITableViewCell {
