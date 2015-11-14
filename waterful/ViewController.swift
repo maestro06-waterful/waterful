@@ -72,6 +72,10 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Setting up informatinos about water
         updateSetting()
         updateWater()
+        button1.setTitle(String(format: "%0.0f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button2.setTitle(String(format: "%0.0f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button3.setTitle(String(format: "%0.0f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button4.setTitle(String(format: "%0.0f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -133,11 +137,6 @@ class ViewController: UIViewController, WCSessionDelegate {
             // !!!!!!!! SUBVIEW !!!!!!!!!!
             // press OK in subview -> !!!! END BLUR !!!!!
         }
-
-        button1.setTitle(String(format: "%0.0f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button2.setTitle(String(format: "%0.0f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button3.setTitle(String(format: "%0.0f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button4.setTitle(String(format: "%0.0f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
 
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

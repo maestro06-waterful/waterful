@@ -13,7 +13,6 @@ import HealthKit
 
 class SettingTableViewController: UITableViewController{
 
-    @IBOutlet weak var fromUIView: UIView!
     @IBOutlet weak var sipLabel: UITextField!
     @IBOutlet weak var cupLabel: UITextField!
     @IBOutlet weak var mugLabel: UITextField!
@@ -21,17 +20,22 @@ class SettingTableViewController: UITableViewController{
     @IBOutlet weak var goalLabel: UITextField!
     @IBOutlet weak var unitText: UILabel!
     
+    @IBAction func userdone(sender: AnyObject) {
+        print("done")
+        saveSetting()
+    }
+    
     var sipVolume : Double = Double()
     var cupVolume : Double = Double()
     var mugVolume : Double = Double()
     var bottleVolume : Double = Double()
+    var setting_info : Setting!
 
     override func viewWillAppear(animated: Bool) {
-
     }
     
     override func viewDidLoad() {
-        let setting_info : Setting = fetchSetting()
+        setting_info = fetchSetting()
         
         unitText.text = setting_info.unit?.description
         sipVolume = (setting_info.sipVolume?.doubleValue)!
@@ -44,6 +48,8 @@ class SettingTableViewController: UITableViewController{
         mugLabel.text = String(format:"%0.1f",(setting_info.mugVolume?.doubleValue)!)
         bottleLabel.text = String(format:"%0.1f",(setting_info.bottleVolume?.doubleValue)!)
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         
         self.requestHealthKitAuthorization()
         super.viewDidLoad()
@@ -70,6 +76,30 @@ class SettingTableViewController: UITableViewController{
         else{
             return fetchResults![0]
         }
+    }
+    
+    func saveSetting() {
+        setting_info.sipVolume = Double(sipLabel.text!)
+        setting_info.cupVolume = Double(cupLabel.text!)
+        setting_info.mugVolume = Double(mugLabel.text!)
+        setting_info.bottleVolume = Double(bottleLabel.text!)
+        setting_info.goal = Double(goalLabel.text!)
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        do {
+            // save the managet object context
+            try managedObjectContext.save()
+            
+        } catch {
+            print("Unresolved error")
+            abort()
+        }
+        navigationController?.popToRootViewControllerAnimated(true)
+        
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }
 
