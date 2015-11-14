@@ -27,12 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         app.scheduleLocalNotification(alarm)
     }
 
+    // Creates shortcut items to provide multiple entries to launching the app.
     func createShortCutItems() {
 
         // shortcut items (entry paths) to launching the app.
-        let item1 = UIMutableApplicationShortcutItem(type: "com.waterful.shortcuts.dynamic.drink", localizedTitle: "Drink in the latest cup size")
-        let item2 = UIMutableApplicationShortcutItem(type: "com.waterful.shortcuts.static.history", localizedTitle: "View History")
-        let item3 = UIMutableApplicationShortcutItem(type: "com.waterful.shortcuts.static.record", localizedTitle: "Record drinking water")
+        let item1 = UIMutableApplicationShortcutItem(type: "waterful.shortcuts.dynamic.drink", localizedTitle: "Drink in the latest cup size")
+        let item2 = UIMutableApplicationShortcutItem(type: "waterful.shortcuts.static.history", localizedTitle: "View History")
+        let item3 = UIMutableApplicationShortcutItem(type: "waterful.shortcuts.static.record", localizedTitle: "Record drinking water")
 
         let shortCutItems = [UIApplicationShortcutItem](arrayLiteral: item1, item2, item3)
 
@@ -41,7 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        // Provides multiple entries to the app.
         self.createShortCutItems()
+
+        // Check whether app is launched from a short cut or not.
+        if let currentShortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+            self.performShortcutAction(currentShortcutItem)
+        }
 
         // Override point for customization after application launch.
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
@@ -61,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
+
         // notification setting
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound]
             , categories: nil)
@@ -70,8 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
-
         
         if identifier == NotiManager.notiActionIdentifier.WaterLog1.rawValue {
             // Showing reminder details in an alertview
@@ -183,5 +190,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+}
+
+typealias ExtensionShortCutItems = AppDelegate
+extension ExtensionShortCutItems {
+
+    // short cut action types
+    enum shortcutActionType: String {
+        case MainView   = "waterful.shortcuts.static.record"
+        case LogView    = "waterful.shortcuts.static.histroy"
+        case DrinkFast  = "waterful.shortcuts.dynamic.drink"
+    }
+
+    // shortcut action handler for selected shortcut item.
+    func performShortcutAction(item: UIApplicationShortcutItem) -> Bool {
+        var isHandled = false
+
+        if let shortcutItemType = shortcutActionType.init(rawValue: item.type) {
+
+            switch shortcutItemType {
+            case .MainView:
+                isHandled = true
+            case .LogView:
+                isHandled = true
+            case .DrinkFast:
+                isHandled = true
+            }
+        }
+        return isHandled
+    }
+
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        // perform action for shortcut item selected
+        let resultHandlingShortcut = performShortcutAction(shortcutItem)
+        completionHandler(resultHandlingShortcut)
     }
 }

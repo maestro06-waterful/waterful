@@ -771,7 +771,7 @@
         <!--Navigation Controller-->
         <scene sceneID="AZs-fS-Trk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mgT-L2-hci" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigator" automaticallyAdjustsScrollViewInsets="NO" id="mgT-L2-hci" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gLR-Y0-X6b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
