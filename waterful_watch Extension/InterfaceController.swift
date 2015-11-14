@@ -53,6 +53,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     override func didAppear() {
         getStatus()
+        getContainer()
         updateView()
 
     }
@@ -107,6 +108,30 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 let res = response
                 self.consumed = res["consumed"] as! Double
                 self.goal = res["goal"] as! Double
+                self.updateView()
+                
+                }, errorHandler: { error in
+                    print("error: \(error)")
+            })
+        }
+        
+    }
+    
+    func getContainer() {
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
+        
+        if WCSession.defaultSession().reachable == true {
+            
+            let request :[ String : AnyObject ] = ["command" : "fetchContainer"]
+            let session = WCSession.defaultSession()
+            
+            session.sendMessage(request, replyHandler: { response in
+                
+                let res = response
                 self.sipVolume = res["sipVolume"] as! Double
                 self.cupVolume = res["cupVolume"] as! Double
                 self.mugVolume = res["mugVolume"] as! Double
@@ -151,10 +176,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         consumedLabel.setText(String(format:"%0.f", consumed))
         goalLabel.setText(String(format:"%0.f", goal))
         
-        button1.setTitle(String(format:"%0.1f", sipVolume) + "ml")
-        button2.setTitle(String(format:"%0.1f", cupVolume) + "ml")
-        button3.setTitle(String(format:"%0.1f", mugVolume) + "ml")
-        button4.setTitle(String(format:"%0.1f", bottleVolume) + "ml")
+        button1.setTitle(String(format:"%0.0f", sipVolume) + "ml")
+        button2.setTitle(String(format:"%0.0f", cupVolume) + "ml")
+        button3.setTitle(String(format:"%0.0f", mugVolume) + "ml")
+        button4.setTitle(String(format:"%0.0f", bottleVolume) + "ml")
         
             
     }

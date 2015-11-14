@@ -82,11 +82,7 @@ class GlanceInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func updateView() {
         consumedLabel.setText(String(format:"%0.f", consumed))
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = NSTextAlignment.Right
-        let attributedDictonary = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSParagraphStyleAttributeName:paragraphStyle]
-        let attributeString = NSAttributedString(string: "/ " + String(format:"%0.f", goal), attributes: attributedDictonary)
-        goalLabel.setAttributedText(attributeString)
+        goalLabel.setText("/ " + String(format:"%0.f", goal))
     }
     
     func undoLastWaterLog() {

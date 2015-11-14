@@ -535,34 +535,32 @@ extension ViewController{
         
         //Use this to update the UI instantaneously (otherwise, takes a little while)
         dispatch_async(dispatch_get_main_queue()) {
-            self.saveWaterLog( container )
+            self.saveWaterLog(container)
         }
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        var response : [String : AnyObject] = [String : AnyObject]()
         
         switch message["command"] as! String {
             
         case "undo" :
             undoLastWaterLog()
-            response["consumed"] = fetchWater()
-            
+            replyHandler(["consumed": fetchWater()])
         case "fetchStatus" :
-            print("response in iphone")
-            response["consumed"] = fetchWater()
-            response["goal"] = setting_info.goal
-            response["sipVolume"] = setting_info.sipVolume?.doubleValue
-            response["cupVolume"] = setting_info.cupVolume?.doubleValue
-            response["mugVolume"] = setting_info.mugVolume?.doubleValue
-            response["bottleVolume"] = setting_info.bottleVolume?.doubleValue
-            print(response)
+            let consumed = fetchWater()
+            let goal = fetchSetting().goal
+            replyHandler(["consumed" : consumed, "goal": goal!])
+        case "fetchContainer" :
+            let setting = fetchSetting()
+            let sip = setting.sipVolume
+            let cup = setting.cupVolume
+            let mug = setting.mugVolume
+            let bottle = setting.bottleVolume
+            replyHandler(["sipVolume" : sip!, "cupVolume": cup!, "mugVolume" : mug!, "bottleVolume" : bottle!])
             
         default:
             break
         }
-        
-        replyHandler(response)
         
     }
     
