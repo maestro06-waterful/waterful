@@ -252,7 +252,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     // update text regards of settings
     func updateSetting() {
         setting_info = fetchSetting()
-        goal.text = setting_info.goal?.description
+        goal.text = String(format:"%0.f", (setting_info.goal?.doubleValue)!)
         goalUnit.text = setting_info.unit?.description
         consumedUnit.text = setting_info.unit?.description
     }
@@ -275,7 +275,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             
             if waterLeft > 0 {
                 unitLeft.text = "* " + (String(format: "%.1f", waterLeft / lastWaterLog.amount!.doubleValue)) + " left."
-                amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
+                amountLeft.text = "(" + String(format: "%.1f", waterLeft) + String(setting_info.unit!) + ")"
             }
             else {
                 unitLeft.text = nil
