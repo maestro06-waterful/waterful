@@ -28,6 +28,9 @@ class GlanceInterfaceController: WKInterfaceController, WCSessionDelegate {
         session?.activateSession()
     }
     
+    override func didAppear() {
+
+    }
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -37,7 +40,6 @@ class GlanceInterfaceController: WKInterfaceController, WCSessionDelegate {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         getStatus()
-
         super.willActivate()
     }
     
@@ -64,6 +66,7 @@ class GlanceInterfaceController: WKInterfaceController, WCSessionDelegate {
                     let res = response
                     self.consumed = res["consumed"] as! Double
                     self.goal = res["goal"] as! Double
+                    
                     self.updateView()
                     
                 }, errorHandler: { (error) in
