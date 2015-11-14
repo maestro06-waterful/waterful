@@ -72,6 +72,10 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Setting up informatinos about water
         updateSetting()
         updateWater()
+        button1.setTitle(String(format: "%0.0f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button2.setTitle(String(format: "%0.0f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button3.setTitle(String(format: "%0.0f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        button4.setTitle(String(format: "%0.0f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -133,11 +137,6 @@ class ViewController: UIViewController, WCSessionDelegate {
             // !!!!!!!! SUBVIEW !!!!!!!!!!
             // press OK in subview -> !!!! END BLUR !!!!!
         }
-
-        button1.setTitle(String(format: "%0.1f", (setting_info.sipVolume?.doubleValue)!), forState: .Normal)
-        button2.setTitle(String(format: "%0.1f", (setting_info.cupVolume?.doubleValue)!), forState: .Normal)
-        button3.setTitle(String(format: "%0.1f", (setting_info.mugVolume?.doubleValue)!), forState: .Normal)
-        button4.setTitle(String(format: "%0.1f", (setting_info.bottleVolume?.doubleValue)!), forState: .Normal)
 
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -540,18 +539,27 @@ extension ViewController{
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        var response : [String : AnyObject] = [String : AnyObject]()
         
         switch message["command"] as! String {
         case "undo" :
             undoLastWaterLog()
-            replyHandler(["consumed": fetchWater()])
+            response["consumed"] = fetchWater()
+            
         case "fetchStatus" :
-            let consumed = fetchWater()
-            let goal = fetchSetting().goal
-            replyHandler(["consumed" : consumed, "goal": goal!])
+            print("response in iphone")
+            response["consumed"] = fetchWater()
+            response["goal"] = setting_info.goal
+            response["sipVolume"] = setting_info.sipVolume?.doubleValue
+            response["cupVolume"] = setting_info.cupVolume?.doubleValue
+            response["mugVolume"] = setting_info.mugVolume?.doubleValue
+            response["bottleVolume"] = setting_info.bottleVolume?.doubleValue
+            print(response)
         default:
             break
         }
+        
+        replyHandler(response)
         
     }
     
