@@ -540,24 +540,27 @@ extension ViewController{
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        var response : [String : AnyObject] = [String : AnyObject]()
         
         switch message["command"] as! String {
         case "undo" :
             undoLastWaterLog()
-            replyHandler(["consumed": fetchWater()])
-        case "fetchStatus" :
-            let consumed = fetchWater()
-            let setting_info = fetchSetting()
-            let goal = setting_info.goal
+            response["consumed"] = fetchWater()
             
-            let sipVolume = setting_info.sipVolume
-            let cupVolume = setting_info.cupVolume?.doubleValue
-            let mugVolume = setting_info.mugVolume?.doubleValue
-            let bottleVolume = setting_info.bottleVolume?.doubleValue
-            replyHandler(["consumed" : consumed, "goal": goal!, "sipVolume" : sipVolume!, "cupVolume" : cupVolume!, "mugVolume" : mugVolume!, "bottleVolume" : bottleVolume!])
+        case "fetchStatus" :
+            print("response in iphone")
+            response["consumed"] = fetchWater()
+            response["goal"] = setting_info.goal
+            response["sipVolume"] = setting_info.sipVolume?.doubleValue
+            response["cupVolume"] = setting_info.cupVolume?.doubleValue
+            response["mugVolume"] = setting_info.mugVolume?.doubleValue
+            response["bottleVolume"] = setting_info.bottleVolume?.doubleValue
+            print(response)
         default:
             break
         }
+        
+        replyHandler(response)
         
     }
     

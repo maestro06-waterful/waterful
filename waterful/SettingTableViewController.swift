@@ -14,11 +14,17 @@ import HealthKit
 class SettingTableViewController: UITableViewController{
 
     @IBOutlet weak var fromUIView: UIView!
-    @IBOutlet weak var fromText: UILabel!
-    @IBOutlet weak var toText: UILabel!
-    @IBOutlet weak var intervalText: UILabel!
-    @IBOutlet weak var goalText: UILabel!
+    @IBOutlet weak var sipLabel: UITextField!
+    @IBOutlet weak var cupLabel: UITextField!
+    @IBOutlet weak var mugLabel: UITextField!
+    @IBOutlet weak var bottleLabel: UITextField!
+    @IBOutlet weak var goalLabel: UITextField!
     @IBOutlet weak var unitText: UILabel!
+    
+    var sipVolume : Double = Double()
+    var cupVolume : Double = Double()
+    var mugVolume : Double = Double()
+    var bottleVolume : Double = Double()
 
     override func viewWillAppear(animated: Bool) {
 
@@ -26,11 +32,18 @@ class SettingTableViewController: UITableViewController{
     
     override func viewDidLoad() {
         let setting_info : Setting = fetchSetting()
-        fromText.text = setting_info.alarmStartTime?.description
-        toText.text = setting_info.alarmEndTime?.description
-        intervalText.text = setting_info.alarmInterval?.description
-        goalText.text = setting_info.goal?.description
+        
         unitText.text = setting_info.unit?.description
+        sipVolume = (setting_info.sipVolume?.doubleValue)!
+        cupVolume = (setting_info.cupVolume?.doubleValue)!
+        mugVolume = (setting_info.mugVolume?.doubleValue)!
+        bottleVolume = (setting_info.bottleVolume?.doubleValue)!
+        goalLabel.text = String(format:"%0.1f",(setting_info.goal?.doubleValue)!)
+        sipLabel.text = String(format:"%0.1f",(setting_info.sipVolume?.doubleValue)!)
+        cupLabel.text = String(format:"%0.1f",(setting_info.cupVolume?.doubleValue)!)
+        mugLabel.text = String(format:"%0.1f",(setting_info.mugVolume?.doubleValue)!)
+        bottleLabel.text = String(format:"%0.1f",(setting_info.bottleVolume?.doubleValue)!)
+        
         
         self.requestHealthKitAuthorization()
         super.viewDidLoad()
@@ -104,7 +117,7 @@ extension SettingTableViewController {
                     print("waterGoal: \(waterGoal)")
 
                     self.updateCoreDataGoal(waterGoal)
-                    self.goalText.text = String(format: "%.1f", waterGoal)
+                    self.goalLabel.text = String(format: "%.1f", waterGoal)
                 } else {
                     print("There are no query results.")
                     return
@@ -128,4 +141,5 @@ extension SettingTableViewController {
             }
         }
     }
+    
 }

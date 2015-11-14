@@ -94,13 +94,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         if WCSession.defaultSession().reachable == true{
             session?.sendMessage(["command" : "fetchStatus"],
                 replyHandler: { (response) in
-                    let res = response
-                    self.consumed = res["consumed"] as! Double
-                    self.goal = res["goal"] as! Double
-                    self.sipVolume = res["sipVolume"] as! Double
-                    self.cupVolume = res["cupVolume"] as! Double
-                    self.mugVolume = res["mugVolume"] as! Double
-                    self.bottleVolume = res["bottleVolume"] as! Double
+                    print("response in watch")
+                    print(response)
+                    self.consumed = response["consumed"] as! Double
+                    self.goal = response["goal"] as! Double
+                    self.sipVolume = response["sipVolume"] as! Double
+                    self.cupVolume = response["cupVolume"] as! Double
+                    self.mugVolume = response["mugVolume"] as! Double
+                    self.bottleVolume = response["bottleVolume"] as! Double
+                    
                     self.updateView()
                     
                 }, errorHandler: { (error) in
