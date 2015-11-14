@@ -43,24 +43,25 @@ class ViewController: UIViewController, WCSessionDelegate {
     
     @IBAction func shortcutPressed(sender: AnyObject) {
         if let lastWaterLog = getLastWaterLog() {
-            saveWaterLog(Double(lastWaterLog.amount!))
+            saveWaterLog(lastWaterLog.container!)
+            
         }
     }
 
     @IBAction func button1Pressed(sender: AnyObject) {
-        saveWaterLog(40)
+        saveWaterLog("sip")
     }
     
     @IBAction func button2Pressed(sender: AnyObject) {
-        saveWaterLog(120)
+        saveWaterLog("cup")
     }
     
     @IBAction func button3Pressed(sender: AnyObject) {
-        saveWaterLog(400)
+        saveWaterLog("mug")
     }
     
     @IBAction func button4Pressed(sender: AnyObject) {
-        saveWaterLog(500)
+        saveWaterLog("bottle")
     }
     
     @IBAction func undoPressed(sender: AnyObject) {
@@ -133,11 +134,16 @@ class ViewController: UIViewController, WCSessionDelegate {
             // press OK in subview -> !!!! END BLUR !!!!!
         }
 
-        
+        button1.setTitle(String(format: "%0.1f", (setting_info.sipVolume?.doubleValue)!), forState: .Normal)
+        button2.setTitle(String(format: "%0.1f", (setting_info.cupVolume?.doubleValue)!), forState: .Normal)
+        button3.setTitle(String(format: "%0.1f", (setting_info.mugVolume?.doubleValue)!), forState: .Normal)
+        button4.setTitle(String(format: "%0.1f", (setting_info.bottleVolume?.doubleValue)!), forState: .Normal)
+
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -182,6 +188,10 @@ class ViewController: UIViewController, WCSessionDelegate {
         setting_info.alarmStartTime = 9
         setting_info.alarmInterval = 3
         setting_info.unit = HKUnit(fromString: "mL")
+        setting_info.sipVolume = 40
+        setting_info.cupVolume = 120
+        setting_info.mugVolume = 350
+        setting_info.bottleVolume = 500
         
         do {
             try managedObjectContext.save()
@@ -221,8 +231,9 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
 
     // store amount of water user consumed
-    func saveWaterLog(amount : Double){
-
+    func saveWaterLog(container : String){
+        let amount = getVolume(container)
+        
         let unitML: HKUnit = HKUnit(fromString: "mL")
         let currentUnit: HKUnit = self.currentUnit()
         
@@ -234,6 +245,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
         waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
         waterLog.loggedTime = NSDate()
+        waterLog.container = container
         
         do {
             // save the managet object context
@@ -269,7 +281,7 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         // show image of last unit.
         if lastWaterLog != nil {
-            let lastUnitImage = UIImage(named: (String(format: "%.0f", lastWaterLog.amount!.doubleValue)) + String(setting_info.unit!))
+            let lastUnitImage = UIImage(named: lastWaterLog.container!)
             shortcut.setBackgroundImage(lastUnitImage, forState: .Normal)
             // show how much drinks you have to drink with the unit.
             
@@ -373,6 +385,25 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
+    func getVolume(container : String) -> Double {
+        if container == "sip" {
+            return (setting_info.sipVolume?.doubleValue)!
+        }
+        else if container == "cup" {
+            return (setting_info.cupVolume?.doubleValue)!
+        }
+            
+        else if container == "mug" {
+            return (setting_info.mugVolume?.doubleValue)!
+        }
+        else if container == "bottle" {
+            return (setting_info.bottleVolume?.doubleValue)!
+        }
+        else {
+            return 0
+        }
+        
+    }
     
 }
 
@@ -500,11 +531,11 @@ extension ViewController{
         session?.activateSession()
     }
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        let amount = applicationContext["amount"] as! Double
+        let container = applicationContext["container"] as! String
         
         //Use this to update the UI instantaneously (otherwise, takes a little while)
         dispatch_async(dispatch_get_main_queue()) {
-            self.saveWaterLog(amount)
+            self.saveWaterLog( container )
         }
     }
     

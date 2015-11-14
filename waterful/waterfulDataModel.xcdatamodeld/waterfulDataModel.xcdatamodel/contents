@@ -11,7 +11,11 @@
         <attribute name="alarmEndTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="alarmInterval" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="alarmStartTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="bottleVolume" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="cupVolume" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="goal" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="mugVolume" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sipVolume" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="todayAmount" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
@@ -20,13 +24,14 @@
     </entity>
     <entity name="WaterLog" representedClassName=".WaterLog" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="container" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="loggedTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
         <element name="Plant" positionX="-18" positionY="54" width="128" height="120"/>
-        <element name="Setting" positionX="-54" positionY="0" width="128" height="135"/>
+        <element name="Setting" positionX="-54" positionY="0" width="128" height="195"/>
         <element name="StepDate" positionX="-63" positionY="-18" width="128" height="60"/>
-        <element name="WaterLog" positionX="-36" positionY="45" width="128" height="90"/>
+        <element name="WaterLog" positionX="-36" positionY="45" width="128" height="105"/>
     </elements>
 </model>
