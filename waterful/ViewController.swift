@@ -215,7 +215,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             try managedObjectContext.save()
             
             // save HK Sample object for logging drinking water.
-            self.requesSavingHKWaterSample(amount)
+            HealthManager.sharedInstance.requesSavingHKWaterSample(amount)
         } catch {
             print("Unresolved error")
             abort()
@@ -322,7 +322,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                 // Delete the last object in WaterLog entity.
                 managedObjectContext.deleteObject(todayWaterLogs[endIndex])
                 // Delete last saved HKSample object meaning drinking water.
-                self.requestDeletingLastHKWaterSample()
+                HealthManager.sharedInstance.requestDeletingLastHKWaterSample()
             }
             do {
                 try managedObjectContext.save()
@@ -388,122 +388,6 @@ class ViewController: UIViewController, WCSessionDelegate {
             amount = (setting_info.bottleVolume?.doubleValue)!
         }
         return amount
-    }
-    
-}
-
-extension ViewController {
-
-    // Requests HealthKit authorization for saving HKSample object for logging water.
-    func requesSavingHKWaterSample(amount: Double) {
-
-        // Set the water type to data types to share (write).
-        let dataTypesToShare = Set(arrayLiteral: HealthManager.sharedInstance.waterType!)
-
-        // request the healthkit authorization to share (write) water logs.
-        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(dataTypesToShare,
-            readTypes: nil, completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.saveHKWaterSample(amount)
-                } else {
-                    print("requestAuthForSavingHKWaterObject() failed.")
-                }
-            }
-        )
-    }
-
-    // Saves a HKSample object representing drinking water
-    func saveHKWaterSample(amount: Double) {
-
-        let currentUnit: HKUnit = Setting.getUnit()
-
-        let waterType = HealthManager.sharedInstance.waterType!
-        let waterQuantity = HKQuantity(unit: currentUnit, doubleValue: amount)
-
-        // Creates a water sample (HKQuantitySample object)
-        let waterSample = HKQuantitySample(type: waterType,
-            quantity: waterQuantity,
-            startDate: NSDate(),
-            endDate: NSDate())
-
-        // Saves the water sample into the healthkit store.
-        HealthManager.sharedInstance.healthKitStore.saveObject(waterSample,
-            withCompletion: {
-                (success: Bool, error: NSError?) -> Void in
-                if error != nil {
-                    print("Error saving water sample: \(error?.localizedDescription)")
-                } else {
-                    print("water sample saved successfully.")
-                }
-            }
-        )
-    }
-
-    // Requests HealthKit authorization for deleting last saved HKSample object.
-    func requestDeletingLastHKWaterSample() {
-
-        // Set the water type to data types to share and read
-        let dataTypes = Set(arrayLiteral: HealthManager.sharedInstance.waterType!)
-
-        // request the healthkit authorization to share (write) water logs.
-        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(dataTypes,
-            readTypes: dataTypes, completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.deleteLastHKWaterSample()
-                } else {
-                    print("requestAuthForSavingHKWaterObject() failed.")
-                }
-            }
-        )
-    }
-
-    // Deletes the last saved HK Sample object representing drinking water.
-    func deleteLastHKWaterSample() {
-
-        // Sort the query in descending order.
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-
-        // HKSample query which gets the last saved HKQuantitySample object meaning drinking water.
-        let sampleQuery = HKSampleQuery(sampleType: HealthManager.sharedInstance.waterType!,
-            predicate: nil,
-            limit: 1,
-            sortDescriptors: [sortDescriptor],
-            resultsHandler: {
-                (query, results, error) -> Void in
-
-                if error != nil{
-                    print("error: \(error?.localizedDescription)")
-                    return
-                }
-
-                // If there's some query results,
-                if let queryResults = results {
-                    // Delete the last saved sample object.
-                    HealthManager.sharedInstance.healthKitStore.deleteObject(queryResults[0]) {
-                        (success, error) -> Void in
-
-                        if error != nil {
-                            print("error: \(error?.localizedDescription)")
-                            return
-                        }
-
-                        if success {
-                            print("water sample deleted successfully.")
-                        } else {
-                            print("water sample deleted not successfully.")
-                            print("error: \(error?.localizedDescription)")
-                        }
-                    }
-                } else {
-                    print("There's no HK Sample query results about drinking water")
-                }
-            }
-        )
-        
-        // Execute the sample query
-        HealthManager.sharedInstance.healthKitStore.executeQuery(sampleQuery)
     }
     
 }
