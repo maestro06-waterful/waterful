@@ -72,10 +72,19 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Setting up informatinos about water
         updateSetting()
         updateWater()
-        button1.setTitle(String(format: "%0.0f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button2.setTitle(String(format: "%0.0f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button3.setTitle(String(format: "%0.0f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button4.setTitle(String(format: "%0.0f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        if setting_info.unit == HKUnit(fromString: "mL"){
+            button1.setTitle(String(format: "%0.1f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+            button2.setTitle(String(format: "%0.1f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+            button3.setTitle(String(format: "%0.1f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+            button4.setTitle(String(format: "%0.1f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        }
+        else if setting_info.unit == HKUnit(fromString: "oz"){
+            button1.setTitle(String(format: "%0.1f", (setting_info.sipVolume?.doubleValue.ml_to_oz)!) + (setting_info.unit?.description)!, forState: .Normal)
+            button2.setTitle(String(format: "%0.1f", (setting_info.cupVolume?.doubleValue.ml_to_oz)!) + (setting_info.unit?.description)!, forState: .Normal)
+            button3.setTitle(String(format: "%0.1f", (setting_info.mugVolume?.doubleValue.ml_to_oz)!) + (setting_info.unit?.description)!, forState: .Normal)
+            button4.setTitle(String(format: "%0.1f", (setting_info.bottleVolume?.doubleValue.ml_to_oz)!) + (setting_info.unit?.description)!, forState: .Normal)
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -242,7 +251,8 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         waterLog.unit = currentUnit
         // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
-        waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
+        //waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
+        waterLog.amount = amount
         waterLog.loggedTime = NSDate()
         waterLog.container = container
         
@@ -263,20 +273,36 @@ class ViewController: UIViewController, WCSessionDelegate {
     // update text regards of settings
     func updateSetting() {
         setting_info = fetchSetting()
-        goal.text = String(format:"%0.f", (setting_info.goal?.doubleValue)!)
+        if setting_info.unit == HKUnit(fromString: "mL"){
+            goal.text = String(format:"%0.f", (setting_info.goal?.doubleValue)!)
+        }
+        else if setting_info.unit == HKUnit(fromString: "oz"){
+            goal.text = String(format:"%0.f", (setting_info.goal?.doubleValue)!.ml_to_oz)
+        }
+        
         goalUnit.text = setting_info.unit?.description
         consumedUnit.text = setting_info.unit?.description
     }
 
     // update text of consumed water
     func updateWater() {
-
-        let consumedWater = fetchWater()
+        var consumedWater = fetchWater() as Double
+        var goalWater = setting_info.goal?.doubleValue
+        if setting_info.unit == HKUnit(fromString: "oz") {
+            consumedWater = consumedWater.ml_to_oz
+            goalWater = goalWater?.ml_to_oz
+        }
+        
         consumed.text = String(format:"%.0f", consumedWater)
         
-        let progressPercentage = consumedWater / Double(setting_info.goal!)
+        let progressPercentage = consumedWater / goalWater!
         let lastWaterLog : WaterLog! = self.getLastWaterLog()
-        let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
+        let waterLeft : Double = goalWater! - consumedWater
+        var lastContainerVolume = getContainerSize(lastWaterLog.container!)
+        if setting_info.unit == HKUnit(fromString: "oz") {
+            lastContainerVolume = lastContainerVolume.ml_to_oz
+        }
+        
 
         // show image of last unit.
         if lastWaterLog != nil {
@@ -285,7 +311,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
-                unitLeft.text = "* " + (String(format: "%.1f", waterLeft / lastWaterLog.amount!.doubleValue)) + " left."
+                unitLeft.text = "* " + (String(format: "%.1f", waterLeft / lastContainerVolume)) + " left."
                 amountLeft.text = "(" + String(format: "%.1f", waterLeft) + String(setting_info.unit!) + ")"
             }
             else {
@@ -296,7 +322,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         else {
             shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
-            amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
+            amountLeft.text = "(" + String(format: "%.1f", waterLeft) + String(setting_info.unit!) + ")"
         }
         
         // cover blue background with white image to show progress status
@@ -403,6 +429,24 @@ class ViewController: UIViewController, WCSessionDelegate {
             return 0
         }
         
+    }
+    
+    func getContainerSize(container : String) -> Double {
+        if container == "sip" {
+            return setting_info.sipVolume!.doubleValue
+        }
+        if container == "cup" {
+            return setting_info.cupVolume!.doubleValue
+        }
+        if container == "mug" {
+            return setting_info.mugVolume!.doubleValue
+        }
+        if container == "bottle" {
+            return setting_info.bottleVolume!.doubleValue
+        }
+        else {
+            return 0
+        }
     }
     
 }

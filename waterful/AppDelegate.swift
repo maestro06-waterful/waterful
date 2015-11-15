@@ -253,4 +253,12 @@ extension ExtensionShortCutItems {
         self.window?.rootViewController = controller
         self.window?.makeKeyAndVisible()
     }
+    
+    
+}
+
+
+extension Double {
+    var ml_to_oz : Double { return self * 0.033814 } // from ml to oz
+    var oz_to_ml : Double { return self / 0.033814 } // from oz to ml
 }
