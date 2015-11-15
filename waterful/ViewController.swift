@@ -145,10 +145,10 @@ class ViewController: UIViewController, WCSessionDelegate {
             button.backgroundColor = themeColor
         }
 
-        setting_info = fetchSetting()
+        setting_info = Setting.getSetting()
         // first time user.
         if (setting_info == nil){
-            setting_info = setSetting()
+            setting_info = Setting.initialSetting()
             
 
             // !!!!!!!! SUBVIEW !!!!!!!!!!
@@ -195,62 +195,12 @@ class ViewController: UIViewController, WCSessionDelegate {
         return consumed
     }
     
-    // set settings, if there is no.
-    func setSetting() -> Setting {
-        
-        let setting_info = NSEntityDescription.insertNewObjectForEntityForName("Setting",
-            inManagedObjectContext: managedObjectContext) as! Setting
-        
-        setting_info.goal = Double(1500)
-        setting_info.alarmEndTime = 23
-        setting_info.alarmStartTime = 9
-        setting_info.alarmInterval = 3
-        setting_info.unit = HKUnit(fromString: "mL")
-        setting_info.sipVolume = 40
-        setting_info.cupVolume = 120
-        setting_info.mugVolume = 350
-        setting_info.bottleVolume = 500
-        
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print("Unresolved error")
-            abort()
-        }
-        
-        return setting_info
-    }
-
-    // fetch settings from
-    func fetchSetting() -> Setting! {
-        
-        let fetchRequest = NSFetchRequest(entityName: "Setting")
-        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [Setting]
-
-        if (fetchResults!.count == 0){
-            return nil
-        } else {
-            return fetchResults![0]
-        }
-    }
-    
-    // Returns the unit attribute in Setting entity in core data framework.
-    func currentUnit() -> HKUnit {
-
-        let unitML: HKUnit = HKUnit(fromString: "mL")
-
-        if setting_info != nil {
-            return setting_info.valueForKey("unit") as! HKUnit
-        }
-        
-        // If there's no setting entity,
-        // return milli litter unit as the global-standard unit.
-        return unitML
-    }
-
     // store amount of water user consumed in datacore(ml)
     func saveWaterLog(container : String){
         let amount = getVolume(container)
+        
+        let unitML: HKUnit = HKUnit(fromString: "mL")
+        let currentUnit: HKUnit = Setting.getUnit()
         
         // insert new object into core data framework.
         let waterLog = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
@@ -276,7 +226,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     
     // update text regards of settings
     func updateSetting() {
-        setting_info = fetchSetting()
+        setting_info = Setting.getSetting()
         if setting_info.unit == HKUnit(fromString: "mL"){
             goal.text = setting_info.goal?.doubleValue.toString
         }
@@ -466,7 +416,7 @@ extension ViewController {
     // Saves a HKSample object representing drinking water
     func saveHKWaterSample(amount: Double) {
 
-        let currentUnit: HKUnit = self.currentUnit()
+        let currentUnit: HKUnit = Setting.getUnit()
 
         let waterType = HealthManager.sharedInstance.waterType!
         let waterQuantity = HKQuantity(unit: currentUnit, doubleValue: amount)
@@ -576,6 +526,7 @@ extension ViewController{
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         
+        let currentSetting = Setting.getSetting()
         switch message["command"] as! String {
             
         case "undo" :
@@ -584,23 +535,23 @@ extension ViewController{
             
         case "fetchStatus" :
             
-            let setting = fetchSetting()
+            let setting = Setting.getSetting()
             var consumed : Double = Double()
             var goal : Double = Double()
             
-            if setting.unit == HKUnit(fromString: "mL"){
+            if setting!.unit == HKUnit(fromString: "mL"){
                 consumed = fetchWater()
-                goal = (setting.goal?.doubleValue)!
+                goal = (setting!.goal?.doubleValue)!
             }
             else {
                 consumed = fetchWater().ml_to_oz
-                goal = (setting.goal?.doubleValue.ml_to_oz)!
+                goal = (setting!.goal?.doubleValue.ml_to_oz)!
             }
             
             replyHandler(["consumed" : consumed, "goal": goal])
             
         case "fetchContainer" :
-            let setting = fetchSetting()
+            let setting = currentSetting!
             let sip = setting.sipVolume
             let cup = setting.cupVolume
             let mug = setting.mugVolume

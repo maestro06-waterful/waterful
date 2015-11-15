@@ -444,7 +444,7 @@
 					};
 					F4B2E8D61BC6CA1700A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = XRUF4YU89Q;
+						DevelopmentTeam = 9TL9TH34MP;
 					};
 				};
 			};
