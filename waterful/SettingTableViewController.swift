@@ -148,45 +148,85 @@ class SettingTableViewController: UITableViewController{
     // if user writes oz volume when user prefers oz, it convers to ml and save it as ml.
     
     @IBAction func sipLabelChanged(sender: AnyObject) {
-        if setting_info.unit == HKUnit(fromString: "mL"){
-            sipVolume = Double(sipLabel.text!)!
+        if Double(sipLabel.text!) != nil{
+            if setting_info.unit == HKUnit(fromString: "mL"){
+                sipVolume = Double(sipLabel.text!)!
+            }
+            else if setting_info.unit == HKUnit(fromString: "oz"){
+                sipVolume = (Double(sipLabel.text!)!.oz_to_ml)
+            }
         }
-        else if setting_info.unit == HKUnit(fromString: "oz"){
-            sipVolume = (Double(sipLabel.text!)!.oz_to_ml)
+        else{
+            let alertController = UIAlertController(title: "invalid", message: "try again", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            updateTexts()
         }
     }
     @IBAction func cupLabelChanged(sender: AnyObject) {
-        if setting_info.unit == HKUnit(fromString: "mL"){
-            cupVolume = Double(cupLabel.text!)!
+        if Double(cupLabel.text!) != nil {
+            if setting_info.unit == HKUnit(fromString: "mL"){
+                cupVolume = Double(cupLabel.text!)!
+            }
+            else if setting_info.unit == HKUnit(fromString: "oz"){
+                cupVolume = (Double(cupLabel.text!)!.oz_to_ml)
+            }
         }
-        else if setting_info.unit == HKUnit(fromString: "oz"){
-            cupVolume = (Double(cupLabel.text!)!.oz_to_ml)
+        else{
+            let alertController = UIAlertController(title: "invalid", message: "try again", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            updateTexts()
         }
     }
     
     @IBAction func mugLabelChanged(sender: AnyObject) {
-        if setting_info.unit == HKUnit(fromString: "mL"){
-            mugVolume = Double(mugLabel.text!)!
+        if Double(mugLabel.text!) != nil {
+            if setting_info.unit == HKUnit(fromString: "mL"){
+                mugVolume = Double(mugLabel.text!)!
+            }
+            else if setting_info.unit == HKUnit(fromString: "oz"){
+                mugVolume = (Double(mugLabel.text!)!.oz_to_ml)
+            }
         }
-        else if setting_info.unit == HKUnit(fromString: "oz"){
-            mugVolume = (Double(mugLabel.text!)!.oz_to_ml)
+        else{
+            let alertController = UIAlertController(title: "invalid", message: "try again", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            updateTexts()
         }
     }
 
     @IBAction func bottleLabelChanged(sender: AnyObject) {
-        if setting_info.unit == HKUnit(fromString: "mL"){
-            bottleVolume = Double(bottleLabel.text!)!
+        if Double(bottleLabel.text!) != nil {
+            if setting_info.unit == HKUnit(fromString: "mL"){
+                bottleVolume = Double(bottleLabel.text!)!
+            }
+            else if setting_info.unit == HKUnit(fromString: "oz"){
+                bottleVolume = (Double(bottleLabel.text!)!.oz_to_ml)
+            }
         }
-        else if setting_info.unit == HKUnit(fromString: "oz"){
-            bottleVolume = (Double(bottleLabel.text!)!.oz_to_ml)
+        else{
+            let alertController = UIAlertController(title: "invalid", message: "try again", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            updateTexts()
         }
     }
     @IBAction func goalLabelChanged(sender: AnyObject) {
-        if setting_info.unit == HKUnit(fromString: "mL"){
-            goalVolume = Double(goalLabel.text!)!
+        if Double(goalLabel.text!) != nil {
+            if setting_info.unit == HKUnit(fromString: "mL"){
+                goalVolume = Double(goalLabel.text!)!
+            }
+            else if setting_info.unit == HKUnit(fromString: "oz"){
+                goalVolume = (Double(goalLabel.text!)!.oz_to_ml)
+            }
         }
-        else if setting_info.unit == HKUnit(fromString: "oz"){
-            goalVolume = (Double(goalLabel.text!)!.oz_to_ml)
+        else{
+            let alertController = UIAlertController(title: "invalid", message: "try again", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            updateTexts()
         }
     }
     

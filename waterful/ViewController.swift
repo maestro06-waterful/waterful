@@ -573,22 +573,36 @@ extension ViewController{
         case "undo" :
             undoLastWaterLog()
             replyHandler(["consumed": fetchWater()])
+            
         case "fetchStatus" :
-            let consumed = fetchWater()
-            let goal = fetchSetting().goal
-            replyHandler(["consumed" : consumed, "goal": goal!])
+            
+            let setting = fetchSetting()
+            var consumed : Double = Double()
+            var goal : Double = Double()
+            
+            if setting.unit == HKUnit(fromString: "mL"){
+                consumed = fetchWater()
+                goal = (setting.goal?.doubleValue)!
+            }
+            else {
+                consumed = fetchWater().ml_to_oz
+                goal = (setting.goal?.doubleValue.ml_to_oz)!
+            }
+            
+            replyHandler(["consumed" : consumed, "goal": goal])
+            
         case "fetchContainer" :
             let setting = fetchSetting()
             let sip = setting.sipVolume
             let cup = setting.cupVolume
             let mug = setting.mugVolume
             let bottle = setting.bottleVolume
-            replyHandler(["sipVolume" : sip!, "cupVolume": cup!, "mugVolume" : mug!, "bottleVolume" : bottle!])
+            let unit = setting.unit?.description
+            replyHandler(["sipVolume" : sip!, "cupVolume": cup!, "mugVolume" : mug!, "bottleVolume" : bottle!, "unit" : unit!])
             
         default:
             break
         }
         
     }
-    
 }

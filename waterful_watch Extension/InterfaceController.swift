@@ -18,10 +18,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var cupVolume : Double = Double()
     var mugVolume : Double = Double()
     var bottleVolume : Double = Double()
+    var unit : String = String()
     
     @IBOutlet var consumedLabel: WKInterfaceLabel!
     @IBOutlet var goalLabel: WKInterfaceLabel!
-
+    
     @IBAction func button1Pressed() {
         sendAmount("sip")
         consumed = consumed + sipVolume
@@ -66,12 +67,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         // Configure interface objects here.
     }
-
+    
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     }
-
+    
     override func didDeactivate() {
         
         // This method is called when watch view controller is no longer visible
@@ -88,7 +89,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         let applicationDict = ["container" : container]
         do {
             try WCSession.defaultSession().updateApplicationContext(applicationDict)
-
+            
         } catch {
             print("error")
         }
@@ -135,10 +136,21 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             session.sendMessage(request, replyHandler: { response in
                 
                 let res = response
-                self.sipVolume = res["sipVolume"] as! Double
-                self.cupVolume = res["cupVolume"] as! Double
-                self.mugVolume = res["mugVolume"] as! Double
-                self.bottleVolume = res["bottleVolume"] as! Double
+                self.unit = res["unit"] as! String
+                if self.unit == "mL" {
+                    self.sipVolume = res["sipVolume"] as! Double
+                    self.cupVolume = res["cupVolume"] as! Double
+                    self.mugVolume = res["mugVolume"] as! Double
+                    self.bottleVolume = res["bottleVolume"] as! Double
+                }
+                    // in watch, if user wants to use "oz", store variable as oz. because watch takes soooo long
+                else if self.unit == "oz" {
+                    self.sipVolume = (res["sipVolume"] as! Double).ml_to_oz
+                    self.cupVolume = (res["cupVolume"] as! Double).ml_to_oz
+                    self.mugVolume = (res["mugVolume"] as! Double).ml_to_oz
+                    self.bottleVolume = (res["bottleVolume"] as! Double).ml_to_oz
+                }
+                
                 self.updateView()
                 
                 }, errorHandler: { error in
@@ -176,13 +188,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func updateView() {
         
-        consumedLabel.setText(String(format:"%0.f", consumed))
-        goalLabel.setText(String(format:"%0.f", goal))
+        consumedLabel.setText(consumed.toString)
+        goalLabel.setText(goal.toString)
         
-        button1.setTitle(String(format:"%0.0f", sipVolume) + "ml")
-        button2.setTitle(String(format:"%0.0f", cupVolume) + "ml")
-        button3.setTitle(String(format:"%0.0f", mugVolume) + "ml")
-        button4.setTitle(String(format:"%0.0f", bottleVolume) + "ml")
+        button1.setTitle(sipVolume.toString + unit)
+        button2.setTitle(cupVolume.toString + unit)
+        button3.setTitle(mugVolume.toString + unit)
+        button4.setTitle(bottleVolume.toString + unit)
         
     }
     
