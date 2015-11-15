@@ -14,8 +14,6 @@
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
 		C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */; };
 		C7BB7FA91BEE0EEC00C4C12F /* WaterPatternPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */; };
-		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
-		C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495261BDCB9B3004FAF45 /* Plant.swift */; };
 		C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */; };
 		C7E495301BDCB9B3004FAF45 /* WaterLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495281BDCB9B3004FAF45 /* WaterLog.swift */; };
 		C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */; };
@@ -111,8 +109,6 @@
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPattern.swift; sourceTree = "<group>"; };
 		C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPatternPredictor.swift; sourceTree = "<group>"; };
-		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C7E495261BDCB9B3004FAF45 /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plant.swift; path = waterful/core_data/Plant.swift; sourceTree = "<group>"; };
 		C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WaterLog+CoreDataProperties.swift"; path = "waterful/core_data/WaterLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C7E495281BDCB9B3004FAF45 /* WaterLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaterLog.swift; path = waterful/core_data/WaterLog.swift; sourceTree = "<group>"; };
 		C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StepDate+CoreDataProperties.swift"; path = "waterful/core_data/StepDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -204,8 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */,
-				C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */,
-				C7E495261BDCB9B3004FAF45 /* Plant.swift */,
 				C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */,
 				C7E495281BDCB9B3004FAF45 /* WaterLog.swift */,
 				C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */,
@@ -530,9 +524,7 @@
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
 				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
-				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
-				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
 				9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,

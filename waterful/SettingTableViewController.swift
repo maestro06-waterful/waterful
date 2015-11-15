@@ -145,6 +145,8 @@ class SettingTableViewController: UITableViewController{
         view.endEditing(true)
     }
     
+    // if user writes oz volume when user prefers oz, it convers to ml and save it as ml.
+    
     @IBAction func sipLabelChanged(sender: AnyObject) {
         if setting_info.unit == HKUnit(fromString: "mL"){
             sipVolume = Double(sipLabel.text!)!

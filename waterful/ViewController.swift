@@ -157,6 +157,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // get date in "2015-05-15" form considering timezone.
     func getDate(date : NSDate) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -165,6 +166,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         return dateString
     }
     
+    // fetch water data
     func fetchWater() -> Double {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
@@ -238,20 +240,14 @@ class ViewController: UIViewController, WCSessionDelegate {
         return unitML
     }
 
-    // store amount of water user consumed
+    // store amount of water user consumed in datacore(ml)
     func saveWaterLog(container : String){
         let amount = getVolume(container)
-        
-        let unitML: HKUnit = HKUnit(fromString: "mL")
-        let currentUnit: HKUnit = self.currentUnit()
         
         // insert new object into core data framework.
         let waterLog = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
             inManagedObjectContext: managedObjectContext) as! WaterLog
 
-        waterLog.unit = currentUnit
-        // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
-        //waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
         waterLog.amount = amount
         waterLog.loggedTime = NSDate()
         waterLog.container = container
@@ -386,7 +382,8 @@ class ViewController: UIViewController, WCSessionDelegate {
         blurView.frame = mainView.bounds
         mainView.addSubview(blurView)
     }
-
+    
+    // draw image of white space to hide blue circle.
     func drawImage(progressPercentage : Double) -> UIImage {
 
         let white_rect = CGRectMake(0, 0, waterImageView.frame.width, waterImageView.frame.height * CGFloat(1-progressPercentage))
@@ -416,6 +413,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
+    // return size(ml) of container.
     func getVolume(container : String) -> Double {
         var amount : Double = Double()
         if container == "sip" {
