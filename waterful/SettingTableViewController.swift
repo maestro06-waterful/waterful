@@ -81,19 +81,20 @@ class SettingTableViewController: UITableViewController{
     
     func updateTexts (){
         if setting_info.unit == HKUnit(fromString: "mL"){
-            goalLabel.text = String(format:"%0.0f", goalVolume)
-            sipLabel.text = String(format:"%0.0f", sipVolume)
-            cupLabel.text = String(format:"%0.0f", cupVolume)
-            mugLabel.text = String(format:"%0.0f", mugVolume )
-            bottleLabel.text = String(format:"%0.0f", bottleVolume)
+            goalLabel.text = goalVolume.toString
+            sipLabel.text = sipVolume.toString
+            cupLabel.text = cupVolume.toString
+            mugLabel.text = mugVolume.toString
+            bottleLabel.text = bottleVolume.toString
         }
         else if setting_info.unit == HKUnit(fromString: "oz"){
-            goalLabel.text = String(format:"%0.0f", goalVolume.ml_to_oz)
-            sipLabel.text = String(format:"%0.0f", sipVolume.ml_to_oz)
-            cupLabel.text = String(format:"%0.0f", cupVolume.ml_to_oz)
-            mugLabel.text = String(format:"%0.0f", mugVolume.ml_to_oz)
-            bottleLabel.text = String(format:"%0.0f", bottleVolume.ml_to_oz)
+            goalLabel.text = goalVolume.ml_to_oz.toString
+            sipLabel.text = sipVolume.ml_to_oz.toString
+            cupLabel.text = cupVolume.ml_to_oz.toString
+            mugLabel.text = mugVolume.ml_to_oz.toString
+            bottleLabel.text = bottleVolume.ml_to_oz.toString
         }
+        
         unitButton.setTitle(setting_info.unit?.description, forState: UIControlState.Normal)
         sipUnitLabel.text = setting_info.unit?.description
         cupUnitLabel.text = setting_info.unit?.description
@@ -233,7 +234,7 @@ extension SettingTableViewController {
                     print("waterGoal: \(waterGoal)")
 
                     self.updateCoreDataGoal(waterGoal)
-                    self.goalLabel.text = String(format: "%.1f", waterGoal)
+                    self.goalLabel.text = waterGoal.toString
                 } else {
                     print("There are no query results.")
                     return

@@ -261,4 +261,14 @@ extension ExtensionShortCutItems {
 extension Double {
     var ml_to_oz : Double { return self * 0.033814 } // from ml to oz
     var oz_to_ml : Double { return self / 0.033814 } // from oz to ml
+    var toString : String {
+        // if 1.01 -> return 1.
+        // if 1.11 -> return 1.1
+        if floor(self) == (floor(10*self))/10 {
+            return String(format: "%0.f", self)
+        }
+        else {
+            return String(format: "%0.1f", self)
+        }
+    }
 }

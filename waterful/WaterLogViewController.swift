@@ -82,7 +82,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
             sum = sum.ml_to_oz
         }
         let footer = view as! UITableViewHeaderFooterView
-        footer.textLabel!.text = "TOTAL: " + String(format: "%0.f", sum) + " " + (setting_info.unit?.description)!
+        footer.textLabel!.text = "TOTAL: " + sum.toString + " " + (setting_info.unit?.description)!
         footer.textLabel!.textAlignment = NSTextAlignment.Right
     }
     
@@ -95,7 +95,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         if setting_info.unit == HKUnit(fromString: "oz"){
             sum = sum.ml_to_oz
         }
-        return "SUM: " + String(format: "%0.f", sum)
+        return "TOTAL: " + sum.toString
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -129,7 +129,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         let container = element.container
         
         tableViewCell.loggedTime.text = loggedTime
-        tableViewCell.amount.text = String(format: "%.0f", amount) + " " +  (setting_info.unit?.description)!
+        tableViewCell.amount.text = amount.toString + " " +  (setting_info.unit?.description)!
         tableViewCell.icon.image = UIImage(named: container!)
         
         return tableViewCell
