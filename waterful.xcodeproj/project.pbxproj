@@ -10,6 +10,7 @@
 		9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */; };
 		9D72A00F1BF70B8B007EAEFD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9D72A0111BF70B8B007EAEFD /* Localizable.strings */; };
 		C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71504061BEE04C00023A871 /* NotificationBuilder.swift */; };
+		C772A4961BF8B09A00E97857 /* WaterLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772A4951BF8B09A00E97857 /* WaterLogManager.swift */; };
 		C78C213B1BDCEB3900DB45A8 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */; };
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
 		C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */; };
@@ -104,6 +105,7 @@
 		9D72A0121BF70B9C007EAEFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9D72A0131BF70B9D007EAEFD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C71504061BEE04C00023A871 /* NotificationBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationBuilder.swift; path = waterful/NotificationBuilder.swift; sourceTree = "<group>"; };
+		C772A4951BF8B09A00E97857 /* WaterLogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterLogManager.swift; sourceTree = "<group>"; };
 		C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPattern.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				F4B2E8A41BC6C9EC00A93E58 /* LaunchScreen.storyboard */,
 				F4B2E8A71BC6C9EC00A93E58 /* Info.plist */,
 				C78C213A1BDCEB3900DB45A8 /* HealthManager.swift */,
+				C772A4951BF8B09A00E97857 /* WaterLogManager.swift */,
 			);
 			path = waterful;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C772A4961BF8B09A00E97857 /* WaterLogManager.swift in Sources */,
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
 				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
