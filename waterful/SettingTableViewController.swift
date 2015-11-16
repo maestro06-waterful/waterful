@@ -69,6 +69,8 @@ class SettingTableViewController: UITableViewController{
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
+        self.addDoneButtonOnKeyboard()
+        
         self.requestHealthKitAuthorization()
         super.viewDidLoad()
     
@@ -229,7 +231,32 @@ class SettingTableViewController: UITableViewController{
             updateTexts()
         }
     }
+   
+    func addDoneButtonOnKeyboard()
+    {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, 0, 300, 50))
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain  , target: self, action: Selector("dismissKeyboard"))
+
+        
+        var items = [AnyObject]()
+        items.append(flexSpace)
+        items.append(done)
+        doneToolbar.items = items as? [UIBarButtonItem]
+
+        self.sipLabel.inputAccessoryView = doneToolbar
+        self.cupLabel.inputAccessoryView = doneToolbar
+        self.mugLabel.inputAccessoryView = doneToolbar
+        self.bottleLabel.inputAccessoryView = doneToolbar
+        self.goalLabel.inputAccessoryView = doneToolbar
+        
+    }
     
+    func doneButtonAction()
+    {
+        dismissKeyboard()
+    }
 }
 
 extension SettingTableViewController {

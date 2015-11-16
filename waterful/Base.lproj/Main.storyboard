@@ -872,7 +872,7 @@
                                 <rect key="frame" x="530" y="7" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
-                                <state key="normal" title="OK"/>
+                                <state key="normal" title="SAVE"/>
                                 <connections>
                                     <action selector="userdone:" destination="AxE-EH-p0Z" eventType="touchUpInside" id="Qwj-g7-Y9u"/>
                                 </connections>
