@@ -121,7 +121,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         // make gradient background
         let gl : CAGradientLayer = CAGradientLayer()
-        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
+        gl.colors = [UIColor(white: 0.95, alpha: 1).CGColor, UIColor(white: 0.9, alpha: 1).CGColor]
         gl.locations = [0.5,1.0]
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
@@ -134,6 +134,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         waterImageView.layer.borderWidth = 1
         waterImageView.layer.borderColor = themeColor.CGColor
+
         
         // make shortcut button circular.
         shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
@@ -142,9 +143,8 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         
         let buttons : [UIButton] = [button1, button2, button3, button4]
-        button1.contentVerticalAlignment = .Bottom
         for button in buttons {
-            button.contentVerticalAlignment = .Bottom
+            button.contentMode = .ScaleAspectFit
             button.layer.cornerRadius = button.frame.height/2
             button.backgroundColor = themeColor
         }
@@ -230,8 +230,19 @@ class ViewController: UIViewController, WCSessionDelegate {
             amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
         }
         
-        // cover blue background with white image to show progress status
-        waterImageView.image = drawImage(progressPercentage)
+        // add gradient image on shortcut button
+        let gl : CAGradientLayer = CAGradientLayer()
+        let border = UIColor(white: 0.95, alpha: 1).CGColor
+        let top = UIColor(red: 255.0/255.0, green: 248.0/255.0, blue: 166.0/255.0, alpha: 0.8).CGColor
+        let bottom = UIColor(red: 2.0/255.0, green: 177.0/255.0, blue: 198.0/255.0, alpha: 0.8).CGColor
+        gl.colors = [border, top, bottom]
+        gl.locations = [0, 0.1, 0.7 ]
+        let height = waterImageView.frame.height * CGFloat(progressPercentage)
+        gl.frame = CGRect(x: 0, y: waterImageView.frame.height - height, width: waterImageView.frame.width, height: height)
+        gl.name = "progressImage"
+        waterImageView.layer.sublayers?.removeAll()
+        waterImageView.layer.addSublayer(gl)
+        
     }
 
     func blurView() {
@@ -239,22 +250,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         blurView.frame = mainView.bounds
         mainView.addSubview(blurView)
     }
-    
-    // draw image of white space to hide blue circle.
-    func drawImage(progressPercentage : Double) -> UIImage {
 
-        let white_rect = CGRectMake(0, 0, waterImageView.frame.width, waterImageView.frame.height * CGFloat(1-progressPercentage))
-        
-        UIGraphicsBeginImageContextWithOptions(waterImageView.frame.size, false, 0)
-        
-        UIColor.whiteColor().setFill()
-        UIRectFill(white_rect)
-        
-        let coverImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return coverImage
-    }
 }
 
 extension ViewController{
@@ -282,8 +278,13 @@ extension ViewController{
         case "undo" :
             WaterLogManager.undoLastWaterLog()
             self.updateViewForWater()
-
-            replyHandler(["consumed": WaterLogManager.getTodayConsumption()])
+            let setting = Setting.getSetting()
+            if setting!.unit == HKUnit(fromString: "mL"){
+                replyHandler(["consumed": WaterLogManager.getTodayConsumption()])
+            }
+            else {
+                replyHandler(["consumed": WaterLogManager.getTodayConsumption().ml_to_oz])
+            }
             
         case "fetchStatus" :
             let setting = Setting.getSetting()
