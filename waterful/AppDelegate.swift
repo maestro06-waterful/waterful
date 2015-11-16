@@ -261,6 +261,7 @@ extension ExtensionShortCutItems {
                 self.launchWaterLogView()
                 isHandled = true
             case .DrinkFast:
+                self.drinkWaterInLastContainer()
                 isHandled = true
             }
         }
@@ -278,7 +279,10 @@ extension ExtensionShortCutItems {
         // storybard instance
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         // main navigation controller instance
-        let controller = storyboard.instantiateViewControllerWithIdentifier("MainNavigator")
+        let controller = storyboard.instantiateViewControllerWithIdentifier("MainNavigator") as! UINavigationController
+
+        let mainView = storyboard.instantiateViewControllerWithIdentifier("MainView")
+        controller.pushViewController(mainView, animated: true)
 
         self.window?.rootViewController = controller
         self.window?.makeKeyAndVisible()
@@ -292,12 +296,20 @@ extension ExtensionShortCutItems {
         let controller = storyboard.instantiateViewControllerWithIdentifier("MainNavigator") as! UINavigationController
 
         let historyView = storyboard.instantiateViewControllerWithIdentifier("WaterLogView")
-        controller.pushViewController(historyView, animated: false)
+        controller.pushViewController(historyView, animated: true)
 
         self.window?.rootViewController = controller
         self.window?.makeKeyAndVisible()
     }
 
+    func drinkWaterInLastContainer() {
+        if let waterContainer = self.lastWaterContainer {
+            WaterLogManager.saveWaterLog(waterContainer)
+        } else {
+            print("lastWaterContainer doesn't exist")
+        }
+        launchMainView()
+    }
 }
 
 extension ViewController {
