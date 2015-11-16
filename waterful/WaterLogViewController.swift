@@ -16,12 +16,12 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var waterLogTableView: UITableView!
     
     var waterLogs : [String :[WaterLog]]!
-    var setting : Setting!
+    var setting_info : Setting!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
         waterLogs = getWaterLogs()
-        setting = fetchSetting()
+        setting_info = fetchSetting()
         
     }
     
@@ -78,9 +78,11 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         for item in waterLogs[date]! {
             sum = sum + (item.amount?.doubleValue)!
         }
-
+        if setting_info.unit == HKUnit(fromString: "oz"){
+            sum = sum.ml_to_oz
+        }
         let footer = view as! UITableViewHeaderFooterView
-        footer.textLabel!.text = "TOTAL: " + String(format: "%0.f", sum)
+        footer.textLabel!.text = "TOTAL: " + sum.toString + " " + (setting_info.unit?.description)!
         footer.textLabel!.textAlignment = NSTextAlignment.Right
     }
     
@@ -90,7 +92,10 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         for item in waterLogs[date]! {
             sum = sum + (item.amount?.doubleValue)!
         }
-        return "SUM: " + String(format: "%0.f", sum)
+        if setting_info.unit == HKUnit(fromString: "oz"){
+            sum = sum.ml_to_oz
+        }
+        return "TOTAL: " + sum.toString
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,12 +116,21 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         let date = Array(waterLogs.keys)[indexPath.section]
         let element :WaterLog = waterLogs[date]![indexPath.row]
         let loggedTime = getTime(element.loggedTime!)
-        let amount = String(format: "%.0f", element.amount!.doubleValue) + (setting.unit?.description)!
+        
+        
+        var amount: Double = Double()
+        if setting_info.unit == HKUnit(fromString: "mL") {
+            amount = (element.amount?.doubleValue)!
+        }
+        else if setting_info.unit == HKUnit(fromString: "oz") {
+            amount = (element.amount?.doubleValue)!.ml_to_oz
+        }
+
         let container = element.container
         
         tableViewCell.loggedTime.text = loggedTime
-        tableViewCell.amount.text = amount
-        tableViewCell.icon.image = UIImage(named: container!)
+        tableViewCell.amount.text = amount.toString + " " +  (setting_info.unit?.description)!
+        tableViewCell.icon.image = UIImage(named: container! + "_icon")
         
         return tableViewCell
         

@@ -17,7 +17,6 @@ extension WaterLog {
 
     @NSManaged var amount: NSNumber?
     @NSManaged var loggedTime: NSDate?
-    @NSManaged var unit: HKUnit?
     @NSManaged var container: String?
 
 }

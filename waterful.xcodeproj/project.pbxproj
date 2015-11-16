@@ -14,8 +14,6 @@
 		C7A1ECBB1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */; };
 		C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */; };
 		C7BB7FA91BEE0EEC00C4C12F /* WaterPatternPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */; };
-		C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */; };
-		C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495261BDCB9B3004FAF45 /* Plant.swift */; };
 		C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */; };
 		C7E495301BDCB9B3004FAF45 /* WaterLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495281BDCB9B3004FAF45 /* WaterLog.swift */; };
 		C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */; };
@@ -100,7 +98,6 @@
 
 /* Begin PBXFileReference section */
 		9D16DD5E1BDE8AA4005C6FFE /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = waterful/NotificationManager.swift; sourceTree = "<group>"; };
-		9D72A00A1BF709EA007EAEFD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		9D72A00B1BF709EA007EAEFD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		9D72A00C1BF709EA007EAEFD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Interface.strings; sourceTree = "<group>"; };
 		9D72A0101BF70B8B007EAEFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -111,8 +108,6 @@
 		C7A1ECBA1BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = waterfulDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C7BB7FA61BEE0DF000C4C12F /* WaterPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPattern.swift; sourceTree = "<group>"; };
 		C7BB7FA81BEE0EEC00C4C12F /* WaterPatternPredictor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterPatternPredictor.swift; sourceTree = "<group>"; };
-		C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plant+CoreDataProperties.swift"; path = "waterful/core_data/Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C7E495261BDCB9B3004FAF45 /* Plant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plant.swift; path = waterful/core_data/Plant.swift; sourceTree = "<group>"; };
 		C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WaterLog+CoreDataProperties.swift"; path = "waterful/core_data/WaterLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C7E495281BDCB9B3004FAF45 /* WaterLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaterLog.swift; path = waterful/core_data/WaterLog.swift; sourceTree = "<group>"; };
 		C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StepDate+CoreDataProperties.swift"; path = "waterful/core_data/StepDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -120,7 +115,6 @@
 		C7E4952B1BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Setting+CoreDataProperties.swift"; path = "waterful/core_data/Setting+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C7E4952C1BDCB9B3004FAF45 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = waterful/core_data/Setting.swift; sourceTree = "<group>"; };
 		F4088FB51BF60E6D00A7D988 /* WaterLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterLogViewController.swift; sourceTree = "<group>"; };
-		F461F04D1BF2F37000872D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F4AC19371BF72B8D00079EC1 /* GlanceInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceInterfaceController.swift; sourceTree = "<group>"; };
 		F4AF28C51BDEF84E00E36E1B /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		F4B2E8981BC6C9EC00A93E58 /* waterful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = waterful.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +141,8 @@
 		F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4B2E8E61BC6CA1700A93E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4D934E51BF985FC00C8B3AD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		F4D934E71BF9860300C8B3AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,8 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				C7A1ECB91BDB9D8D00E51EE8 /* waterfulDataModel.xcdatamodeld */,
-				C7E495251BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift */,
-				C7E495261BDCB9B3004FAF45 /* Plant.swift */,
 				C7E495271BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift */,
 				C7E495281BDCB9B3004FAF45 /* WaterLog.swift */,
 				C7E495291BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift */,
@@ -530,9 +524,7 @@
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
 				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
-				C7E4952D1BDCB9B3004FAF45 /* Plant+CoreDataProperties.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,
-				C7E4952E1BDCB9B3004FAF45 /* Plant.swift in Sources */,
 				9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,
@@ -616,8 +608,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F4B2E8A01BC6C9EC00A93E58 /* Base */,
-				F461F04D1BF2F37000872D89 /* en */,
-				9D72A00A1BF709EA007EAEFD /* ko */,
+				F4D934E51BF985FC00C8B3AD /* ko */,
+				F4D934E71BF9860300C8B3AD /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

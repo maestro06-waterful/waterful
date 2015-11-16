@@ -41,6 +41,11 @@ class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var shortcut: UIButton!
     
+    @IBOutlet weak var sipLabel: UILabel!
+    @IBOutlet weak var cupLabel: UILabel!
+    @IBOutlet weak var mugLabel: UILabel!
+    @IBOutlet weak var bottleLabel: UILabel!
+    
     @IBAction func shortcutPressed(sender: AnyObject) {
         if let lastWaterLog = getLastWaterLog() {
             saveWaterLog(lastWaterLog.container!)
@@ -72,10 +77,20 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Setting up informatinos about water
         updateSetting()
         updateWater()
-        button1.setTitle(String(format: "%0.0f", (setting_info.sipVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button2.setTitle(String(format: "%0.0f", (setting_info.cupVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button3.setTitle(String(format: "%0.0f", (setting_info.mugVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
-        button4.setTitle(String(format: "%0.0f", (setting_info.bottleVolume?.doubleValue)!) + (setting_info.unit?.description)!, forState: .Normal)
+        
+        if setting_info.unit == HKUnit(fromString: "mL"){
+            sipLabel.text = (setting_info.sipVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+            cupLabel.text = (setting_info.cupVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+            mugLabel.text = (setting_info.mugVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+            bottleLabel.text = (setting_info.bottleVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+        }
+        else if setting_info.unit == HKUnit(fromString: "oz"){
+            sipLabel.text = (setting_info.sipVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+            cupLabel.text = (setting_info.cupVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+            mugLabel.text = (setting_info.mugVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+            bottleLabel.text = (setting_info.bottleVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,7 +138,9 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         
         let buttons : [UIButton] = [button1, button2, button3, button4]
+        button1.contentVerticalAlignment = .Bottom
         for button in buttons {
+            button.contentVerticalAlignment = .Bottom
             button.layer.cornerRadius = button.frame.height/2
             button.backgroundColor = themeColor
         }
@@ -148,6 +165,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // get date in "2015-05-15" form considering timezone.
     func getDate(date : NSDate) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -156,6 +174,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         return dateString
     }
     
+    // fetch water data
     func fetchWater() -> Double {
         
         let fetchRequest = NSFetchRequest(entityName: "WaterLog")
@@ -229,20 +248,15 @@ class ViewController: UIViewController, WCSessionDelegate {
         return unitML
     }
 
-    // store amount of water user consumed
+    // store amount of water user consumed in datacore(ml)
     func saveWaterLog(container : String){
         let amount = getVolume(container)
-        
-        let unitML: HKUnit = HKUnit(fromString: "mL")
-        let currentUnit: HKUnit = self.currentUnit()
         
         // insert new object into core data framework.
         let waterLog = NSEntityDescription.insertNewObjectForEntityForName("WaterLog",
             inManagedObjectContext: managedObjectContext) as! WaterLog
 
-        waterLog.unit = currentUnit
-        // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
-        waterLog.amount = HKQuantity(unit: currentUnit, doubleValue: amount).doubleValueForUnit(unitML)
+        waterLog.amount = amount
         waterLog.loggedTime = NSDate()
         waterLog.container = container
         
@@ -263,30 +277,51 @@ class ViewController: UIViewController, WCSessionDelegate {
     // update text regards of settings
     func updateSetting() {
         setting_info = fetchSetting()
-        goal.text = String(format:"%0.f", (setting_info.goal?.doubleValue)!)
+        if setting_info.unit == HKUnit(fromString: "mL"){
+            goal.text = setting_info.goal?.doubleValue.toString
+        }
+        else if setting_info.unit == HKUnit(fromString: "oz"){
+            goal.text = setting_info.goal?.doubleValue.ml_to_oz.toString
+        }
+        
         goalUnit.text = setting_info.unit?.description
         consumedUnit.text = setting_info.unit?.description
     }
 
     // update text of consumed water
     func updateWater() {
-
-        let consumedWater = fetchWater()
-        consumed.text = String(format:"%.0f", consumedWater)
+        var consumedWater = fetchWater() as Double
+        var goalWater = setting_info.goal?.doubleValue
+        if setting_info.unit == HKUnit(fromString: "oz") {
+            consumedWater = consumedWater.ml_to_oz
+            goalWater = goalWater?.ml_to_oz
+        }
         
-        let progressPercentage = consumedWater / Double(setting_info.goal!)
+        consumed.text = consumedWater.toString
+        
+        let progressPercentage = consumedWater / goalWater!
         let lastWaterLog : WaterLog! = self.getLastWaterLog()
-        let waterLeft : Double = Double(setting_info.goal!) - Double(consumedWater)
+        let waterLeft : Double = goalWater! - consumedWater
+        
 
         // show image of last unit.
         if lastWaterLog != nil {
-            let lastUnitImage = UIImage(named: lastWaterLog.container!)
+            let lastContainer = lastWaterLog.container
+            var lastContainerVolume : Double = Double()
+            if (setting_info.unit == HKUnit(fromString: "mL")){
+                lastContainerVolume = getVolume(lastContainer!)
+            }
+            else if (setting_info.unit == HKUnit(fromString: "oz")){
+                lastContainerVolume = getVolume(lastContainer!).ml_to_oz
+            }
+            
+            let lastUnitImage = UIImage(named: lastContainer! + "_shortcut")
             shortcut.setBackgroundImage(lastUnitImage, forState: .Normal)
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
-                unitLeft.text = "* " + (String(format: "%.1f", waterLeft / lastWaterLog.amount!.doubleValue)) + " left."
-                amountLeft.text = "(" + String(format: "%.1f", waterLeft) + String(setting_info.unit!) + ")"
+                unitLeft.text = "* " + (waterLeft / lastContainerVolume).toString + " left."
+                amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
             }
             else {
                 unitLeft.text = nil
@@ -296,7 +331,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         else {
             shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
-            amountLeft.text = "(" + String(waterLeft) + String(setting_info.unit!) + ")"
+            amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
         }
         
         // cover blue background with white image to show progress status
@@ -355,7 +390,8 @@ class ViewController: UIViewController, WCSessionDelegate {
         blurView.frame = mainView.bounds
         mainView.addSubview(blurView)
     }
-
+    
+    // draw image of white space to hide blue circle.
     func drawImage(progressPercentage : Double) -> UIImage {
 
         let white_rect = CGRectMake(0, 0, waterImageView.frame.width, waterImageView.frame.height * CGFloat(1-progressPercentage))
@@ -385,24 +421,23 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
+    // return size(ml) of container.
     func getVolume(container : String) -> Double {
+        var amount : Double = Double()
         if container == "sip" {
-            return (setting_info.sipVolume?.doubleValue)!
+            amount = (setting_info.sipVolume?.doubleValue)!
         }
         else if container == "cup" {
-            return (setting_info.cupVolume?.doubleValue)!
+            amount = (setting_info.cupVolume?.doubleValue)!
         }
             
         else if container == "mug" {
-            return (setting_info.mugVolume?.doubleValue)!
+            amount = (setting_info.mugVolume?.doubleValue)!
         }
         else if container == "bottle" {
-            return (setting_info.bottleVolume?.doubleValue)!
+            amount = (setting_info.bottleVolume?.doubleValue)!
         }
-        else {
-            return 0
-        }
-        
+        return amount
     }
     
 }
@@ -546,22 +581,36 @@ extension ViewController{
         case "undo" :
             undoLastWaterLog()
             replyHandler(["consumed": fetchWater()])
+            
         case "fetchStatus" :
-            let consumed = fetchWater()
-            let goal = fetchSetting().goal
-            replyHandler(["consumed" : consumed, "goal": goal!])
+            
+            let setting = fetchSetting()
+            var consumed : Double = Double()
+            var goal : Double = Double()
+            
+            if setting.unit == HKUnit(fromString: "mL"){
+                consumed = fetchWater()
+                goal = (setting.goal?.doubleValue)!
+            }
+            else {
+                consumed = fetchWater().ml_to_oz
+                goal = (setting.goal?.doubleValue.ml_to_oz)!
+            }
+            
+            replyHandler(["consumed" : consumed, "goal": goal])
+            
         case "fetchContainer" :
             let setting = fetchSetting()
             let sip = setting.sipVolume
             let cup = setting.cupVolume
             let mug = setting.mugVolume
             let bottle = setting.bottleVolume
-            replyHandler(["sipVolume" : sip!, "cupVolume": cup!, "mugVolume" : mug!, "bottleVolume" : bottle!])
+            let unit = setting.unit?.description
+            replyHandler(["sipVolume" : sip!, "cupVolume": cup!, "mugVolume" : mug!, "bottleVolume" : bottle!, "unit" : unit!])
             
         default:
             break
         }
         
     }
-    
 }
