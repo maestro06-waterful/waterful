@@ -2,8 +2,8 @@
 /* Class = "UIButton"; normalTitle = "400ml"; ObjectID = "0jj-GP-Hz4"; */
 "0jj-GP-Hz4.normalTitle" = "400ml";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "34q-Ch-euU"; */
-"34q-Ch-euU.text" = "Label";
+/* Class = "UILabel"; text = "cup"; ObjectID = "2yq-4l-WSX"; */
+"2yq-4l-WSX.text" = "cup";
 
 /* Class = "UIButton"; normalTitle = "500ml"; ObjectID = "A0n-vx-jpe"; */
 "A0n-vx-jpe.normalTitle" = "500ml";
@@ -12,22 +12,34 @@
 "A25-o1-jFa.normalTitle" = "40ml";
 
 /* Class = "UILabel"; text = "consumed"; ObjectID = "AhO-Bv-et1"; */
-"AhO-Bv-et1.text" = "consumed";
+"AhO-Bv-et1.text" = "오늘 마신 양";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "Aqf-s0-HgE"; */
-"Aqf-s0-HgE.text" = "Label";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "AnR-b5-xGt"; */
+"AnR-b5-xGt.normalTitle" = "Button";
 
-/* Class = "UIButton"; normalTitle = "400ml"; ObjectID = "D31-Bc-QcG"; */
-"D31-Bc-QcG.normalTitle" = "400ml";
+/* Class = "UITableViewController"; title = "Setting"; ObjectID = "AxE-EH-p0Z"; */
+"AxE-EH-p0Z.title" = "설정";
 
-/* Class = "UITableViewSection"; headerTitle = "Alarm"; ObjectID = "D7I-64-RvB"; */
-"D7I-64-RvB.headerTitle" = "Alarm";
+/* Class = "UILabel"; text = "unit"; ObjectID = "C7C-ek-F1s"; */
+"C7C-ek-F1s.text" = "unit";
+
+/* Class = "UILabel"; text = "unit"; ObjectID = "DHv-iO-KtI"; */
+"DHv-iO-KtI.text" = "unit";
+
+/* Class = "UILabel"; text = "Mug"; ObjectID = "EO4-zM-kO6"; */
+"EO4-zM-kO6.text" = "머그컵";
 
 /* Class = "UILabel"; text = "recommended"; ObjectID = "EPu-Yf-Qg6"; */
-"EPu-Yf-Qg6.text" = "recommended";
+"EPu-Yf-Qg6.text" = "오늘 마셔야 할 양";
 
 /* Class = "UILabel"; text = "unit"; ObjectID = "EsT-uM-fwb"; */
 "EsT-uM-fwb.text" = "unit";
+
+/* Class = "UILabel"; text = "Glass"; ObjectID = "HVs-Z0-Y1o"; */
+"HVs-Z0-Y1o.text" = "한 잔";
+
+/* Class = "UITableViewSection"; headerTitle = "Container"; ObjectID = "K9s-1N-0LX"; */
+"K9s-1N-0LX.headerTitle" = "Container";
 
 /* Class = "UILabel"; text = "unit"; ObjectID = "Kt3-mp-Lnj"; */
 "Kt3-mp-Lnj.text" = "unit";
@@ -36,46 +48,40 @@
 "LVN-sj-oSf.headerTitle" = "Water";
 
 /* Class = "UILabel"; text = "things you might want to know"; ObjectID = "NxN-0R-YjX"; */
-"NxN-0R-YjX.text" = "things you might want to know";
-
-/* Class = "UILabel"; text = "from"; ObjectID = "RCg-ig-rNJ"; */
-"RCg-ig-rNJ.text" = "from";
+"NxN-0R-YjX.text" = "궁금해요";
 
 /* Class = "UILabel"; text = "종이컵"; ObjectID = "RKy-Qv-qvz"; */
 "RKy-Qv-qvz.text" = "종이컵";
 
 /* Class = "UILabel"; text = "goal"; ObjectID = "SyJ-7Q-xSV"; */
-"SyJ-7Q-xSV.text" = "goal";
+"SyJ-7Q-xSV.text" = "목표 양";
+
+/* Class = "UILabel"; text = "Bottle"; ObjectID = "U9H-cu-m0w"; */
+"U9H-cu-m0w.text" = "물병";
 
 /* Class = "UILabel"; text = "unit"; ObjectID = "UHB-0P-dpw"; */
-"UHB-0P-dpw.text" = "unit";
-
-/* Class = "UILabel"; text = "interval"; ObjectID = "XK5-Vi-55l"; */
-"XK5-Vi-55l.text" = "interval";
+"UHB-0P-dpw.text" = "단위";
 
 /* Class = "UITextField"; text = "0"; ObjectID = "Yhq-Et-3ca"; */
 "Yhq-Et-3ca.text" = "0";
 
-/* Class = "UIButton"; normalTitle = "500ml"; ObjectID = "ZIr-7i-RBQ"; */
-"ZIr-7i-RBQ.normalTitle" = "500ml";
+/* Class = "UILabel"; text = "sip"; ObjectID = "ZSc-gv-yyl"; */
+"ZSc-gv-yyl.text" = "sip";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "ak6-Ao-9Pc"; */
-"ak6-Ao-9Pc.text" = "Label";
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "aE2-z0-XY4"; */
+"aE2-z0-XY4.normalTitle" = "저장";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "cEj-No-eTC"; */
 "cEj-No-eTC.title" = "Title";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "e0I-4W-t6F"; */
-"e0I-4W-t6F.text" = "Label";
+/* Class = "UILabel"; text = "Sip"; ObjectID = "fMH-vh-q3s"; */
+"fMH-vh-q3s.text" = "한모금";
 
-/* Class = "UIButton"; normalTitle = "120ml"; ObjectID = "fyZ-IK-QeO"; */
-"fyZ-IK-QeO.normalTitle" = "120ml";
+/* Class = "UILabel"; text = "mug"; ObjectID = "gOw-DX-Wbl"; */
+"gOw-DX-Wbl.text" = "mug";
 
 /* Class = "UILabel"; text = "한 모금"; ObjectID = "gf3-oi-R0A"; */
 "gf3-oi-R0A.text" = "한 모금";
-
-/* Class = "UIButton"; normalTitle = "40ml"; ObjectID = "hFf-Rq-Exn"; */
-"hFf-Rq-Exn.normalTitle" = "40ml";
 
 /* Class = "UILabel"; text = "time"; ObjectID = "hMP-bx-JGp"; */
 "hMP-bx-JGp.text" = "time";
@@ -83,20 +89,26 @@
 /* Class = "UILabel"; text = "goal"; ObjectID = "hwX-p2-0xd"; */
 "hwX-p2-0xd.text" = "goal";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "kkk-yh-SX9"; */
-"kkk-yh-SX9.text" = "Label";
+/* Class = "UILabel"; text = "unit"; ObjectID = "kKb-Ef-IdG"; */
+"kKb-Ef-IdG.text" = "unit";
 
 /* Class = "UILabel"; text = "/"; ObjectID = "ni6-Ej-Ogc"; */
 "ni6-Ej-Ogc.text" = "/";
 
-/* Class = "UILabel"; text = "to"; ObjectID = "pnE-A6-zst"; */
-"pnE-A6-zst.text" = "to";
+/* Class = "UILabel"; text = "bottle"; ObjectID = "owu-O6-7D7"; */
+"owu-O6-7D7.text" = "bottle";
 
 /* Class = "UIButton"; normalTitle = "120ml"; ObjectID = "qkZ-es-4HC"; */
 "qkZ-es-4HC.normalTitle" = "120ml";
 
 /* Class = "UILabel"; text = "consumed"; ObjectID = "rUZ-MH-4ZW"; */
 "rUZ-MH-4ZW.text" = "consumed";
+
+/* Class = "UILabel"; text = "unit"; ObjectID = "rrK-qR-DS0"; */
+"rrK-qR-DS0.text" = "unit";
+
+/* Class = "UILabel"; text = "unit"; ObjectID = "sxt-xD-Hm2"; */
+"sxt-xD-Hm2.text" = "unit";
 
 /* Class = "UILabel"; text = "패트병"; ObjectID = "uBR-fL-47d"; */
 "uBR-fL-47d.text" = "패트병";
