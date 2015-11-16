@@ -278,8 +278,13 @@ extension ViewController{
         case "undo" :
             WaterLogManager.undoLastWaterLog()
             self.updateViewForWater()
-
-            replyHandler(["consumed": WaterLogManager.getTodayConsumption()])
+            let setting = Setting.getSetting()
+            if setting!.unit == HKUnit(fromString: "mL"){
+                replyHandler(["consumed": WaterLogManager.getTodayConsumption()])
+            }
+            else {
+                replyHandler(["consumed": WaterLogManager.getTodayConsumption().ml_to_oz])
+            }
             
         case "fetchStatus" :
             let setting = Setting.getSetting()
