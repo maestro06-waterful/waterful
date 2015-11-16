@@ -47,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Sets shortcut items to provide multiple entries to launching the app.
     func setShortcutItems() {
 
+        if let lastWaterLog = WaterLogManager.getLastWaterLog() {
+            self.lastWaterContainer = lastWaterLog.container
+        }
+
         // 3d touch short cut icons
         let icon1 = dynamicShortcutIcon(self.lastWaterContainer)
         let icon2 = UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_history2")
@@ -84,9 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // Provides multiple entries to the app.
-        if let lastWaterLog = WaterLogManager.getLastWaterLog() {
-            self.lastWaterContainer = lastWaterLog.container
-        }
         self.setShortcutItems()
 
         // Check whether app is launched from a short cut or not.

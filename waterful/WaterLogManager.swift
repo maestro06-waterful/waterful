@@ -58,6 +58,7 @@ class WaterLogManager {
             print("Unresolved error")
             abort()
         }
+        (UIApplication.sharedApplication().delegate as! AppDelegate).setShortcutItems()
     }
 
     // return size(ml) of container.
@@ -138,6 +139,8 @@ class WaterLogManager {
                 // Do something in response to error condition
             }
         }
+        
+        (UIApplication.sharedApplication().delegate as! AppDelegate).setShortcutItems()
     }
 }
 
