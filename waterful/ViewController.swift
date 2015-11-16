@@ -580,7 +580,18 @@ extension ViewController{
             
         case "undo" :
             undoLastWaterLog()
-            replyHandler(["consumed": fetchWater()])
+            let setting = fetchSetting()
+            
+            var consumed : Double = Double()
+            
+            if setting.unit == HKUnit(fromString: "mL"){
+                consumed = fetchWater()
+            }
+            else {
+                consumed = fetchWater().ml_to_oz
+            }
+
+            replyHandler(["consumed": consumed])
             
         case "fetchStatus" :
             
