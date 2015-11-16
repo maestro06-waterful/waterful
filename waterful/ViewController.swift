@@ -14,6 +14,8 @@ import HealthKit
 
 class ViewController: UIViewController, WCSessionDelegate {
 
+    let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
+    
     // managed object context to control core data framework
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -22,10 +24,14 @@ class ViewController: UIViewController, WCSessionDelegate {
 
     // Setting object from core data framework
     var setting_info : Setting! = nil
+    
+    var consumedAmount : Double = Double()
+    var goalAmount : Double = Double()
 
     @IBOutlet var mainView: UIView!
 
     @IBOutlet weak var consumed: UILabel!
+    @IBOutlet weak var left: UILabel!
     @IBOutlet weak var goal: UILabel!
     @IBOutlet weak var consumedUnit: UILabel!
     @IBOutlet weak var goalUnit: UILabel!
@@ -33,12 +39,12 @@ class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var waterImageView: UIImageView!
     
     @IBOutlet weak var unitLeft: UILabel!
-    @IBOutlet weak var amountLeft: UILabel!
     
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
+    
     @IBOutlet weak var shortcut: UIButton!
     
     @IBOutlet weak var sipLabel: UILabel!
@@ -52,6 +58,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             
         }
     }
+    @IBOutlet weak var consumed_left: UILabel!
 
     @IBAction func button1Pressed(sender: AnyObject) {
         saveWaterLog("sip")
@@ -73,6 +80,10 @@ class ViewController: UIViewController, WCSessionDelegate {
         undoLastWaterLog()
     }
 
+    @IBAction func togglePressed(sender: AnyObject) {
+        toggle()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         updateSetting()
@@ -89,6 +100,13 @@ class ViewController: UIViewController, WCSessionDelegate {
             cupLabel.text = (setting_info.cupVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
             mugLabel.text = (setting_info.mugVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
             bottleLabel.text = (setting_info.bottleVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+        }
+        
+        if consumed_left.text == "consumed" {
+            left.hidden = true
+        }
+        else {
+            consumed.hidden = true
         }
         
     }
@@ -117,13 +135,12 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         // make gradient background
         let gl : CAGradientLayer = CAGradientLayer()
-        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
+        gl.colors = [UIColor(white:0.9, alpha :1).CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
         gl.locations = [0.5,1.0]
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
         
         // make water image view circular.
-        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
         waterImageView.layer.masksToBounds = false
         waterImageView.layer.cornerRadius = waterImageView.frame.height/2
         waterImageView.clipsToBounds = true
@@ -290,18 +307,18 @@ class ViewController: UIViewController, WCSessionDelegate {
 
     // update text of consumed water
     func updateWater() {
-        var consumedWater = fetchWater() as Double
-        var goalWater = setting_info.goal?.doubleValue
+        consumedAmount = fetchWater() as Double
+        goalAmount = (setting_info.goal?.doubleValue)!
         if setting_info.unit == HKUnit(fromString: "oz") {
-            consumedWater = consumedWater.ml_to_oz
-            goalWater = goalWater?.ml_to_oz
+            consumedAmount = consumedAmount.ml_to_oz
+            goalAmount = goalAmount.ml_to_oz
         }
+        consumed.text = consumedAmount.toString
+        left.text = (goalAmount - consumedAmount).toString
         
-        consumed.text = consumedWater.toString
-        
-        let progressPercentage = consumedWater / goalWater!
+        let progressPercentage = consumedAmount / goalAmount
         let lastWaterLog : WaterLog! = self.getLastWaterLog()
-        let waterLeft : Double = goalWater! - consumedWater
+        let waterLeft : Double = goalAmount - consumedAmount
         
 
         // show image of last unit.
@@ -321,21 +338,42 @@ class ViewController: UIViewController, WCSessionDelegate {
             
             if waterLeft > 0 {
                 unitLeft.text = "* " + (waterLeft / lastContainerVolume).toString + " left."
-                amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
             }
             else {
                 unitLeft.text = nil
-                amountLeft.text = nil
             }
         }
         else {
             shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
-            amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
         }
         
-        // cover blue background with white image to show progress status
-        waterImageView.image = drawImage(progressPercentage)
+        if waterLeft < 0 {
+            consumed_left.text = "consumed"
+        }
+        if consumed_left.text == "left"
+        {
+            consumed.text = (goalAmount - consumedAmount).toString
+        }
+        else if consumed_left.text == "consumed" {
+            consumed.text = (consumedAmount).toString
+        }
+        
+        // show progress in graphic
+        
+        let gl : CAGradientLayer = CAGradientLayer()
+        //gl.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
+        let border = UIColor(white: 0.9, alpha: 1).CGColor
+        let top = UIColor(red: 255.0/255.0, green: 248.0/255.0, blue: 166.0/255.0, alpha: 0.8).CGColor
+        let bottom = UIColor(red: 2.0/255.0, green: 177.0/255.0, blue: 198.0/255.0, alpha: 0.8).CGColor
+        gl.colors = [border, top, bottom]
+        gl.locations = [0, 0.1, 0.7 ]
+        let height = waterImageView.frame.height * CGFloat(progressPercentage)
+        gl.frame = CGRect(x: 0, y: waterImageView.frame.height - height, width: waterImageView.frame.width, height: height)
+        gl.name = "progressImage"
+        waterImageView.layer.sublayers?.removeAll()
+        waterImageView.layer.addSublayer(gl)
+        
     }
     
     // Returns core data objects, which is saved in today, in WaterLog entity.
@@ -391,22 +429,6 @@ class ViewController: UIViewController, WCSessionDelegate {
         mainView.addSubview(blurView)
     }
     
-    // draw image of white space to hide blue circle.
-    func drawImage(progressPercentage : Double) -> UIImage {
-
-        let white_rect = CGRectMake(0, 0, waterImageView.frame.width, waterImageView.frame.height * CGFloat(1-progressPercentage))
-        
-        UIGraphicsBeginImageContextWithOptions(waterImageView.frame.size, false, 0)
-        
-        UIColor.whiteColor().setFill()
-        UIRectFill(white_rect)
-        
-        let coverImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return coverImage
-    }
-
     // Returns the last WaterLog object in core data framework.
     func getLastWaterLog() -> WaterLog! {
         
@@ -438,6 +460,19 @@ class ViewController: UIViewController, WCSessionDelegate {
             amount = (setting_info.bottleVolume?.doubleValue)!
         }
         return amount
+    }
+    
+    func toggle() {
+        if consumedAmount < goalAmount {
+            if consumed_left.text == "left"
+            {
+                consumed_left.text = "consumed"
+            }
+            else if consumed_left.text == "consumed" {
+                consumed_left.text = "left"
+            }
+        }
+        updateWater()
     }
     
 }

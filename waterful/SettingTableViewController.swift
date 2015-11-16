@@ -52,6 +52,7 @@ class SettingTableViewController: UITableViewController{
     var setting_info : Setting!
 
     override func viewWillAppear(animated: Bool) {
+        
     }
     
     override func viewDidLoad() {
@@ -166,6 +167,7 @@ class SettingTableViewController: UITableViewController{
         }
     }
     @IBAction func cupLabelChanged(sender: AnyObject) {
+        
         if Double(cupLabel.text!) != nil {
             if setting_info.unit == HKUnit(fromString: "mL"){
                 cupVolume = Double(cupLabel.text!)!
@@ -180,6 +182,7 @@ class SettingTableViewController: UITableViewController{
             self.presentViewController(alertController, animated: true, completion: nil)
             updateTexts()
         }
+        
     }
     
     @IBAction func mugLabelChanged(sender: AnyObject) {
@@ -215,7 +218,9 @@ class SettingTableViewController: UITableViewController{
             updateTexts()
         }
     }
+    
     @IBAction func goalLabelChanged(sender: AnyObject) {
+        
         if Double(goalLabel.text!) != nil {
             if setting_info.unit == HKUnit(fromString: "mL"){
                 goalVolume = Double(goalLabel.text!)!
@@ -230,6 +235,7 @@ class SettingTableViewController: UITableViewController{
             self.presentViewController(alertController, animated: true, completion: nil)
             updateTexts()
         }
+        
     }
    
     func addDoneButtonOnKeyboard()
