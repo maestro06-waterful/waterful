@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var isBackground: Bool = true
     let app = UIApplication.sharedApplication()
+    var lastWaterContainer: String? = nil
 
     // Register the notification with 'alertBody' when it's 'fireDate'
     func registerNotification(fireDate: NSDate, alertBody: String) {
@@ -27,23 +28,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         app.scheduleLocalNotification(alarm)
     }
 
-    // Creates shortcut items to provide multiple entries to launching the app.
-    func createShortCutItems() {
+    func dynamicShortcutIcon(lastContainer: String?) -> UIApplicationShortcutIcon? {
+
+        if let container = lastContainer {
+            if container == "sip" {
+                return UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_sip")
+            } else if container == "cup" {
+                return UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_cup")
+            } else if container == "mug" {
+                return UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_mug")
+            } else if container == "bottle" {
+                return UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_tumblur")
+            }
+        }
+        return nil
+    }
+
+    // Sets shortcut items to provide multiple entries to launching the app.
+    func setShortcutItems() {
+
+        // 3d touch short cut icons
+        let icon1 = dynamicShortcutIcon(self.lastWaterContainer)
+        let icon2 = UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_history2")
+        let icon3 = UIApplicationShortcutIcon(templateImageName: "3dTouch_shortcut_record")
 
         // shortcut items (entry paths) to launching the app.
-        let item1 = UIMutableApplicationShortcutItem(type: shortcutActionType.DrinkFast.rawValue, localizedTitle: "Drink in the latest cup size")
-        let item2 = UIMutableApplicationShortcutItem(type: shortcutActionType.LogView.rawValue, localizedTitle: "View History")
-        let item3 = UIMutableApplicationShortcutItem(type: shortcutActionType.MainView.rawValue, localizedTitle: "Record drinking water")
+        var dynamicTitle: String!
+        if self.lastWaterContainer != nil {
+            let strLastWater = WaterLogManager.getVolume(lastWaterContainer!)
+            let strUnit = Setting.getUnit().description
+            dynamicTitle = "Drink \(strLastWater) \(strUnit)"
+        } else {
+            dynamicTitle = "Drink water in the latest cup size"
+        }
+        let item1 = UIMutableApplicationShortcutItem(type: shortcutActionType.DrinkFast.rawValue,
+            localizedTitle: dynamicTitle,
+            localizedSubtitle: nil,
+            icon: icon1,
+            userInfo: nil)
+        let item2 = UIMutableApplicationShortcutItem(type: shortcutActionType.LogView.rawValue,
+            localizedTitle: "View History",
+            localizedSubtitle: nil,
+            icon: icon2,
+            userInfo: nil)
+        let item3 = UIMutableApplicationShortcutItem(type: shortcutActionType.MainView.rawValue,
+            localizedTitle: "Record drinking water",
+            localizedSubtitle: nil,
+            icon: icon3,
+            userInfo: nil)
 
         let shortCutItems = [UIApplicationShortcutItem](arrayLiteral: item1, item2, item3)
-
         UIApplication.sharedApplication().shortcutItems = shortCutItems
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // Provides multiple entries to the app.
-        self.createShortCutItems()
+        if let lastWaterLog = WaterLogManager.getLastWaterLog() {
+            self.lastWaterContainer = lastWaterLog.container
+        }
+        self.setShortcutItems()
 
         // Check whether app is launched from a short cut or not.
         if let currentShortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
