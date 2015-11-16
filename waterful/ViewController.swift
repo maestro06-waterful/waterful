@@ -41,6 +41,11 @@ class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var shortcut: UIButton!
     
+    @IBOutlet weak var sipLabel: UILabel!
+    @IBOutlet weak var cupLabel: UILabel!
+    @IBOutlet weak var mugLabel: UILabel!
+    @IBOutlet weak var bottleLabel: UILabel!
+    
     @IBAction func shortcutPressed(sender: AnyObject) {
         if let lastWaterLog = getLastWaterLog() {
             saveWaterLog(lastWaterLog.container!)
@@ -72,17 +77,18 @@ class ViewController: UIViewController, WCSessionDelegate {
         // Setting up informatinos about water
         updateSetting()
         updateWater()
+        
         if setting_info.unit == HKUnit(fromString: "mL"){
-            button1.setTitle((setting_info.sipVolume?.doubleValue.toString)! + (setting_info.unit?.description)!, forState: .Normal)
-            button2.setTitle((setting_info.cupVolume?.doubleValue.toString)! + (setting_info.unit?.description)!, forState: .Normal)
-            button3.setTitle((setting_info.mugVolume?.doubleValue.toString)! + (setting_info.unit?.description)!, forState: .Normal)
-            button4.setTitle((setting_info.bottleVolume?.doubleValue.toString)! + (setting_info.unit?.description)!, forState: .Normal)
+            sipLabel.text = (setting_info.sipVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+            cupLabel.text = (setting_info.cupVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+            mugLabel.text = (setting_info.mugVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
+            bottleLabel.text = (setting_info.bottleVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
         }
         else if setting_info.unit == HKUnit(fromString: "oz"){
-            button1.setTitle((setting_info.sipVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!, forState: .Normal)
-            button2.setTitle((setting_info.cupVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!, forState: .Normal)
-            button3.setTitle((setting_info.mugVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!, forState: .Normal)
-            button4.setTitle((setting_info.bottleVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!, forState: .Normal)
+            sipLabel.text = (setting_info.sipVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+            cupLabel.text = (setting_info.cupVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+            mugLabel.text = (setting_info.mugVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
+            bottleLabel.text = (setting_info.bottleVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
         }
         
     }
@@ -132,7 +138,9 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         
         let buttons : [UIButton] = [button1, button2, button3, button4]
+        button1.contentVerticalAlignment = .Bottom
         for button in buttons {
+            button.contentVerticalAlignment = .Bottom
             button.layer.cornerRadius = button.frame.height/2
             button.backgroundColor = themeColor
         }
@@ -307,7 +315,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                 lastContainerVolume = getVolume(lastContainer!).ml_to_oz
             }
             
-            let lastUnitImage = UIImage(named: lastContainer!)
+            let lastUnitImage = UIImage(named: lastContainer! + "_shortcut")
             shortcut.setBackgroundImage(lastUnitImage, forState: .Normal)
             // show how much drinks you have to drink with the unit.
             

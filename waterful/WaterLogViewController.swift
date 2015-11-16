@@ -130,7 +130,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableViewCell.loggedTime.text = loggedTime
         tableViewCell.amount.text = amount.toString + " " +  (setting_info.unit?.description)!
-        tableViewCell.icon.image = UIImage(named: container!)
+        tableViewCell.icon.image = UIImage(named: container! + "_icon")
         
         return tableViewCell
         
