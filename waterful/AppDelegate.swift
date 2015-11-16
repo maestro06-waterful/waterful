@@ -253,8 +253,24 @@ extension ExtensionShortCutItems {
         self.window?.rootViewController = controller
         self.window?.makeKeyAndVisible()
     }
-    
-    
+
+}
+
+extension ViewController {
+
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+
+}
+
+extension UINavigationController {
+    public override func shouldAutorotate() -> Bool {
+        return false
+    }
 }
 
 
