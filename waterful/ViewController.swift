@@ -121,7 +121,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         // make gradient background
         let gl : CAGradientLayer = CAGradientLayer()
-        gl.colors = [UIColor.whiteColor().CGColor, UIColor(white: 0.80, alpha: 1).CGColor]
+        gl.colors = [UIColor(white: 0.95, alpha: 1).CGColor, UIColor(white: 0.9, alpha: 1).CGColor]
         gl.locations = [0.5,1.0]
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
@@ -134,6 +134,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         waterImageView.layer.borderWidth = 1
         waterImageView.layer.borderColor = themeColor.CGColor
+
         
         // make shortcut button circular.
         shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
@@ -142,9 +143,8 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         
         let buttons : [UIButton] = [button1, button2, button3, button4]
-        button1.contentVerticalAlignment = .Bottom
         for button in buttons {
-            button.contentVerticalAlignment = .Bottom
+            button.contentMode = .ScaleAspectFit
             button.layer.cornerRadius = button.frame.height/2
             button.backgroundColor = themeColor
         }
@@ -232,7 +232,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         // add gradient image on shortcut button
         let gl : CAGradientLayer = CAGradientLayer()
-        let border = UIColor(white: 0.9, alpha: 1).CGColor
+        let border = UIColor(white: 0.95, alpha: 1).CGColor
         let top = UIColor(red: 255.0/255.0, green: 248.0/255.0, blue: 166.0/255.0, alpha: 0.8).CGColor
         let bottom = UIColor(red: 2.0/255.0, green: 177.0/255.0, blue: 198.0/255.0, alpha: 0.8).CGColor
         gl.colors = [border, top, bottom]

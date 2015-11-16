@@ -42,7 +42,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I5D-2a-GDb" userLabel="waterImageView">
                                 <rect key="frame" x="175" y="134" width="250" height="250"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.098039215686274508" green="0.77647058823529413" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="TTC-gN-qa0"/>
                                     <constraint firstAttribute="width" constant="250" id="g2n-br-2IV"/>
