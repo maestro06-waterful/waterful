@@ -138,8 +138,9 @@ class ViewController: UIViewController, WCSessionDelegate {
         //create watch session
         configureWCSession()
         
+        // navigation controller
         let logo : UIImage = UIImage(named: "logo")!
-        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
+        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 25))
         logoView.contentMode = .ScaleAspectFit
         logoView.image = logo
         self.navigationItem.titleView = logoView
@@ -265,11 +266,14 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         // add gradient image on shortcut button
         let gl : CAGradientLayer = CAGradientLayer()
-        let border = UIColor(white: 0.95, alpha: 1).CGColor
-        let top = UIColor(red: 255.0/255.0, green: 248.0/255.0, blue: 166.0/255.0, alpha: 0.8).CGColor
-        let bottom = UIColor(red: 2.0/255.0, green: 177.0/255.0, blue: 198.0/255.0, alpha: 0.8).CGColor
-        gl.colors = [border, top, bottom]
-        gl.locations = [0, 0.1, 0.7 ]
+        let border = UIColor(red: 225/255, green: 234/255, blue: 241/255, alpha: 0.8).CGColor
+        let color1 = UIColor(red: 255/255, green: 248/255, blue: 166/255, alpha: 0.8).CGColor
+        let color2 = UIColor(red: 105/255, green: 217/255, blue: 193/255, alpha: 0.8).CGColor
+        let color3 = UIColor(red: 0/255, green: 209/255, blue: 234/255, alpha: 0.8).CGColor
+        let color4 = UIColor(red: 0/255, green: 177/255, blue: 198/255, alpha: 0.8).CGColor
+        
+        gl.colors = [border, color1, color2, color3, color4]
+        gl.locations = [0, 0.05, 0.5, 0.8, 1]
         let height = waterImageView.frame.height * CGFloat(progressPercentage)
         gl.frame = CGRect(x: 0, y: waterImageView.frame.height - height, width: waterImageView.frame.width, height: height)
         gl.name = "progressImage"
