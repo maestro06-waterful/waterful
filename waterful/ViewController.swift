@@ -173,6 +173,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     func updateViewForSetting() {
 
         setting_info = Setting.getSetting()
+
         if setting_info.unit == HKUnit(fromString: "mL"){
             goal.text = setting_info.goal?.doubleValue.toString
         }
