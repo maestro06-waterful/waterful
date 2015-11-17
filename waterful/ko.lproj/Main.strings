@@ -118,3 +118,6 @@
 
 /* Class = "UILabel"; text = "amount"; ObjectID = "ukr-9s-99x"; */
 "ukr-9s-99x.text" = "amount";
+
+/* Class = "UILabel"; text = "left"; ObjectID = "f6W-73-JvO"; */
+"f6W-73-JvO.text" = "남은 양";
