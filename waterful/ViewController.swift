@@ -33,7 +33,6 @@ class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var waterImageView: UIImageView!
     
     @IBOutlet weak var unitLeft: UILabel!
-    @IBOutlet weak var amountLeft: UILabel!
     
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
@@ -217,18 +216,15 @@ class ViewController: UIViewController, WCSessionDelegate {
             // show how much drinks you have to drink with the unit.
             
             if waterLeft > 0 {
-                unitLeft.text = "* " + (waterLeft / lastContainerVolume).toString + " left."
-                amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
+                unitLeft.text = "X " + (waterLeft / lastContainerVolume).toString + " left"
             }
             else {
                 unitLeft.text = nil
-                amountLeft.text = nil
             }
         }
         else {
             shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
-            amountLeft.text = "(" + waterLeft.toString + String(setting_info.unit!) + ")"
         }
         
         // add gradient image on shortcut button
