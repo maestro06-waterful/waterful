@@ -13,7 +13,9 @@ import WatchConnectivity
 import HealthKit
 
 class ViewController: UIViewController, WCSessionDelegate {
-
+    var consumedWater : Double = Double()
+    var goalWater : Double = Double()
+    
     // managed object context to control core data framework
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -29,6 +31,8 @@ class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var goal: UILabel!
     @IBOutlet weak var consumedUnit: UILabel!
     @IBOutlet weak var goalUnit: UILabel!
+    @IBOutlet weak var cl_consumed: UILabel!
+    @IBOutlet weak var cl_left: UILabel!
     
     @IBOutlet weak var waterImageView: UIImageView!
     
@@ -76,6 +80,26 @@ class ViewController: UIViewController, WCSessionDelegate {
         WaterLogManager.undoLastWaterLog()
         self.updateViewForWater()
     }
+    @IBAction func cl_pressed(sender: AnyObject) {
+        if consumedWater < goalWater {
+            if cl_consumed.hidden == true {
+                cl_consumed.hidden = false
+                cl_left.hidden = true
+            }
+            else if cl_consumed.hidden == false {
+                cl_consumed.hidden = true
+                cl_left.hidden = false
+            }
+            
+            if cl_consumed.hidden == false {
+                consumed.text = consumedWater.toString
+            }
+            else {
+                consumed.text = (goalWater - consumedWater).toString
+            }
+        }
+
+    }
 
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
@@ -109,6 +133,8 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
     
     override func viewDidLoad() {
+        cl_left.hidden = true
+        
         //create watch session
         configureWCSession()
         
@@ -187,18 +213,18 @@ class ViewController: UIViewController, WCSessionDelegate {
     // update this view in response to change of water logs
     func updateViewForWater() {
 
-        var consumedWater = WaterLogManager.getTodayConsumption()
-        var goalWater = setting_info.goal?.doubleValue
+        consumedWater = WaterLogManager.getTodayConsumption()
+        goalWater = (setting_info.goal?.doubleValue)!
         if setting_info.unit == HKUnit(fromString: "oz") {
             consumedWater = consumedWater.ml_to_oz
-            goalWater = goalWater?.ml_to_oz
+            goalWater = goalWater.ml_to_oz
         }
         
         consumed.text = consumedWater.toString
         
-        let progressPercentage = consumedWater / goalWater!
+        let progressPercentage = consumedWater / goalWater
         let lastWaterLog : WaterLog! = WaterLogManager.getLastWaterLog()
-        let waterLeft : Double = goalWater! - consumedWater
+        let waterLeft : Double = goalWater - consumedWater
 
         // show image of last unit.
         if lastWaterLog != nil {
@@ -226,6 +252,16 @@ class ViewController: UIViewController, WCSessionDelegate {
             shortcut.setBackgroundImage(nil, forState: .Normal)
             unitLeft.text = nil
         }
+        if waterLeft < 0 {
+            cl_consumed.hidden = false
+            cl_left.hidden = true
+        }
+        if cl_consumed.hidden == false {
+            consumed.text = consumedWater.toString
+        }
+        else {
+            consumed.text = (goalWater - consumedWater).toString
+        }
         
         // add gradient image on shortcut button
         let gl : CAGradientLayer = CAGradientLayer()
@@ -239,6 +275,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         gl.name = "progressImage"
         waterImageView.layer.sublayers?.removeAll()
         waterImageView.layer.addSublayer(gl)
+        
         
     }
 
