@@ -143,13 +143,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXn-Sn-Hqf" userLabel="undo">
-                                <rect key="frame" x="415" y="364" width="45" height="45"/>
+                                <rect key="frame" x="412" y="334" width="40" height="40"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="EfE-kG-oAm"/>
-                                    <constraint firstAttribute="width" constant="45" id="JjJ-s8-khS"/>
+                                    <constraint firstAttribute="height" constant="40" id="EfE-kG-oAm"/>
+                                    <constraint firstAttribute="width" constant="40" id="JjJ-s8-khS"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="undo"/>
+                                <state key="normal" backgroundImage="icon_undo"/>
                                 <connections>
                                     <action selector="undoPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WHo-93-d6W"/>
                                 </connections>
@@ -243,7 +243,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="f6W-73-JvO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="404" id="1JJ-ZH-Md9"/>
-                            <constraint firstItem="zXn-Sn-Hqf" firstAttribute="leading" secondItem="7Lu-Fg-djo" secondAttribute="trailing" constant="-5" id="2zT-PV-eor"/>
+                            <constraint firstItem="zXn-Sn-Hqf" firstAttribute="leading" secondItem="7Lu-Fg-djo" secondAttribute="trailing" constant="-8" id="2zT-PV-eor"/>
                             <constraint firstItem="D31-Bc-QcG" firstAttribute="top" secondItem="hwX-p2-0xd" secondAttribute="bottom" constant="50" id="39y-Hm-CTX"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZIr-7i-RBQ" secondAttribute="bottom" constant="20" id="3Tt-PZ-hoO"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ks4-6T-9V6" secondAttribute="bottom" constant="-5" id="4M4-yT-dwq"/>
@@ -314,7 +314,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ks4-6T-9V6" secondAttribute="trailing" id="uNK-fi-5Ax"/>
                             <constraint firstItem="2yq-4l-WSX" firstAttribute="top" secondItem="fyZ-IK-QeO" secondAttribute="bottom" constant="-35" id="uX0-ac-SjI"/>
                             <constraint firstItem="ks4-6T-9V6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-5" id="utw-7z-BmZ"/>
-                            <constraint firstItem="zXn-Sn-Hqf" firstAttribute="top" secondItem="7Lu-Fg-djo" secondAttribute="bottom" constant="-10" id="uwj-Db-8Zk"/>
+                            <constraint firstItem="zXn-Sn-Hqf" firstAttribute="top" secondItem="7Lu-Fg-djo" secondAttribute="bottom" constant="-40" id="uwj-Db-8Zk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="owu-O6-7D7" secondAttribute="bottom" constant="32" id="vJH-bt-JSJ"/>
                             <constraint firstItem="AhO-Bv-et1" firstAttribute="top" secondItem="rUZ-MH-4ZW" secondAttribute="bottom" id="wpc-Fn-AcU"/>
                             <constraint firstItem="Kt3-mp-Lnj" firstAttribute="leading" secondItem="rUZ-MH-4ZW" secondAttribute="trailing" id="xPh-OF-eUa"/>
@@ -1140,12 +1140,12 @@
         <image name="bottle_icon" width="300" height="300"/>
         <image name="cup_buttons" width="500" height="500"/>
         <image name="cup_icon" width="300" height="300"/>
+        <image name="icon_undo" width="210" height="210"/>
         <image name="log" width="300" height="300"/>
         <image name="mug_buttons" width="500" height="500"/>
         <image name="mug_icon" width="300" height="300"/>
         <image name="setting" width="300" height="300"/>
         <image name="sip_buttons" width="500" height="500"/>
         <image name="sip_icon" width="300" height="300"/>
-        <image name="undo" width="310" height="310"/>
     </resources>
 </document>
