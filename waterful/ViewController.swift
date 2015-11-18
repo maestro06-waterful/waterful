@@ -280,6 +280,16 @@ class ViewController: UIViewController, WCSessionDelegate {
         waterImageView.layer.sublayers?.removeAll()
         waterImageView.layer.addSublayer(gl)
         
+        // alert user when user made the goal.
+        if (consumedWater >= goalWater && consumedWater - (lastWaterLog.amount?.doubleValue)! < goalWater ) {
+            let alertController = UIAlertController(title: NSLocalizedString("GOOD JOB!", comment: "Alert view when user made the goal"), message:
+                NSLocalizedString("You made it! \n Keep up the good work ٩(ˊᗜˋ*)و", comment: "Alert view when user made the goal"), preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+
+        
         
     }
 
