@@ -53,27 +53,32 @@ class ViewController: UIViewController, WCSessionDelegate {
         if let lastWaterLog = WaterLogManager.getLastWaterLog() {
             WaterLogManager.saveWaterLog(lastWaterLog.container!)
             self.updateViewForWater()
+            didFinishDrinking()
         }
     }
 
     @IBAction func button1Pressed(sender: AnyObject) {
         WaterLogManager.saveWaterLog("sip")
         self.updateViewForWater()
+        didFinishDrinking()
     }
     
     @IBAction func button2Pressed(sender: AnyObject) {
         WaterLogManager.saveWaterLog("cup")
         self.updateViewForWater()
+        didFinishDrinking()
     }
     
     @IBAction func button3Pressed(sender: AnyObject) {
         WaterLogManager.saveWaterLog("mug")
         self.updateViewForWater()
+        didFinishDrinking()
     }
     
     @IBAction func button4Pressed(sender: AnyObject) {
         WaterLogManager.saveWaterLog("bottle")
         self.updateViewForWater()
+        didFinishDrinking()
     }
     
     @IBAction func undoPressed(sender: AnyObject) {
@@ -280,7 +285,11 @@ class ViewController: UIViewController, WCSessionDelegate {
         waterImageView.layer.sublayers?.removeAll()
         waterImageView.layer.addSublayer(gl)
         
-        // alert user when user made the goal.
+        
+    }
+    // alert user when user made the goal.
+    func didFinishDrinking() {
+        let lastWaterLog : WaterLog! = WaterLogManager.getLastWaterLog()
         if (consumedWater >= goalWater && consumedWater - (lastWaterLog.amount?.doubleValue)! < goalWater ) {
             let alertController = UIAlertController(title: NSLocalizedString("GOOD JOB!", comment: "Alert view when user made the goal"), message:
                 NSLocalizedString("You made it! \n Keep up the good work ٩(ˊᗜˋ*)و", comment: "Alert view when user made the goal"), preferredStyle: UIAlertControllerStyle.Alert)
@@ -288,15 +297,6 @@ class ViewController: UIViewController, WCSessionDelegate {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
-
-        
-        
-    }
-
-    func blurView() {
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
-        blurView.frame = mainView.bounds
-        mainView.addSubview(blurView)
     }
 
 }
