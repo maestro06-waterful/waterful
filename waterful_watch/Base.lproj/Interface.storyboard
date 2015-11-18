@@ -5,31 +5,31 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--waterful-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="waterful_watch" customModuleProvider="target">
+                <controller title="waterful" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="waterful_watch" customModuleProvider="target">
                     <items>
-                        <label width="1" height="0.25" alignment="left" text="consumed" id="zrI-ed-g9m">
+                        <label width="1" height="0.25" alignment="left" text="..." id="zrI-ed-g9m">
                             <color key="textColor" red="0.098039215690000001" green="0.77647058820000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" type="system" pointSize="28"/>
                         </label>
                         <group width="1" height="0.14999999999999999" alignment="left" id="pZ6-No-DMd">
                             <items>
                                 <label alignment="center" text="/" id="cXD-Oe-myA"/>
-                                <label alignment="right" verticalAlignment="bottom" text="goal" numberOfLines="2" id="bIO-ZW-Y8E">
+                                <label alignment="right" verticalAlignment="bottom" text="..." numberOfLines="2" id="bIO-ZW-Y8E">
                                     <fontDescription key="font" type="system" pointSize="25"/>
                                 </label>
                             </items>
                         </group>
                         <group width="1" height="0.29999999999999999" alignment="left" id="Sfw-Ee-SAv">
                             <items>
-                                <button width="0.5" height="1" alignment="left" title="40ml" id="frv-dV-29I">
+                                <button width="0.5" height="1" alignment="left" title="..." id="frv-dV-29I">
                                     <connections>
                                         <action selector="button1Pressed" destination="AgC-eL-Hgc" id="w71-qU-Y3s"/>
                                     </connections>
                                 </button>
-                                <button width="0.5" height="1" alignment="left" title="120ml" id="vk6-q1-5Rf">
+                                <button width="0.5" height="1" alignment="left" title="..." id="vk6-q1-5Rf">
                                     <connections>
                                         <action selector="button2Pressed" destination="AgC-eL-Hgc" id="Kvo-PP-KT7"/>
                                     </connections>
@@ -38,12 +38,12 @@
                         </group>
                         <group width="1" height="0.29999999999999999" alignment="left" id="iod-jF-dac">
                             <items>
-                                <button width="0.5" height="1" alignment="left" title="400ml" id="nN6-6n-SQc">
+                                <button width="0.5" height="1" alignment="left" title="..." id="nN6-6n-SQc">
                                     <connections>
                                         <action selector="button3Pressed" destination="AgC-eL-Hgc" id="h6l-4y-zMs"/>
                                     </connections>
                                 </button>
-                                <button width="0.5" height="1" alignment="left" title="500ml" id="AbH-BF-8qe">
+                                <button width="0.5" height="1" alignment="left" title="..." id="AbH-BF-8qe">
                                     <connections>
                                         <action selector="button4Pressed" destination="AgC-eL-Hgc" id="YK4-tR-DOY"/>
                                     </connections>
@@ -84,7 +84,7 @@
                     <items>
                         <group alignment="left" id="F7f-jm-bvI">
                             <items>
-                                <imageView width="1" height="1" alignment="left" image="waterdrop_watch" id="3IF-HP-Uw9"/>
+                                <imageView width="1" height="1" alignment="left" image="watch_waterdrop" id="3IF-HP-Uw9"/>
                             </items>
                         </group>
                         <label alignment="left" id="cFX-T9-HqL"/>
