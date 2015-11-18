@@ -437,18 +437,36 @@
             </objects>
             <point key="canvasLocation" x="571" y="2792"/>
         </scene>
-        <!--Water Log View Controller-->
+        <!--Log-->
         <scene sceneID="HOs-Wq-aSa">
             <objects>
-                <tableViewController storyboardIdentifier="WaterLogView" id="FHh-UY-uNy" customClass="WaterLogViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WaterLogView" title="Log" id="FHh-UY-uNy" customClass="WaterLogViewController" customModule="waterful" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Hrh-bi-YAy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableHeaderView" alpha="0.14999999999999999" contentMode="scaleToFill" id="Lpk-rQ-kpq">
+                            <rect key="frame" x="0.0" y="64" width="600" height="200"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CR7-mx-Jwa">
+                                    <rect key="frame" x="180" y="20" width="240" height="128"/>
+                                    <animations/>
+                                </imageView>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="CR7-mx-Jwa" secondAttribute="trailing" id="9BW-4a-zBL"/>
+                                <constraint firstAttribute="bottom" secondItem="CR7-mx-Jwa" secondAttribute="bottom" id="GMx-9f-WeO"/>
+                                <constraint firstItem="CR7-mx-Jwa" firstAttribute="top" secondItem="Lpk-rQ-kpq" secondAttribute="top" id="hP0-L3-T2h"/>
+                                <constraint firstItem="CR7-mx-Jwa" firstAttribute="leading" secondItem="Lpk-rQ-kpq" secondAttribute="leading" id="wES-zt-bVC"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CELL" id="y0X-ep-JVt" customClass="WaterLogTableCell" customModule="waterful" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="313.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y0X-ep-JVt" id="Xkz-7S-hEf">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -509,6 +527,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="waterLogBarView" destination="Lpk-rQ-kpq" id="FBa-fQ-V9E"/>
                         <outlet property="waterLogTableView" destination="Hrh-bi-YAy" id="CEa-Vu-WAt"/>
                     </connections>
                 </tableViewController>
@@ -936,7 +955,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="wQZ-p0-LqP">
-                                        <rect key="frame" x="0.0" y="532" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="531.5" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wQZ-p0-LqP" id="ygX-D4-3hY">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69.5"/>
@@ -1130,8 +1149,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-cq-rjz">
-                                <rect key="frame" x="-5" y="-5" width="610" height="600"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-cq-rjz">
+                                <rect key="frame" x="-5" y="45" width="610" height="485"/>
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFS-5v-KT4">
@@ -1146,8 +1165,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CFS-5v-KT4" firstAttribute="centerX" secondItem="4ls-8Z-Qcu" secondAttribute="centerX" id="900-26-3je"/>
-                            <constraint firstItem="tZO-cq-rjz" firstAttribute="bottom" secondItem="tHK-Nh-lDl" secondAttribute="top" constant="-5" id="A2M-oJ-t0A"/>
-                            <constraint firstItem="tZO-cq-rjz" firstAttribute="top" secondItem="4ls-8Z-Qcu" secondAttribute="top" constant="-5" id="OXY-3L-MOd"/>
+                            <constraint firstItem="tZO-cq-rjz" firstAttribute="bottom" secondItem="tHK-Nh-lDl" secondAttribute="top" constant="-70" id="A2M-oJ-t0A"/>
+                            <constraint firstItem="tZO-cq-rjz" firstAttribute="top" secondItem="4ls-8Z-Qcu" secondAttribute="top" constant="45" id="OXY-3L-MOd"/>
                             <constraint firstItem="CFS-5v-KT4" firstAttribute="top" secondItem="ope-Mu-aGV" secondAttribute="bottom" constant="10" id="hOa-mU-9gV"/>
                             <constraint firstAttribute="trailing" secondItem="tZO-cq-rjz" secondAttribute="trailing" constant="-5" id="qUW-KE-At2"/>
                             <constraint firstItem="tZO-cq-rjz" firstAttribute="leading" secondItem="4ls-8Z-Qcu" secondAttribute="leading" constant="-5" id="rRH-Ff-RMa"/>
