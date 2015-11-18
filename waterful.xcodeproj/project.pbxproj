@@ -39,6 +39,8 @@
 		F4B2E8E31BC6CA1700A93E58 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */; };
 		F4B2E8E51BC6CA1700A93E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */; };
 		F4B2E8E91BC6CA1700A93E58 /* waterful_watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F4B2E8CB1BC6CA1700A93E58 /* waterful_watch.app */; };
+		F4B3F3EA1BFC8BEF00CB332A /* HowToPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3F3E91BFC8BEF00CB332A /* HowToPageViewController.swift */; };
+		F4B3F3EC1BFC964100CB332A /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3F3EB1BFC964100CB332A /* ContentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +145,8 @@
 		F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4B2E8E61BC6CA1700A93E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4B3F3E91BFC8BEF00CB332A /* HowToPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToPageViewController.swift; sourceTree = "<group>"; };
+		F4B3F3EB1BFC964100CB332A /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		F4D934E51BF985FC00C8B3AD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		F4D934E71BF9860300C8B3AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,6 +223,8 @@
 				F4B2E89D1BC6C9EC00A93E58 /* ViewController.swift */,
 				F4AF28C51BDEF84E00E36E1B /* SettingTableViewController.swift */,
 				F4088FB51BF60E6D00A7D988 /* WaterLogViewController.swift */,
+				F4B3F3E91BFC8BEF00CB332A /* HowToPageViewController.swift */,
+				F4B3F3EB1BFC964100CB332A /* ContentViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C772A4961BF8B09A00E97857 /* WaterLogManager.swift in Sources */,
+				F4B3F3EA1BFC8BEF00CB332A /* HowToPageViewController.swift in Sources */,
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
 				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
@@ -532,6 +539,7 @@
 				9D16DD5F1BDE8AA4005C6FFE /* NotificationManager.swift in Sources */,
 				C7E495311BDCB9B3004FAF45 /* StepDate+CoreDataProperties.swift in Sources */,
 				C7E495331BDCB9B3004FAF45 /* Setting+CoreDataProperties.swift in Sources */,
+				F4B3F3EC1BFC964100CB332A /* ContentViewController.swift in Sources */,
 				F4088FB61BF60E6D00A7D988 /* WaterLogViewController.swift in Sources */,
 				C7BB7FA71BEE0DF000C4C12F /* WaterPattern.swift in Sources */,
 				F4B2E89E1BC6C9EC00A93E58 /* ViewController.swift in Sources */,
