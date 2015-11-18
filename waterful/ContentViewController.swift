@@ -16,6 +16,9 @@ class ContentViewController: UIViewController {
     var titleText: String!
     var imageFile: String!
     
+    @IBAction func popPressed(sender: AnyObject) {
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
     
     
     override func viewDidLoad()
