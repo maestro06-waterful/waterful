@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Notification - waterful_watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>waterful.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>waterful_watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>F4B2E8971BC6C9EC00A93E58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4B2E8AB1BC6C9EC00A93E58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4B2E8B61BC6C9EC00A93E58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4B2E8CA1BC6CA1700A93E58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
