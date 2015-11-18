@@ -6,3 +6,7 @@
   Copyright © 2015년 suz. All rights reserved.
 */
 
+
+/* Alert view when user made the goal */
+"GOOD JOB!" = "잘 하셨어요!";
+"You made it! \n Keep up the good work ٩(ˊᗜˋ*)و" = "목표를 달성하셨군요! \n 앞으로도 잘 부탁드려요 ٩(ˊᗜˋ*)و";
