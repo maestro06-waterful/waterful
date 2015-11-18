@@ -25,22 +25,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     @IBAction func button1Pressed() {
         sendAmount("sip")
-        consumed = consumed + sipVolume
+        getStatus()
         self.updateView()
     }
     @IBAction func button2Pressed() {
         sendAmount("cup")
-        consumed = consumed + cupVolume
+        getStatus()
         self.updateView()
     }
     @IBAction func button3Pressed() {
         sendAmount("mug")
-        consumed = consumed + mugVolume
+        getStatus()
         self.updateView()
     }
     @IBAction func button4Pressed() {
         sendAmount("bottle")
-        consumed = consumed + bottleVolume
+        getStatus()
         self.updateView()
     }
     @IBOutlet var button1: WKInterfaceButton!
