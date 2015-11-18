@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.waterful</string>
+	<string>suz.waterful</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

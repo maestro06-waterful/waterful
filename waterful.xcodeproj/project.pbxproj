@@ -39,6 +39,7 @@
 		F4B2E8E31BC6CA1700A93E58 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */; };
 		F4B2E8E51BC6CA1700A93E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */; };
 		F4B2E8E91BC6CA1700A93E58 /* waterful_watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F4B2E8CB1BC6CA1700A93E58 /* waterful_watch.app */; };
+		F4D482251BFC2BCA00339DFA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D482241BFC2BCA00339DFA /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,8 @@
 		F4B2E8E21BC6CA1700A93E58 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F4B2E8E41BC6CA1700A93E58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4B2E8E61BC6CA1700A93E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4D482241BFC2BCA00339DFA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		F4D482261BFC2BCA00339DFA /* waterful.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = waterful.entitlements; sourceTree = "<group>"; };
 		F4D934E51BF985FC00C8B3AD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		F4D934E71BF9860300C8B3AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4D482251BFC2BCA00339DFA /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +239,7 @@
 		F4B2E88F1BC6C9EC00A93E58 = {
 			isa = PBXGroup;
 			children = (
+				F4D482241BFC2BCA00339DFA /* HealthKit.framework */,
 				F4B2E89A1BC6C9EC00A93E58 /* waterful */,
 				F4B2E8AF1BC6C9EC00A93E58 /* waterfulTests */,
 				F4B2E8BA1BC6C9EC00A93E58 /* waterfulUITests */,
@@ -259,6 +264,7 @@
 		F4B2E89A1BC6C9EC00A93E58 /* waterful */ = {
 			isa = PBXGroup;
 			children = (
+				F4D482261BFC2BCA00339DFA /* waterful.entitlements */,
 				9D72A0111BF70B8B007EAEFD /* Localizable.strings */,
 				C7BB7FA51BEE0DD900C4C12F /* PatternPredictor */,
 				9DF662041BDF1E8A00123EA7 /* noti */,
@@ -428,9 +434,10 @@
 				TargetAttributes = {
 					F4B2E8971BC6C9EC00A93E58 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = XRUF4YU89Q;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -726,11 +733,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = waterful/waterful.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = waterful/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterful;
+				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -740,11 +748,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = waterful/waterful.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = waterful/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterful;
+				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -805,7 +814,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "waterful_watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -822,7 +831,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "waterful_watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -840,7 +849,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = waterful_watch_Extension;
 				INFOPLIST_FILE = waterful_watch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -857,7 +866,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = waterful_watch_Extension;
 				INFOPLIST_FILE = waterful_watch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterful.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = suz.waterful.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
