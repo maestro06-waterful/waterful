@@ -165,7 +165,7 @@
                                 <rect key="frame" x="55" y="474.5" width="17" height="13.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="unit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kt3-mp-Lnj">
@@ -337,11 +337,11 @@
                                 <exclude reference="qLR-eH-Hki"/>
                                 <exclude reference="1JJ-ZH-Md9"/>
                                 <exclude reference="uGB-ij-Fwg"/>
-                                <exclude reference="jgY-Oo-vuG"/>
-                                <exclude reference="tBf-pW-fCY"/>
                                 <exclude reference="T97-DR-uh4"/>
                                 <exclude reference="Zj8-5T-oju"/>
                                 <exclude reference="rDg-SB-6JM"/>
+                                <exclude reference="jgY-Oo-vuG"/>
+                                <exclude reference="tBf-pW-fCY"/>
                                 <exclude reference="6lp-2A-zqd"/>
                                 <exclude reference="Gbo-Oh-YNW"/>
                                 <exclude reference="a0c-TS-MB7"/>
