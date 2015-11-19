@@ -17,8 +17,8 @@ class HowToPageViewController: UIViewController, UIPageViewControllerDataSource 
     {
         super.viewDidLoad()
         
-        self.pageTitles = NSArray(objects: "Explore", "Today Widget")
-        self.pageImages = NSArray(objects: "background", "launchscreen")
+        self.pageTitles = NSArray(objects: "", "", "")
+        self.pageImages = NSArray(objects: "tutorial_1", "tutorial_2", "tutorial_3")
         
         self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
         self.pageViewController.dataSource = self

@@ -13,6 +13,7 @@ import HealthKit
 
 class WaterLogViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var waterLogBarView: UIView!
     @IBOutlet var waterLogTableView: UITableView!
     
     var waterLogs : [String :[WaterLog]]!
@@ -22,7 +23,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         waterLogs = getWaterLogs()
         setting_info = fetchSetting()
-        
+        drawCharts()
     }
     
     override func didReceiveMemoryWarning() {
@@ -272,6 +273,102 @@ extension WaterLogViewController {
         // Execute the sample query
         HealthManager.sharedInstance.healthKitStore.executeQuery(sampleQuery)
     }
+}
+
+extension WaterLogViewController {
+    func getDay(date : NSDate) -> String {
+        // get day. (Mon, Tue, ...)
+        let dayFormatter = NSDateFormatter()
+        dayFormatter.dateFormat = "EE"
+        dayFormatter.timeZone = NSTimeZone.defaultTimeZone()
+        let dayString = dayFormatter.stringFromDate(date)
+        return dayString
+        
+    }
+    func drawCharts() {
+        /// get date
+        let ti = NSTimeInterval.init(86400) //time interval for one day
+        
+        let width : CGFloat = self.view.bounds.width/14
+        let cellWidth : CGFloat = 1.8 * width
+        
+        for i in  0...6 {
+            let j = 6-i // to print backward.
+            var sum = Double()
+            let date = NSDate().dateByAddingTimeInterval(-ti * Double(j))
+            
+            if waterLogs[getDate(date)] != nil {
+                for item in waterLogs[getDate(date)]! {
+                    sum = sum + (item.amount?.doubleValue)!
+                }
+            }
+            
+            let processPercentage : Double = sum / (setting_info.goal?.doubleValue)!
+            
+            // draw image of bar
+            
+            let maximum_bar_height : CGFloat = 170
+            let imageView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, CGFloat(maximum_bar_height)))
+            imageView.contentMode = .Bottom
+            self.view.addSubview(imageView)
+            var height : CGFloat = maximum_bar_height * CGFloat(processPercentage)
+            if height > maximum_bar_height {
+                height = maximum_bar_height
+            }
+            if height > 0 {
+                let image = drawCustomImage(width, height: height)
+                imageView.image = image
+            }
+            
+            
+            // put label of day (Mon, Tue, ...)
+            let label = UILabel(frame: CGRectMake(cellWidth + cellWidth * CGFloat(i), 180, width , 20))
+            label.textAlignment = NSTextAlignment.Center
+            label.font = UIFont(name: label.font.fontName, size: 10)
+            
+            label.text = getDay(date)
+            self.view.addSubview(label)
+        }
+        
+        
+        let maxLabel = UILabel(frame: CGRectMake(10 , 10, width , 20))
+        maxLabel.textAlignment = NSTextAlignment.Center
+        maxLabel.font = UIFont(name: maxLabel.font.fontName, size: 10)
+        //maxLabel.textColor = UIColor.whiteColor()
+        maxLabel.text = "100%"
+        
+        self.view.addSubview(maxLabel)
+        
+        let middleLabel = UILabel(frame: CGRectMake(10 , 90, width , 20))
+        middleLabel.textAlignment = NSTextAlignment.Center
+        middleLabel.font = UIFont(name: middleLabel.font.fontName, size: 10)
+        //middleLabel.textColor = UIColor.whiteColor()
+        middleLabel.text = "50%"
+        
+        self.view.addSubview(middleLabel)
+        
+        let minLabel = UILabel(frame: CGRectMake(10 , 170, width , 20))
+        minLabel.textAlignment = NSTextAlignment.Center
+        minLabel.font = UIFont(name: minLabel.font.fontName, size: 10)
+        //minLabel.textColor = UIColor.whiteColor()
+        minLabel.text = "0%"
+        self.view.addSubview(minLabel)
+        
+    }
+    
+    
+    func drawCustomImage(width
+        :CGFloat , height: CGFloat) -> UIImage {
+        // Setup our context
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
+        let size = CGSize(width: width, height: height)
+        let rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        themeColor.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image    }
 }
 
 class WaterLogTableCell : UITableViewCell {
