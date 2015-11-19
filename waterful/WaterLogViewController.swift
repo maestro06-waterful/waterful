@@ -276,13 +276,18 @@ extension WaterLogViewController {
 }
 
 extension WaterLogViewController {
-    func drawCharts() {
-        
+    func getDay(date : NSDate) -> String {
         // get day. (Mon, Tue, ...)
         let dayFormatter = NSDateFormatter()
         dayFormatter.dateFormat = "EE"
         dayFormatter.timeZone = NSTimeZone.defaultTimeZone()
-        let ti = NSTimeInterval.init(86400)
+        let dayString = dayFormatter.stringFromDate(date)
+        return dayString
+        
+    }
+    func drawCharts() {
+        /// get date
+        let ti = NSTimeInterval.init(86400) //time interval for one day
         
         let width : CGFloat = self.view.bounds.width/14
         let cellWidth : CGFloat = 1.8 * width
@@ -290,17 +295,19 @@ extension WaterLogViewController {
         for i in  0...6 {
             let j = 6-i // to print backward.
             var sum = Double()
-            if j < Array(waterLogs.keys).count {
-                let date = Array(waterLogs.keys)[j]
-                for item in waterLogs[date]! {
+            let date = NSDate().dateByAddingTimeInterval(-ti * Double(j))
+            
+            if waterLogs[getDate(date)] != nil {
+                for item in waterLogs[getDate(date)]! {
                     sum = sum + (item.amount?.doubleValue)!
                 }
             }
             
             let processPercentage : Double = sum / (setting_info.goal?.doubleValue)!
-
-            let maximum_bar_height : CGFloat = 170
             
+            // draw image of bar
+            
+            let maximum_bar_height : CGFloat = 170
             let imageView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, CGFloat(maximum_bar_height)))
             imageView.contentMode = .Bottom
             self.view.addSubview(imageView)
@@ -313,20 +320,23 @@ extension WaterLogViewController {
                 imageView.image = image
             }
             
+            
+            // put label of day (Mon, Tue, ...)
             let label = UILabel(frame: CGRectMake(cellWidth + cellWidth * CGFloat(i), 180, width , 20))
             label.textAlignment = NSTextAlignment.Center
             label.font = UIFont(name: label.font.fontName, size: 10)
-
-            label.text = dayFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(-ti * Double(j)))
+            
+            label.text = getDay(date)
             self.view.addSubview(label)
         }
+        
         
         let maxLabel = UILabel(frame: CGRectMake(10 , 10, width , 20))
         maxLabel.textAlignment = NSTextAlignment.Center
         maxLabel.font = UIFont(name: maxLabel.font.fontName, size: 10)
         //maxLabel.textColor = UIColor.whiteColor()
         maxLabel.text = "100%"
-
+        
         self.view.addSubview(maxLabel)
         
         let middleLabel = UILabel(frame: CGRectMake(10 , 90, width , 20))
@@ -344,9 +354,9 @@ extension WaterLogViewController {
         minLabel.text = "0%"
         self.view.addSubview(minLabel)
         
-        
-
     }
+    
+    
     func drawCustomImage(width
         :CGFloat , height: CGFloat) -> UIImage {
         // Setup our context
