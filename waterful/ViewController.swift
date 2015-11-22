@@ -21,12 +21,12 @@ class ViewController: UIViewController, WCSessionDelegate {
     
     // session with watch
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
-
+    
     // Setting object from core data framework
     var setting_info : Setting! = nil
-
+    
     @IBOutlet var mainView: UIView!
-
+    
     @IBOutlet weak var consumed: UILabel!
     @IBOutlet weak var goal: UILabel!
     @IBOutlet weak var consumedUnit: UILabel!
@@ -56,7 +56,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             didFinishDrinking()
         }
     }
-
+    
     @IBAction func button1Pressed(sender: AnyObject) {
         WaterLogManager.saveWaterLog("sip")
         self.updateViewForWater()
@@ -103,9 +103,9 @@ class ViewController: UIViewController, WCSessionDelegate {
                 consumed.text = (goalWater - consumedWater).toString
             }
         }
-
+        
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         self.updateViewForSetting()
@@ -165,13 +165,13 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         waterImageView.layer.borderWidth = 1
         waterImageView.layer.borderColor = themeColor.CGColor
-
+        
         
         // make shortcut button circular.
         shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
         shortcut.clipsToBounds = true
         shortcut.contentMode = UIViewContentMode.Center
-
+        
         
         let buttons : [UIButton] = [button1, button2, button3, button4]
         for button in buttons {
@@ -179,32 +179,33 @@ class ViewController: UIViewController, WCSessionDelegate {
             button.layer.cornerRadius = button.frame.height/2
             button.backgroundColor = themeColor
         }
-
+        
         setting_info = Setting.getSetting()
         // first time user.
         if (setting_info == nil){
             setting_info = Setting.initialSetting()
+            self.requestHealthKitAuthorization()
+            updateViewForSetting()
             
-
             // !!!!!!!! SUBVIEW !!!!!!!!!!
             // press OK in subview -> !!!! END BLUR !!!!!
         }
-
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // update this view in response to change of setting.
     func updateViewForSetting() {
-
+        
         setting_info = Setting.getSetting()
-
+        
         if setting_info.unit == HKUnit(fromString: "mL"){
             goal.text = setting_info.goal?.doubleValue.toString
         }
@@ -215,10 +216,10 @@ class ViewController: UIViewController, WCSessionDelegate {
         goalUnit.text = setting_info.unit?.description
         consumedUnit.text = setting_info.unit?.description
     }
-
+    
     // update this view in response to change of water logs
     func updateViewForWater() {
-
+        
         consumedWater = WaterLogManager.getTodayConsumption()
         goalWater = (setting_info.goal?.doubleValue)!
         if setting_info.unit == HKUnit(fromString: "oz") {
@@ -231,7 +232,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         let progressPercentage = consumedWater / goalWater
         let lastWaterLog : WaterLog! = WaterLogManager.getLastWaterLog()
         let waterLeft : Double = goalWater - consumedWater
-
+        
         // show image of last unit.
         if lastWaterLog != nil {
             let lastContainer = lastWaterLog.container
@@ -298,11 +299,11 @@ class ViewController: UIViewController, WCSessionDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
-
+    
 }
 
 extension ViewController{
-
+    
     // handle watch
     private func configureWCSession() {
         session?.delegate = self;
@@ -364,3 +365,75 @@ extension ViewController{
         }
     }
 }
+
+
+extension ViewController {
+    
+    func requestHealthKitAuthorization() {
+        let dataTypesToRead = Set(arrayLiteral: HealthManager.sharedInstance.weightType!)
+        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(nil,
+            readTypes: dataTypesToRead) {
+                (success, error) -> Void in
+                
+                if success {
+                    print("requestHealthKitAuthorization() succeeded.")
+                    self.setRecommendedWater()
+                } else {
+                    print("requestHealthKitAuthorization() failed.")
+                }
+        }
+    }
+    
+    func setRecommendedWater() {
+        
+        print("set Recommended water")
+        var weight: Double = 0
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
+        // Sample Query to get the latest weight (body mass)
+        let weightSampleQuery = HKSampleQuery(sampleType: HealthManager.sharedInstance.weightType!,
+            predicate: nil,
+            limit: 1,
+            sortDescriptors: [sortDescriptor]) {
+                (query, results, error) -> Void in
+                
+                if let queryError = error {
+                    print("weight query error: \(queryError.localizedDescription)")
+                    return
+                }
+                
+                if let queryResults = results {
+                    let latestSample = queryResults[0] as! HKQuantitySample
+                    weight = latestSample.quantity.doubleValueForUnit(HKUnit(fromString:"kg"))
+                    print("weight: \(weight)")
+                    
+                    let waterGoal = floor(weight * 33 / 10 )*10
+                    print("waterGoal: \(waterGoal)")
+                    
+                    self.updateCoreDataGoal(waterGoal)
+                } else {
+                    print("There are no query results.")
+                    return
+                }
+        }
+        // Execute the sample query to get the weight
+        HealthManager.sharedInstance.healthKitStore.executeQuery(weightSampleQuery)
+    }
+    
+    func updateCoreDataGoal(newGoal: Double) {
+        
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Setting")
+        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [Setting]
+        
+        if fetchResults != nil {
+            if fetchResults!.count != 0 {
+                fetchResults![0].goal = newGoal
+            } else {
+                print("updateCoreDataGoal -- There's no fetch results from Setting.")
+            }
+        }
+    }
+    
+}
+
