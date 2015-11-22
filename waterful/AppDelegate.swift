@@ -120,7 +120,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
         
-        
         let pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.blackColor()

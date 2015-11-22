@@ -21,6 +21,7 @@ class Setting: NSManagedObject {
         let initialSetting = NSEntityDescription.insertNewObjectForEntityForName("Setting",
             inManagedObjectContext: managedObjectContext) as! Setting
         
+        
         initialSetting.goal = Double(1500)
         initialSetting.alarmEndTime = 23
         initialSetting.alarmStartTime = 9
