@@ -120,9 +120,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             , categories: nil)
         app.registerUserNotificationSettings(notificationSettings)
         
-        let notification = UILocalNotification()
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
-        
         let pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.blackColor()
