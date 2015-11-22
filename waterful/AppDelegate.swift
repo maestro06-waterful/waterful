@@ -121,9 +121,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         app.registerUserNotificationSettings(notificationSettings)
         
         let notification = UILocalNotification()
-        notification.alertBody = "목 마르지 않으세요?\n물 마실 시간이에요!"
-        
-        notification.fireDate = NSDate().dateByAddingTimeInterval(30)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
         
         let pageControl = UIPageControl.appearance()
