@@ -312,8 +312,11 @@ extension WaterLogViewController {
             imageView.contentMode = .Bottom
             self.view.addSubview(imageView)
             var height : CGFloat = maximum_bar_height * CGFloat(processPercentage)
-            if height > maximum_bar_height {
+            if height >= maximum_bar_height {
                 height = maximum_bar_height
+                let achievementView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, width))
+                achievementView.image = UIImage(named: "achievementBadge")
+                self.view.addSubview(achievementView)
             }
             if height > 0 {
                 let image = drawCustomImage(width, height: height)
@@ -355,7 +358,6 @@ extension WaterLogViewController {
         self.view.addSubview(minLabel)
         
     }
-    
     
     func drawCustomImage(width
         :CGFloat , height: CGFloat) -> UIImage {
