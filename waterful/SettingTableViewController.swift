@@ -71,7 +71,7 @@ class SettingTableViewController: UITableViewController{
         
         self.addDoneButtonOnKeyboard()
         
-        self.requestHealthKitAuthorization()
+        
         super.viewDidLoad()
     
     }
@@ -257,75 +257,4 @@ class SettingTableViewController: UITableViewController{
     {
         dismissKeyboard()
     }
-}
-
-extension SettingTableViewController {
-    
-    func requestHealthKitAuthorization() {
-        let dataTypesToRead = Set(arrayLiteral: HealthManager.sharedInstance.weightType!)
-        HealthManager.sharedInstance.healthKitStore.requestAuthorizationToShareTypes(nil,
-            readTypes: dataTypesToRead) {
-                (success, error) -> Void in
-
-                if success {
-                    print("requestHealthKitAuthorization() succeeded.")
-                    self.setRecommendedWater()
-                } else {
-                    print("requestHealthKitAuthorization() failed.")
-                }
-        }
-    }
-
-    func setRecommendedWater() {
-
-        print("set Recommended water")
-        var weight: Double = 0
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-
-        // Sample Query to get the latest weight (body mass)
-        let weightSampleQuery = HKSampleQuery(sampleType: HealthManager.sharedInstance.weightType!,
-            predicate: nil,
-            limit: 1,
-            sortDescriptors: [sortDescriptor]) {
-                (query, results, error) -> Void in
-
-                if let queryError = error {
-                    print("weight query error: \(queryError.localizedDescription)")
-                    return
-                }
-
-                if let queryResults = results {
-                    let latestSample = queryResults[0] as! HKQuantitySample
-                    weight = latestSample.quantity.doubleValueForUnit(HKUnit(fromString:"kg"))
-                    print("weight: \(weight)")
-
-                    let waterGoal = weight * 33
-                    print("waterGoal: \(waterGoal)")
-
-                    self.updateCoreDataGoal(waterGoal)
-                    self.goalLabel.text = waterGoal.toString
-                } else {
-                    print("There are no query results.")
-                    return
-                }
-        }
-        // Execute the sample query to get the weight
-        HealthManager.sharedInstance.healthKitStore.executeQuery(weightSampleQuery)
-    }
-    
-    func updateCoreDataGoal(newGoal: Double) {
-
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Setting")
-        let fetchResults = (try? managedObjectContext.executeFetchRequest(fetchRequest)) as? [Setting]
-
-        if fetchResults != nil {
-            if fetchResults!.count != 0 {
-                fetchResults![0].goal = newGoal
-            } else {
-                print("updateCoreDataGoal -- There's no fetch results from Setting.")
-            }
-        }
-    }
-    
 }
