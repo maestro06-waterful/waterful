@@ -53,7 +53,8 @@ class WaterLogManager {
             try managedObjectContext.save()
             
             // save HK Sample object for logging drinking water.
-            HealthManager.sharedInstance.requesSavingHKWaterSample(amount)
+            HealthManager.sharedInstance.requesSavingHKWaterSample(amount, logDate: loggedTime)
+            
         } catch {
             print("Unresolved error")
             abort()
