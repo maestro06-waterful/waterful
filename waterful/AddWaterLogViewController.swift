@@ -99,10 +99,7 @@ class AddWaterLogViewController: UIViewController {
         
     }
     
-    override func viewDidLoad() {
-        datePicker.frame = CGRectMake(0,0, view.bounds.width, datePicker.frame.height)
-        datePicker.backgroundColor = UIColor(white: 0.8, alpha: 0.2)
-        
+    override func viewDidLoad() {        
         
         setting_info = Setting.getSetting()
         
