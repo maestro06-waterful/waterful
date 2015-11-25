@@ -21,6 +21,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
+        
         waterLogs = getWaterLogs()
         setting_info = fetchSetting()
         drawCharts()
