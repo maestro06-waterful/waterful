@@ -268,7 +268,7 @@ class HealthManager {
     }
     
     // Requests HealthKit authorization for saving HKSample object for logging water.
-    func requesSavingHKWaterSample(amount: Double) {
+    func requesSavingHKWaterSample(amount: Double, logDate : NSDate = NSDate()) {
         
         // Set the water type to data types to share (write).
         let dataTypesToShare = Set(arrayLiteral: waterType!)
@@ -278,7 +278,7 @@ class HealthManager {
             readTypes: nil, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
-                    self.saveHKWaterSample(amount)
+                    self.saveHKWaterSample(amount, logDate: logDate)
                 } else {
                     print("requestAuthForSavingHKWaterObject() failed.")
                 }
@@ -287,7 +287,7 @@ class HealthManager {
     }
     
     // Saves a HKSample object representing drinking water
-    func saveHKWaterSample(amount: Double) {
+    func saveHKWaterSample(amount: Double, logDate: NSDate) {
         
         let currentUnit: HKUnit = Setting.getUnit()
         
@@ -296,8 +296,8 @@ class HealthManager {
         // Creates a water sample (HKQuantitySample object)
         let waterSample = HKQuantitySample(type: waterType!,
             quantity: waterQuantity,
-            startDate: NSDate(),
-            endDate: NSDate())
+            startDate: logDate,
+            endDate: logDate)
         
         // Saves the water sample into the healthkit store.
         self.healthKitStore.saveObject(waterSample,
