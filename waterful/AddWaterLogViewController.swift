@@ -42,26 +42,47 @@ class AddWaterLogViewController: UIViewController {
     @IBOutlet weak var consumedLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
     
-    @IBOutlet weak var sipCounterStepper: UIStepper!
-    @IBAction func sipCounterPressed(sender: AnyObject){
-        sipCounter = sipCounterStepper.value
+    @IBAction func sipIncrease(sender: AnyObject) {
+        sipCounter++
         updateView()
     }
-    @IBOutlet weak var cupCounterStepper: UIStepper!
-    @IBAction func cupCounterPressed(sender: AnyObject) {
-        cupCounter = cupCounterStepper.value
+    @IBAction func sipDecrease(sender: AnyObject) {
+        if (sipCounter>=1){
+            sipCounter--
+            updateView()
+        }
+    }
+    @IBAction func cupIncrease(sender: AnyObject) {
+        cupCounter++
         updateView()
     }
-    @IBOutlet weak var mugCounterStepper: UIStepper!
-    @IBAction func mugCounterPressed(sender: AnyObject) {
-        mugCounter = mugCounterStepper.value
+    @IBAction func cupDecrease(sender: AnyObject) {
+        if (cupCounter>=1){
+            cupCounter--
+            updateView()
+        }
+    }
+    @IBAction func mugIncrease(sender: AnyObject) {
+        mugCounter++
         updateView()
     }
-    @IBOutlet weak var bottleCounterStepper: UIStepper!
-    @IBAction func bottleCounterPressed(sender: AnyObject) {
-        bottleCounter = bottleCounterStepper.value
+    @IBAction func mugDecrease(sender: AnyObject) {
+        if (mugCounter>=1){
+            mugCounter--
+            updateView()
+        }
+    }
+    @IBAction func bottleIncrease(sender: AnyObject) {
+        bottleCounter++
         updateView()
     }
+    @IBAction func bottleDecrease(sender: AnyObject) {
+        if (bottleCounter>=1){
+            bottleCounter--
+            updateView()
+        }
+    }
+    
     
     @IBAction func savePressed(sender: AnyObject) {
         addWater()

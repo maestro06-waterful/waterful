@@ -1166,14 +1166,25 @@
                                     <!--2015-11-25 01:47:55 +0000-->
                                 </date>
                             </datePicker>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xng-kJ-G0z">
-                                <rect key="frame" x="105" y="400" width="355" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xng-kJ-G0z">
+                                <rect key="frame" x="123" y="363.5" width="355" height="186.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OeW-dD-r3w">
-                                        <rect key="frame" x="0.0" y="0.0" width="85" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="186.5"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rY-Wr-kQu">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="jLu-o1-y8t"/>
+                                                </constraints>
+                                                <state key="normal" image="plus"/>
+                                                <connections>
+                                                    <action selector="sipIncrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="0Tq-Pm-4Bx"/>
+                                                </connections>
+                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sip_shortcut" translatesAutoresizingMaskIntoConstraints="NO" id="3DK-cw-cUU">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                                <rect key="frame" x="0.0" y="35" width="85" height="85"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1187,47 +1198,62 @@
                                                 </variation>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxA-hh-Ldk">
-                                                <rect key="frame" x="0.0" y="85" width="85" height="11"/>
+                                                <rect key="frame" x="0.0" y="120" width="85" height="11"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tna-h6-2mc">
+                                                <rect key="frame" x="0.0" y="131" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="frI-Ym-X3d"/>
+                                                </constraints>
+                                                <state key="normal" image="minus"/>
+                                                <connections>
+                                                    <action selector="sipDecrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="toN-M1-mET"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2d-qM-Xkh">
-                                                <rect key="frame" x="0.0" y="96" width="85" height="25"/>
+                                                <rect key="frame" x="0.0" y="166" width="85" height="20.5"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="zyy-m0-8AJ">
-                                                <rect key="frame" x="0.0" y="121" width="94" height="29"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="85" id="UQQ-sK-dvj"/>
-                                                </constraints>
-                                                <connections>
-                                                    <action selector="sipCounterPressed:" destination="ShR-OQ-gsp" eventType="valueChanged" id="YbT-dP-CUO"/>
-                                                </connections>
-                                            </stepper>
                                         </subviews>
                                         <animations/>
                                         <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="7xS-hP-1c2"/>
                                             <constraint firstAttribute="width" constant="90" id="FwA-i7-YTS"/>
                                             <constraint firstAttribute="width" constant="85" id="P5V-fT-OhU"/>
                                             <constraint firstAttribute="height" constant="150" id="R7u-za-ett"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="7xS-hP-1c2"/>
                                                 <exclude reference="FwA-i7-YTS"/>
+                                                <exclude reference="R7u-za-ett"/>
                                             </mask>
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="D8h-Sx-LA9">
-                                        <rect key="frame" x="90" y="0.0" width="85" height="150"/>
+                                        <rect key="frame" x="90" y="0.0" width="85" height="186.5"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpE-4W-W7Q">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="XPa-EH-wmd"/>
+                                                </constraints>
+                                                <state key="normal" image="plus"/>
+                                                <connections>
+                                                    <action selector="cupIncrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="6Ch-YJ-P1n"/>
+                                                </connections>
+                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cup_shortcut" translatesAutoresizingMaskIntoConstraints="NO" id="F7R-Cm-5NY">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                                <rect key="frame" x="0.0" y="35" width="85" height="85"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1241,47 +1267,62 @@
                                                 </variation>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8Y-w8-qEu">
-                                                <rect key="frame" x="0.0" y="85" width="85" height="16"/>
+                                                <rect key="frame" x="0.0" y="120" width="85" height="11"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybm-xz-fq3">
+                                                <rect key="frame" x="0.0" y="131" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="VL3-m3-JRe"/>
+                                                </constraints>
+                                                <state key="normal" image="minus"/>
+                                                <connections>
+                                                    <action selector="cupDecrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="Z9h-4Z-8gJ"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-lO-a52">
-                                                <rect key="frame" x="0.0" y="101" width="85" height="21"/>
+                                                <rect key="frame" x="0.0" y="166" width="85" height="20.5"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="umZ-uY-K4c">
-                                                <rect key="frame" x="0.0" y="121" width="94" height="29"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="85" id="a57-gm-rnz"/>
-                                                </constraints>
-                                                <connections>
-                                                    <action selector="cupCounterPressed:" destination="ShR-OQ-gsp" eventType="valueChanged" id="YcX-3g-EI3"/>
-                                                </connections>
-                                            </stepper>
                                         </subviews>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="JgV-90-dtT"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="fmp-nb-c16"/>
                                             <constraint firstAttribute="width" constant="85" id="ssY-em-1ac"/>
                                             <constraint firstAttribute="height" constant="150" id="xJI-KU-bA7"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="JgV-90-dtT"/>
+                                                <exclude reference="fmp-nb-c16"/>
+                                                <exclude reference="xJI-KU-bA7"/>
                                             </mask>
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RhY-eN-6en">
-                                        <rect key="frame" x="180" y="0.0" width="85" height="150"/>
+                                        <rect key="frame" x="180" y="0.0" width="85" height="186.5"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALg-99-eGL">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="4wo-ih-Nkd"/>
+                                                </constraints>
+                                                <state key="normal" image="plus"/>
+                                                <connections>
+                                                    <action selector="mugIncrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="8Ww-jY-Nwe"/>
+                                                </connections>
+                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mug_shortcut" translatesAutoresizingMaskIntoConstraints="NO" id="cW4-8q-yuT">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                                <rect key="frame" x="0.0" y="35" width="85" height="85"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1295,47 +1336,62 @@
                                                 </variation>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1Q-1w-uun">
-                                                <rect key="frame" x="0.0" y="85" width="85" height="11"/>
+                                                <rect key="frame" x="0.0" y="120" width="85" height="11"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0HE-PM-TUp">
+                                                <rect key="frame" x="0.0" y="131" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="4Io-GC-Y5K"/>
+                                                </constraints>
+                                                <state key="normal" image="minus"/>
+                                                <connections>
+                                                    <action selector="mugDecrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="6DJ-5N-Nbc"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVA-PA-fdr">
-                                                <rect key="frame" x="0.0" y="96" width="85" height="25"/>
+                                                <rect key="frame" x="0.0" y="166" width="85" height="20.5"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Xwf-mL-C6D">
-                                                <rect key="frame" x="0.0" y="121" width="94" height="29"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="85" id="6of-FT-WU9"/>
-                                                </constraints>
-                                                <connections>
-                                                    <action selector="mugCounterPressed:" destination="ShR-OQ-gsp" eventType="valueChanged" id="BB6-vR-XlG"/>
-                                                </connections>
-                                            </stepper>
                                         </subviews>
                                         <animations/>
                                         <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="Gvs-yj-HoJ"/>
                                             <constraint firstAttribute="height" constant="150" id="eT2-zB-Axr"/>
                                             <constraint firstAttribute="width" constant="90" id="naL-hy-KH8"/>
                                             <constraint firstAttribute="width" constant="85" id="nr3-qa-uWh"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="Gvs-yj-HoJ"/>
+                                                <exclude reference="eT2-zB-Axr"/>
                                                 <exclude reference="naL-hy-KH8"/>
                                             </mask>
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="afB-NU-4EQ">
-                                        <rect key="frame" x="270" y="0.0" width="85" height="150"/>
+                                        <rect key="frame" x="270" y="0.0" width="85" height="186.5"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6KR-JA-NJR">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="koT-d8-EOp"/>
+                                                </constraints>
+                                                <state key="normal" image="plus"/>
+                                                <connections>
+                                                    <action selector="bottleIncrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="C6K-LI-h8C"/>
+                                                </connections>
+                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottle_shortcut" translatesAutoresizingMaskIntoConstraints="NO" id="a9W-4t-uAA">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                                <rect key="frame" x="0.0" y="35" width="85" height="85"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.104582734" green="0.86031205899999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1349,39 +1405,43 @@
                                                 </variation>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8g-Hj-eVN">
-                                                <rect key="frame" x="0.0" y="85" width="85" height="16"/>
+                                                <rect key="frame" x="0.0" y="120" width="85" height="11"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFP-Gu-Agw">
+                                                <rect key="frame" x="0.0" y="131" width="85" height="35"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="5uj-Gl-WDH"/>
+                                                </constraints>
+                                                <state key="normal" image="minus"/>
+                                                <connections>
+                                                    <action selector="bottleDecrease:" destination="ShR-OQ-gsp" eventType="touchUpInside" id="ozG-cP-6Y1"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZU-c0-Rsu">
-                                                <rect key="frame" x="0.0" y="101" width="85" height="21"/>
+                                                <rect key="frame" x="0.0" y="166" width="85" height="20.5"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-Qd-QkT">
-                                                <rect key="frame" x="0.0" y="121" width="94" height="29"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="85" id="aMm-ez-m5B"/>
-                                                </constraints>
-                                                <connections>
-                                                    <action selector="bottleCounterPressed:" destination="ShR-OQ-gsp" eventType="valueChanged" id="W0c-Wb-hbx"/>
-                                                </connections>
-                                            </stepper>
                                         </subviews>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="5Gx-JB-6BK"/>
                                             <constraint firstAttribute="width" constant="85" id="AG8-1w-U8B"/>
                                             <constraint firstAttribute="height" constant="150" id="Qtq-yy-ySI"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="vf0-E4-ieU"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="5Gx-JB-6BK"/>
+                                                <exclude reference="Qtq-yy-ySI"/>
+                                                <exclude reference="vf0-E4-ieU"/>
                                             </mask>
                                         </variation>
                                     </stackView>
@@ -1433,18 +1493,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottleCounterLabel" destination="fZU-c0-Rsu" id="2oQ-zV-6Ck"/>
-                        <outlet property="bottleCounterStepper" destination="hEg-Qd-QkT" id="fh6-UD-ekr"/>
                         <outlet property="bottleVolumeLabel" destination="J8g-Hj-eVN" id="AbZ-if-dPx"/>
                         <outlet property="consumedLabel" destination="zRE-3z-nvM" id="yHi-ZC-k69"/>
                         <outlet property="cupCounterLabel" destination="fhD-lO-a52" id="KED-x2-esu"/>
-                        <outlet property="cupCounterStepper" destination="umZ-uY-K4c" id="4Vy-ax-Hrn"/>
                         <outlet property="cupVolumeLabel" destination="Y8Y-w8-qEu" id="SDf-el-Ai3"/>
                         <outlet property="datePicker" destination="j5W-b4-Qrz" id="mc9-4Q-d5p"/>
                         <outlet property="mugCounterLabel" destination="cVA-PA-fdr" id="oKW-0E-A5G"/>
-                        <outlet property="mugCounterStepper" destination="Xwf-mL-C6D" id="Vfe-S3-dw2"/>
                         <outlet property="mugVolumeLabel" destination="l1Q-1w-uun" id="88J-6J-jRk"/>
                         <outlet property="sipCounterLabel" destination="I2d-qM-Xkh" id="2LY-HG-itW"/>
-                        <outlet property="sipCounterStepper" destination="zyy-m0-8AJ" id="Ep9-SV-ugj"/>
                         <outlet property="sipVolumeLabel" destination="vxA-hh-Ldk" id="DMJ-g5-iwp"/>
                         <outlet property="unitLabel" destination="REJ-h5-BEs" id="tQi-09-m94"/>
                     </connections>
@@ -1559,9 +1615,11 @@
         <image name="icon_undo" width="210" height="210"/>
         <image name="log" width="300" height="300"/>
         <image name="logo" width="200" height="46"/>
+        <image name="minus" width="24" height="24"/>
         <image name="mug_buttons" width="500" height="500"/>
         <image name="mug_icon" width="300" height="300"/>
         <image name="mug_shortcut" width="500" height="500"/>
+        <image name="plus" width="24" height="24"/>
         <image name="setting" width="300" height="300"/>
         <image name="sip_buttons" width="500" height="500"/>
         <image name="sip_icon" width="300" height="300"/>

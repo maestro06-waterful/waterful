@@ -21,10 +21,12 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var setting_info : Setting!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
+
+    let ti = NSTimeInterval.init(86400) //time interval for one day
+
     override func viewDidLoad() {
-        
-        
+        writePercentage()
+        setting_info = fetchSetting()
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,13 +35,29 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        waterLogs = getWaterLogs()
-        datesForWaterLogs = Array(waterLogs.keys).sort(>)
-        setting_info = fetchSetting()
-        drawCharts()
+        updateView()
         waterLogTableView.reloadData()
     }
     
+    func updateView() {
+        waterLogs = getWaterLogs()
+        datesForWaterLogs = Array(waterLogs.keys).sort(>)
+
+        // remove all bars and achievement items.
+        while let viewWithTag = self.view.viewWithTag(1) {
+            viewWithTag.removeFromSuperview()
+        }
+        while let viewWithTag = self.view.viewWithTag(2) {
+            viewWithTag.removeFromSuperview()
+        }
+        // remove days labels in case day passed
+        while let viewWithTag = self.view.viewWithTag(3) {
+            viewWithTag.removeFromSuperview()
+        }
+        let width = self.view.bounds.width/14
+        writeDay(width)
+        drawBar(width)
+    }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.Delete
@@ -54,7 +72,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
             let date = datesForWaterLogs[indexPath.section]
             removeItem(date, rowIndex: indexPath.row)
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-            waterLogs = getWaterLogs()
+            updateView()
             waterLogTableView.reloadData()
         }
     }
@@ -160,9 +178,6 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
             waterLogs[date]?.append(result)
 
         }
-        
-
-        
         return waterLogs
     }
     
@@ -293,54 +308,9 @@ extension WaterLogViewController {
         return dayString
         
     }
-    func drawCharts() {
-        /// get date
-        let ti = NSTimeInterval.init(86400) //time interval for one day
-        
+    
+    func writePercentage() {
         let width : CGFloat = self.view.bounds.width/14
-        let cellWidth : CGFloat = 1.8 * width
-        
-        for i in  0...6 {
-            let j = 6-i // to print backward.
-            var sum = Double()
-            let date = NSDate().dateByAddingTimeInterval(-ti * Double(j))
-            
-            if waterLogs[getDate(date)] != nil {
-                for item in waterLogs[getDate(date)]! {
-                    sum = sum + (item.amount?.doubleValue)!
-                }
-            }
-            
-            let processPercentage : Double = sum / (setting_info.goal?.doubleValue)!
-            
-            // draw image of bar
-            
-            let maximum_bar_height : CGFloat = 170
-            let imageView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, CGFloat(maximum_bar_height)))
-            imageView.contentMode = .Bottom
-            self.view.addSubview(imageView)
-            var height : CGFloat = maximum_bar_height * CGFloat(processPercentage)
-            if height >= maximum_bar_height {
-                height = maximum_bar_height
-                let achievementView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, width))
-                achievementView.image = UIImage(named: "achievementBadge")
-                self.view.addSubview(achievementView)
-            }
-            if height > 0 {
-                let image = drawCustomImage(width, height: height)
-                imageView.image = image
-            }
-            
-            
-            // put label of day (Mon, Tue, ...)
-            let label = UILabel(frame: CGRectMake(cellWidth + cellWidth * CGFloat(i), 180, width , 20))
-            label.textAlignment = NSTextAlignment.Center
-            label.font = UIFont(name: label.font.fontName, size: 10)
-            
-            label.text = getDay(date)
-            self.view.addSubview(label)
-        }
-        
         
         let maxLabel = UILabel(frame: CGRectMake(10 , 10, width , 20))
         maxLabel.textAlignment = NSTextAlignment.Center
@@ -366,6 +336,70 @@ extension WaterLogViewController {
         self.view.addSubview(minLabel)
         
     }
+    
+    func drawBar(width: CGFloat) {
+        
+        let cellWidth : CGFloat = 1.8 * width
+        
+        for i in  0...6 {
+            let j = 6-i // to print backward.
+            var sum = Double()
+            let date = NSDate().dateByAddingTimeInterval(-ti * Double(j))
+            
+            if waterLogs[getDate(date)] != nil {
+                for item in waterLogs[getDate(date)]! {
+                    sum = sum + (item.amount?.doubleValue)!
+                }
+            }
+            
+            let processPercentage : Double = sum / (setting_info.goal?.doubleValue)!
+            
+            // draw image of bar
+            
+            let maximum_bar_height : CGFloat = 170
+            let imageView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, CGFloat(maximum_bar_height)))
+            imageView.contentMode = .Bottom
+            imageView.tag = 1 // bar
+            self.view.addSubview(imageView)
+            var height : CGFloat = maximum_bar_height * CGFloat(processPercentage)
+            if height >= maximum_bar_height {
+                height = maximum_bar_height
+                let achievementView = UIImageView(frame: CGRectMake(cellWidth + cellWidth*CGFloat(i), 10 , width, width))
+                achievementView.image = UIImage(named: "achievementBadge")
+                achievementView.tag = 2 // achievement image
+                self.view.addSubview(achievementView)
+                
+            }
+            if height > 0 {
+                let image = drawCustomImage(width, height: height)
+                imageView.image = image
+            }
+        }
+        
+    }
+    
+    func writeDay(width: CGFloat) {
+        /// get date
+        let ti = NSTimeInterval.init(86400) //time interval for one day
+        
+        let cellWidth : CGFloat = 1.8 * width
+        
+        for i in  0...6 {
+            let j = 6-i // to print backward.
+            let date = NSDate().dateByAddingTimeInterval(-ti * Double(j))
+            
+            // put label of day (Mon, Tue, ...)
+            let label = UILabel(frame: CGRectMake(cellWidth + cellWidth * CGFloat(i), 180, width , 20))
+            label.textAlignment = NSTextAlignment.Center
+            label.font = UIFont(name: label.font.fontName, size: 10)
+            
+            label.text = getDay(date)
+            label.tag = 3 // mon, tue, ...
+            self.view.addSubview(label)
+        }
+    }
+    
+    
     
     func drawCustomImage(width
         :CGFloat , height: CGFloat) -> UIImage {
