@@ -42,7 +42,7 @@
 		F4D482251BFC2BCA00339DFA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D482241BFC2BCA00339DFA /* HealthKit.framework */; };
 		F4B3F3EA1BFC8BEF00CB332A /* HowToPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3F3E91BFC8BEF00CB332A /* HowToPageViewController.swift */; };
 		F4B3F3EC1BFC964100CB332A /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3F3EB1BFC964100CB332A /* ContentViewController.swift */; };
-
+		F4BFE5411C05566000DC596E /* AddWaterLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BFE5401C05566000DC596E /* AddWaterLogViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +151,7 @@
 		F4D482261BFC2BCA00339DFA /* waterful.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = waterful.entitlements; sourceTree = "<group>"; };
 		F4B3F3E91BFC8BEF00CB332A /* HowToPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToPageViewController.swift; sourceTree = "<group>"; };
 		F4B3F3EB1BFC964100CB332A /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		F4BFE5401C05566000DC596E /* AddWaterLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWaterLogViewController.swift; sourceTree = "<group>"; };
 		F4D934E51BF985FC00C8B3AD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		F4D934E71BF9860300C8B3AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 
@@ -229,6 +230,7 @@
 				F4088FB51BF60E6D00A7D988 /* WaterLogViewController.swift */,
 				F4B3F3E91BFC8BEF00CB332A /* HowToPageViewController.swift */,
 				F4B3F3EB1BFC964100CB332A /* ContentViewController.swift */,
+				F4BFE5401C05566000DC596E /* AddWaterLogViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -540,6 +542,7 @@
 				C772A4961BF8B09A00E97857 /* WaterLogManager.swift in Sources */,
 				F4B3F3EA1BFC8BEF00CB332A /* HowToPageViewController.swift in Sources */,
 				C7E4952F1BDCB9B3004FAF45 /* WaterLog+CoreDataProperties.swift in Sources */,
+				F4BFE5411C05566000DC596E /* AddWaterLogViewController.swift in Sources */,
 				F4AF28C61BDEF84E00E36E1B /* SettingTableViewController.swift in Sources */,
 				C71504071BEE04C00023A871 /* NotificationBuilder.swift in Sources */,
 				C7E495341BDCB9B3004FAF45 /* Setting.swift in Sources */,

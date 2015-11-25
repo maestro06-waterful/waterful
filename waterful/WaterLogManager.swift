@@ -36,7 +36,7 @@ class WaterLogManager {
     }
     
     // store amount of water user consumed
-    class func saveWaterLog(container : String){
+    class func saveWaterLog(container : String, loggedTime : NSDate = NSDate() ){
         let amount = getVolume(container)
         
         // insert new object into core data framework.
@@ -45,7 +45,7 @@ class WaterLogManager {
 
         // When the log is saved, 'amount' in current unit is converted to mili-litter unit.
         waterLog.amount = amount
-        waterLog.loggedTime = NSDate()
+        waterLog.loggedTime = loggedTime
         waterLog.container = container
         
         do {
@@ -53,7 +53,8 @@ class WaterLogManager {
             try managedObjectContext.save()
             
             // save HK Sample object for logging drinking water.
-            HealthManager.sharedInstance.requesSavingHKWaterSample(amount)
+            HealthManager.sharedInstance.requesSavingHKWaterSample(amount, logDate: loggedTime)
+            
         } catch {
             print("Unresolved error")
             abort()
