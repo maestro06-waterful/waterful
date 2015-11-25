@@ -65,7 +65,7 @@ class AddWaterLogViewController: UIViewController {
     
     @IBAction func savePressed(sender: AnyObject) {
         addWater()
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     // managed object context to control core data framework
@@ -79,6 +79,9 @@ class AddWaterLogViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        datePicker.frame = CGRectMake(0,0, view.bounds.width, datePicker.frame.height)
+        datePicker.backgroundColor = UIColor(white: 0.8, alpha: 0.2)
+        
         
         setting_info = Setting.getSetting()
         
@@ -88,19 +91,19 @@ class AddWaterLogViewController: UIViewController {
         bottleVolume = (setting_info.bottleVolume?.doubleValue)!
         
         if setting_info.unit == HKUnit(fromString: "mL") {
-            sipVolumeLabel.text = sipVolume.toString
-            cupVolumeLabel.text = cupVolume.toString
-            mugVolumeLabel.text = mugVolume.toString
-            bottleVolumeLabel.text = bottleVolume.toString
+            sipVolumeLabel.text = sipVolume.toString + (setting_info.unit?.description)!
+            cupVolumeLabel.text = cupVolume.toString + (setting_info.unit?.description)!
+            mugVolumeLabel.text = mugVolume.toString + (setting_info.unit?.description)!
+            bottleVolumeLabel.text = bottleVolume.toString + (setting_info.unit?.description)!
         }
         else {
-            sipVolumeLabel.text = sipVolume.ml_to_oz.toString
-            cupVolumeLabel.text = cupVolume.ml_to_oz.toString
-            mugVolumeLabel.text = mugVolume.ml_to_oz.toString
-            bottleVolumeLabel.text = bottleVolume.ml_to_oz.toString
+            sipVolumeLabel.text = sipVolume.ml_to_oz.toString + (setting_info.unit?.description)!
+            cupVolumeLabel.text = cupVolume.ml_to_oz.toString + (setting_info.unit?.description)!
+            mugVolumeLabel.text = mugVolume.ml_to_oz.toString + (setting_info.unit?.description)!
+            bottleVolumeLabel.text = bottleVolume.ml_to_oz.toString + (setting_info.unit?.description)!
         }
         
-        unitLabel.text = String(setting_info.unit!)
+        unitLabel.text = setting_info.unit?.description
         
         updateView()
         

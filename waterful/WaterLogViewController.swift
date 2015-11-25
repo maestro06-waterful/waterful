@@ -17,14 +17,14 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var waterLogTableView: UITableView!
     
     var waterLogs : [String :[WaterLog]]!
+    var datesForWaterLogs : [String]!
+    
     var setting_info : Setting!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
         
-        waterLogs = getWaterLogs()
-        setting_info = fetchSetting()
-        drawCharts()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,7 +33,11 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        //waterLogTableView.reloadData()
+        waterLogs = getWaterLogs()
+        datesForWaterLogs = Array(waterLogs.keys).sort(>)
+        setting_info = fetchSetting()
+        drawCharts()
+        waterLogTableView.reloadData()
     }
     
     
@@ -47,7 +51,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let date = Array(waterLogs.keys)[indexPath.section]
+            let date = datesForWaterLogs[indexPath.section]
             removeItem(date, rowIndex: indexPath.row)
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             waterLogs = getWaterLogs()
@@ -57,16 +61,16 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
-        return Array(waterLogs.keys).count
+        return datesForWaterLogs.count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Array(waterLogs.keys)[section]
+        return datesForWaterLogs[section]
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
-        let date = Array(waterLogs.keys)[section]
+        let date = datesForWaterLogs[section]
         
         let header = view as! UITableViewHeaderFooterView
         header.textLabel!.text = date
@@ -76,7 +80,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         var sum : Double = 0
-        let date = Array(waterLogs.keys)[section]
+        let date = datesForWaterLogs[section]
         for item in waterLogs[date]! {
             sum = sum + (item.amount?.doubleValue)!
         }
@@ -90,7 +94,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         var sum : Double = 0
-        let date = Array(waterLogs.keys)[section]
+        let date = datesForWaterLogs[section]
         for item in waterLogs[date]! {
             sum = sum + (item.amount?.doubleValue)!
         }
@@ -102,7 +106,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        let date = Array(waterLogs.keys)[section]
+        let date = datesForWaterLogs[section]
         return (waterLogs[date]?.count)!
         
     }
@@ -115,7 +119,7 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
         //we know that cell is not empty now so we use ! to force unwrapping
         tableViewCell.editing = true
         //let date = Array(waterLogs.keys)[indexPath.row
-        let date = Array(waterLogs.keys)[indexPath.section]
+        let date = datesForWaterLogs[indexPath.section]
         let element :WaterLog = waterLogs[date]![indexPath.row]
         let loggedTime = getTime(element.loggedTime!)
         
@@ -154,7 +158,10 @@ class WaterLogViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             waterLogs[date]?.append(result)
+
         }
+        
+
         
         return waterLogs
     }
