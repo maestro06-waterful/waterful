@@ -50,7 +50,6 @@
                                 </button>
                             </items>
                         </group>
-                        <label alignment="left" text="비가 오더라도 물 마시는거 잊지 마세요!" numberOfLines="3" id="Rj1-ZD-uki"/>
                     </items>
                     <menu key="menu" id="coN-q9-IYO">
                         <items>
