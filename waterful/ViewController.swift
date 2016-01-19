@@ -106,10 +106,35 @@ class ViewController: UIViewController, WCSessionDelegate {
         
     }
     
+    func makeUIViews() {
+        // make water image view circular.
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
+        waterImageView.layer.cornerRadius = (waterImageView.frame.height-60)/2
+        waterImageView.clipsToBounds = true
+        
+        waterImageView.layer.borderWidth = 1
+        waterImageView.layer.borderColor = themeColor.CGColor
+        
+        // make shortcut button circular.
+        shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
+        shortcut.clipsToBounds = true
+        shortcut.contentMode = UIViewContentMode.Center
+        
+        
+        let buttons : [UIButton] = [button1, button2, button3, button4]
+        for button in buttons {
+            button.contentMode = .ScaleAspectFit
+            button.layer.cornerRadius = button.frame.height/2
+            button.backgroundColor = themeColor
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
+        
         self.updateViewForSetting()
         self.updateViewForWater()
+
         
         if setting_info.unit == HKUnit(fromString: "mL"){
             sipLabel.text = (setting_info.sipVolume?.doubleValue.toString)! + (setting_info.unit?.description)!
@@ -123,6 +148,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             mugLabel.text = (setting_info.mugVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
             bottleLabel.text = (setting_info.bottleVolume?.doubleValue.ml_to_oz.toString)! + (setting_info.unit?.description)!
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -137,7 +163,15 @@ class ViewController: UIViewController, WCSessionDelegate {
         configureWCSession()
     }
     
+
+    
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        makeUIViews()
+        
         cl_left.hidden = true
         
         //create watch session
@@ -157,28 +191,6 @@ class ViewController: UIViewController, WCSessionDelegate {
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
         
-        // make water image view circular.
-        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
-        waterImageView.layer.masksToBounds = false
-        waterImageView.layer.cornerRadius = waterImageView.frame.height/2
-        waterImageView.clipsToBounds = true
-        
-        waterImageView.layer.borderWidth = 1
-        waterImageView.layer.borderColor = themeColor.CGColor
-        
-        
-        // make shortcut button circular.
-        shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
-        shortcut.clipsToBounds = true
-        shortcut.contentMode = UIViewContentMode.Center
-        
-        
-        let buttons : [UIButton] = [button1, button2, button3, button4]
-        for button in buttons {
-            button.contentMode = .ScaleAspectFit
-            button.layer.cornerRadius = button.frame.height/2
-            button.backgroundColor = themeColor
-        }
         
         setting_info = Setting.getSetting()
         // first time user.
@@ -191,7 +203,6 @@ class ViewController: UIViewController, WCSessionDelegate {
             // press OK in subview -> !!!! END BLUR !!!!!
         }
         
-        super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -219,6 +230,8 @@ class ViewController: UIViewController, WCSessionDelegate {
     
     // update this view in response to change of water logs
     func updateViewForWater() {
+        print("update view" + String(waterImageView.frame.size.height))
+        print("update view origin" + String(waterImageView.frame.origin))
         
         consumedWater = WaterLogManager.getTodayConsumption()
         goalWater = (setting_info.goal?.doubleValue)!
