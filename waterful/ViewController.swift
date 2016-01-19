@@ -106,6 +106,35 @@ class ViewController: UIViewController, WCSessionDelegate {
         
     }
     
+    func makeUIView() {
+        // make water image view circular.
+        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
+        waterImageView.layer.masksToBounds = false
+        waterImageView.layer.cornerRadius = waterImageView.frame.height/2
+        waterImageView.clipsToBounds = true
+        
+        waterImageView.layer.borderWidth = 1
+        waterImageView.layer.borderColor = themeColor.CGColor
+        
+        
+        // make shortcut button circular.
+        shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
+        shortcut.clipsToBounds = true
+        shortcut.contentMode = UIViewContentMode.Center
+        
+        
+        let buttons : [UIButton] = [button1, button2, button3, button4]
+        for button in buttons {
+            button.contentMode = .ScaleAspectFit
+            button.layer.cornerRadius = button.frame.height/2
+            button.backgroundColor = themeColor
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        makeUIView()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         // Setting up informatinos about water
         self.updateViewForSetting()
@@ -140,6 +169,9 @@ class ViewController: UIViewController, WCSessionDelegate {
     override func viewDidLoad() {
         cl_left.hidden = true
         
+        self.view.layoutIfNeeded()
+        self.view.setNeedsLayout()
+        
         //create watch session
         configureWCSession()
         
@@ -157,28 +189,6 @@ class ViewController: UIViewController, WCSessionDelegate {
         gl.frame = mainView.bounds
         self.view.layer.insertSublayer(gl, atIndex: 0)
         
-        // make water image view circular.
-        let themeColor : UIColor = UIColor(patternImage: UIImage(named: "themeColor")!)
-        waterImageView.layer.masksToBounds = false
-        waterImageView.layer.cornerRadius = waterImageView.frame.height/2
-        waterImageView.clipsToBounds = true
-        
-        waterImageView.layer.borderWidth = 1
-        waterImageView.layer.borderColor = themeColor.CGColor
-        
-        
-        // make shortcut button circular.
-        shortcut.layer.cornerRadius = shortcut.imageView!.frame.height/2
-        shortcut.clipsToBounds = true
-        shortcut.contentMode = UIViewContentMode.Center
-        
-        
-        let buttons : [UIButton] = [button1, button2, button3, button4]
-        for button in buttons {
-            button.contentMode = .ScaleAspectFit
-            button.layer.cornerRadius = button.frame.height/2
-            button.backgroundColor = themeColor
-        }
         
         setting_info = Setting.getSetting()
         // first time user.
