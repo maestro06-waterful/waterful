@@ -122,9 +122,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             let request :[ String : AnyObject ] = ["command" : "fetchStatus"]
             self.session.sendMessage(request, replyHandler: { response in
                 let res = response
-                self.consumed = res["consumed"] as! Double
-                self.goal = res["goal"] as! Double
-                if (current_consumed != self.consumed || current_goal != self.goal){
+                if (current_consumed != res["consumed"] as! Double || current_goal != res["goal"] as! Double){
+                    self.consumed = res["consumed"] as! Double
+                    self.goal = res["goal"] as! Double
                     self.updateView()
                 }
                 self.updateView()
