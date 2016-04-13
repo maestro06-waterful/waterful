@@ -43,42 +43,42 @@ class AddWaterLogViewController: UIViewController {
     @IBOutlet weak var unitLabel: UILabel!
     
     @IBAction func sipIncrease(sender: AnyObject) {
-        sipCounter++
+        sipCounter += 1
         updateView()
     }
     @IBAction func sipDecrease(sender: AnyObject) {
         if (sipCounter>=1){
-            sipCounter--
+            sipCounter -= 1
             updateView()
         }
     }
     @IBAction func cupIncrease(sender: AnyObject) {
-        cupCounter++
+        cupCounter += 1
         updateView()
     }
     @IBAction func cupDecrease(sender: AnyObject) {
         if (cupCounter>=1){
-            cupCounter--
+            cupCounter -= 1
             updateView()
         }
     }
     @IBAction func mugIncrease(sender: AnyObject) {
-        mugCounter++
+        mugCounter += 1
         updateView()
     }
     @IBAction func mugDecrease(sender: AnyObject) {
         if (mugCounter>=1){
-            mugCounter--
+            mugCounter -= 1
             updateView()
         }
     }
     @IBAction func bottleIncrease(sender: AnyObject) {
-        bottleCounter++
+        bottleCounter += 1
         updateView()
     }
     @IBAction func bottleDecrease(sender: AnyObject) {
         if (bottleCounter>=1){
-            bottleCounter--
+            bottleCounter -= 1
             updateView()
         }
     }
@@ -156,19 +156,19 @@ class AddWaterLogViewController: UIViewController {
         let loggedTime = datePicker.date
         while (sipCounter>0){
             WaterLogManager.saveWaterLog("sip", loggedTime: loggedTime)
-            sipCounter--
+            sipCounter -= 1
         }
         while (cupCounter>0){
             WaterLogManager.saveWaterLog("cup", loggedTime: loggedTime)
-            cupCounter--
+            cupCounter -= 1
         }
         while (mugCounter>0){
             WaterLogManager.saveWaterLog("mug", loggedTime: loggedTime)
-            mugCounter--
+            mugCounter -= 1
         }
         while (bottleCounter>0){
             WaterLogManager.saveWaterLog("bottle", loggedTime: loggedTime)
-            bottleCounter--
+            bottleCounter -= 1
         }
     }
     

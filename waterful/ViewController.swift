@@ -323,7 +323,7 @@ extension ViewController{
         let container = applicationContext["container"] as! String
         
         //Use this to update the UI instantaneously (otherwise, takes a little while)
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_sync(dispatch_get_main_queue()) { 
             WaterLogManager.saveWaterLog(container)
             self.updateViewForWater()
         }

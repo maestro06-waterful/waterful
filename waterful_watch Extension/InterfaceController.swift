@@ -14,33 +14,37 @@ import WatchConnectivity
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var consumed : Double = Double()
     var goal : Double = Double()
+    
     var sipVolume : Double = Double()
     var cupVolume : Double = Double()
     var mugVolume : Double = Double()
     var bottleVolume : Double = Double()
+    
     var unit : String = String()
+    
+    var session : WCSession = WCSession.defaultSession()
     
     @IBOutlet var consumedLabel: WKInterfaceLabel!
     @IBOutlet var goalLabel: WKInterfaceLabel!
     
     @IBAction func button1Pressed() {
         sendAmount("sip")
-        getStatus()
+        consumed = consumed + sipVolume
         self.updateView()
     }
     @IBAction func button2Pressed() {
         sendAmount("cup")
-        getStatus()
+        consumed = consumed + cupVolume
         self.updateView()
     }
     @IBAction func button3Pressed() {
         sendAmount("mug")
-        getStatus()
+        consumed = consumed + mugVolume
         self.updateView()
     }
     @IBAction func button4Pressed() {
         sendAmount("bottle")
-        getStatus()
+        consumed = consumed + bottleVolume
         self.updateView()
     }
     @IBOutlet var button1: WKInterfaceButton!
@@ -55,11 +59,21 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func refreshPressed() {
         getStatus()
         getContainer()
+        self.updateView()
+    }
+    
+    override init() {
+        super.init()
+        self.getSession()
+        getStatus()
+        getContainer()
+        self.updateView()
     }
     
     override func didAppear() {
         getStatus()
         getContainer()
+        self.updateView()
     }
     
     override func awakeWithContext(context: AnyObject?) {
@@ -71,6 +85,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        getStatus()
+        getContainer()
+        self.updateView()
     }
     
     override func didDeactivate() {
@@ -79,16 +96,18 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.didDeactivate()
     }
     
-    func sendAmount(container: String){
+    func getSession() {
         if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
+            self.session = WCSession.defaultSession()
+            self.session.delegate = self
+            self.session.activateSession()
         }
-        
+    }
+    
+    func sendAmount(container: String){
         let applicationDict = ["container" : container]
         do {
-            try WCSession.defaultSession().updateApplicationContext(applicationDict)
+            try self.session.updateApplicationContext(applicationDict)
             
         } catch {
             print("error")
@@ -96,24 +115,19 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func getStatus() {
-        if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
-        }
-        
-        if WCSession.defaultSession().reachable == true {
-            
+        let current_consumed : Double = self.consumed
+        let current_goal : Double = self.goal
+
+        if self.session.reachable == true {
             let request :[ String : AnyObject ] = ["command" : "fetchStatus"]
-            let session = WCSession.defaultSession()
-            
-            session.sendMessage(request, replyHandler: { response in
-                
+            self.session.sendMessage(request, replyHandler: { response in
                 let res = response
                 self.consumed = res["consumed"] as! Double
                 self.goal = res["goal"] as! Double
+                if (current_consumed != self.consumed || current_goal != self.goal){
+                    self.updateView()
+                }
                 self.updateView()
-                
                 }, errorHandler: { error in
                     print("error: \(error)")
             })
@@ -122,14 +136,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func getContainer() {
-        if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
-        }
-        
-        if WCSession.defaultSession().reachable == true {
-            
+        if self.session.reachable == true {
             let request :[ String : AnyObject ] = ["command" : "fetchContainer"]
             let session = WCSession.defaultSession()
             
@@ -150,7 +157,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                     self.mugVolume = (res["mugVolume"] as! Double).ml_to_oz
                     self.bottleVolume = (res["bottleVolume"] as! Double).ml_to_oz
                 }
-                
                 self.updateView()
                 
                 }, errorHandler: { error in
@@ -161,18 +167,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func undoLastWaterLog() {
-        
-        if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
-        }
-        
-        if WCSession.defaultSession().reachable == true {
-            
+        if self.session.reachable == true {
             let request = ["command" : "undo"]
-            let session = WCSession.defaultSession()
-            
             session.sendMessage(request, replyHandler: { response in
                 let res = response
                 

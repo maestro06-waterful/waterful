@@ -19,7 +19,7 @@ class WaterPatternPredictor {
 
         waterPatterns = [WaterPattern]()
 
-        for var day = 7; day >= 1; day-- {
+        for var day = 7; day >= 1; day -= 1 {
             let (startDate, objects) = getWaterLogsInCoreData(day)
             let pattern = WaterPattern()
             pattern.composeDataPoints(startDate!, waterLogs: objects as! [WaterLog])
